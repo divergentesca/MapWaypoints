@@ -1,0 +1,103 @@
+.
+├── CSP-PRODUCTION.md
+├── dist
+│   ├── assets
+│   │   ├── default.gif
+│   │   ├── editor-BP4vyq2g.js
+│   │   ├── fonts
+│   │   │   ├── inter-v20-latin-500.woff2
+│   │   │   ├── inter-v20-latin-600.woff2
+│   │   │   ├── inter-v20-latin-700.woff2
+│   │   │   ├── inter-v20-latin-800.woff2
+│   │   │   └── inter-v20-latin-regular.woff2
+│   │   ├── icon-info.png
+│   │   ├── index-bpnlZlfH.css
+│   │   ├── index-qjf0SXPx.js
+│   │   ├── mapa-1.jpg
+│   │   ├── mapa-1.webp
+│   │   ├── mapa-11.webp
+│   │   ├── mapa-dektop-2.jpg
+│   │   ├── mapa-dektop-2.webp
+│   │   ├── mapa-dektop-3.jpg
+│   │   ├── mapa-dektop-3.webp
+│   │   ├── mapa-dektop-copy.jpg
+│   │   ├── mapa-dektop.jpg
+│   │   ├── mapa-dektop.webp
+│   │   ├── mapa-mobile-2.jpg
+│   │   ├── mapa-mobile-2.webp
+│   │   ├── mapa-mobile-3.jpg
+│   │   ├── mapa-mobile-3.webp
+│   │   ├── mapa-mobile.jpg
+│   │   ├── mapa-mobile.webp
+│   │   ├── persona_1-1.gif
+│   │   ├── persona_1-2.gif
+│   │   ├── persona_1-3.gif
+│   │   └── persona_1-4.gif
+│   ├── data
+│   │   ├── maps
+│   │   │   ├── mapa_f1.json
+│   │   │   ├── mapa_f2.json
+│   │   │   └── mapa_f3.json
+│   │   └── story.json
+│   ├── index.html
+│   ├── mapa-mobile.jpg
+│   └── mapa-mobile.webp
+├── DOC-INICIO-FWB.md
+├── FONTS-GUIDE.md
+├── package-lock.json
+├── package.json
+├── project_wp_tree.txt
+├── public
+│   ├── assets
+│   │   ├── default.gif
+│   │   ├── fonts
+│   │   │   ├── inter-v20-latin-500.woff2
+│   │   │   ├── inter-v20-latin-600.woff2
+│   │   │   ├── inter-v20-latin-700.woff2
+│   │   │   ├── inter-v20-latin-800.woff2
+│   │   │   └── inter-v20-latin-regular.woff2
+│   │   ├── icon-info.png
+│   │   ├── mapa-1.jpg
+│   │   ├── mapa-1.webp
+│   │   ├── mapa-11.webp
+│   │   ├── mapa-dektop-2.jpg
+│   │   ├── mapa-dektop-2.webp
+│   │   ├── mapa-dektop-3.jpg
+│   │   ├── mapa-dektop-3.webp
+│   │   ├── mapa-dektop-copy.jpg
+│   │   ├── mapa-dektop.jpg
+│   │   ├── mapa-dektop.webp
+│   │   ├── mapa-mobile-2.jpg
+│   │   ├── mapa-mobile-2.webp
+│   │   ├── mapa-mobile-3.jpg
+│   │   ├── mapa-mobile-3.webp
+│   │   ├── mapa-mobile.jpg
+│   │   ├── mapa-mobile.webp
+│   │   ├── persona_1-1.gif
+│   │   ├── persona_1-2.gif
+│   │   ├── persona_1-3.gif
+│   │   └── persona_1-4.gif
+│   ├── data
+│   │   ├── maps
+│   │   │   ├── mapa_f1.json
+│   │   │   ├── mapa_f2.json
+│   │   │   └── mapa_f3.json
+│   │   └── story.json
+│   ├── mapa-mobile.jpg
+│   └── mapa-mobile.webp
+├── src
+│   ├── app.js
+│   ├── Camera.js
+│   ├── config.js
+│   ├── DetailedPopupManager.js
+│   ├── editor.js
+│   ├── index.html
+│   ├── main.js
+│   ├── MapManager.js
+│   ├── OverlayLayer.js
+│   ├── popup_styles.css
+│   ├── style.css
+│   └── UIManager.js
+└── vite.config.js
+
+12 directories, 89 files

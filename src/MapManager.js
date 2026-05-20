@@ -4,7 +4,7 @@ import { PHASES, MAPS_CONFIG, GLOBAL_CONFIG } from './config.js';
 export class MapManager {
   constructor() {
     this.imageCache = new Map();
-    this.currentPhase = PHASES[0].id;
+    this.currentPhase = PHASES[0]?.id || null;
     this.currentMapId = null;
     this.currentMap = null;
     this.preloadedMaps = new Set();
@@ -21,6 +21,29 @@ export class MapManager {
     this.mediaQuery.addEventListener('change', (e) => {
       this.isMobile = e.matches;
     });
+  }
+
+  async loadStory(storyUrl = '/data/story.json') {
+    try {
+      const res = await fetch(storyUrl);
+      if (!res.ok) throw new Error(`HTTP ${res.status} cargando ${storyUrl}`);
+      const story = await res.json();
+
+      PHASES.length = 0;
+      story.phases.forEach((phase) => PHASES.push(phase));
+
+      Object.keys(MAPS_CONFIG).forEach((key) => delete MAPS_CONFIG[key]);
+      Object.assign(MAPS_CONFIG, story.mapsIndex);
+
+      if (!this.currentPhase && PHASES.length) {
+        this.currentPhase = PHASES[0].id;
+      }
+
+      console.log(`✅ Story cargada: ${PHASES.length} fases, ${Object.keys(MAPS_CONFIG).length} mapas`);
+    } catch (err) {
+      console.error('❌ Error cargando story.json:', err);
+      throw err;
+    }
   }
 
   checkIsMobile() {
@@ -360,11 +383,23 @@ export class MapManager {
    */
   async loadMap(mapId) {
     if (!MAPS_CONFIG[mapId]) {
-      throw new Error(`❌ Mapa no encontrado: ${mapId}`);
+      throw new Error(`❌ Mapa no encontrado en índice: ${mapId}`);
     }
-    
+
     console.log(`🗺️ Cargando mapa: ${mapId} (${this.isMobile ? 'mobile' : 'desktop'})`);
-    
+
+    if (!MAPS_CONFIG[mapId].waypoints) {
+      try {
+        const res = await fetch(`/data/maps/${mapId}.json`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const fullData = await res.json();
+        Object.assign(MAPS_CONFIG[mapId], fullData);
+      } catch (err) {
+        console.error(`❌ Error cargando /data/maps/${mapId}.json:`, err);
+        throw err;
+      }
+    }
+
     const mapConfig = { ...MAPS_CONFIG[mapId] };
 
     const images = await this.loadMapImages(mapConfig);

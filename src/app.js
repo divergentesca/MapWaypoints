@@ -2041,6 +2041,8 @@ ${memStats ? `├─ Memory: ${memStats.current} (avg: ${memStats.average}, peak
     // Valor inicial: 100%
     window.LayoutFill.set(100);
 
+    await mapManager.loadStory('/data/story.json');
+
     uiManager = new UIManager(mapManager, handlePhaseChange, handleMapChange);
     popupManager = new DetailedPopupManager();
     
