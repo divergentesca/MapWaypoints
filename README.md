@@ -18,14 +18,15 @@
 10. [Agregar una nueva historia](#10-agregar-una-nueva-historia)
 11. [Agregar un nuevo mapa a una historia](#11-agregar-un-nuevo-mapa-a-una-historia)
 12. [Cambiar la imagen del mapa](#12-cambiar-la-imagen-del-mapa)
-13. [Optimizaciones de performance implementadas](#13-optimizaciones-de-performance-implementadas)
-14. [Pendientes y roadmap](#14-pendientes-y-roadmap)
+13. [Sistema de layout y viewport](#13-sistema-de-layout-y-viewport)
+14. [Optimizaciones de performance implementadas](#14-optimizaciones-de-performance-implementadas)
+15. [Pendientes y roadmap](#15-pendientes-y-roadmap)
 
 ---
 
 ## 1. Qué es este proyecto
 
-Aplicación web de mapas interactivos narrativos para periodismo de investigación. Permite contar historias geoespaciales por fases, con waypoints, hotspots clicables, overlays animados y popups con información detallada (personas implicadas, fechas, ubicaciones, echos).
+Aplicación web de mapas interactivos narrativos para periodismo de investigación. Permite contar historias geoespaciales por fases, con waypoints, hotspots clicables, overlays animados y popups con información detallada (personas implicadas, fechas, ubicaciones, hechos).
 
 **El modelo de negocio:**
 - Tú produces las historias (JSON + imágenes) y las publicas en Vercel.
@@ -76,7 +77,7 @@ map-waypoints/
 │   ├── Camera.js                 ← Sistema de cámara, zoom, pan, transiciones
 │   ├── UIManager.js              ← Filtros de fase, drawer, progress, selector de mapas
 │   ├── OverlayLayer.js           ← Overlays DOM (iconos clicables sobre el canvas)
-│   ├── DetailedPopupManager.js   ← Popups con personas, fechas, echos
+│   ├── DetailedPopupManager.js   ← Popups con personas, fechas, hechos
 │   ├── editor.js                 ← Editor visual (carga bajo demanda con ?editor=1)
 │   ├── config.js                 ← GLOBAL_CONFIG técnico (sin datos de negocio)
 │   ├── index.html                ← HTML base
@@ -313,7 +314,7 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
 | `editor` | boolean | `1` / `0` | Carga el editor visual bajo demanda. |
 | `mute` | boolean | `1` / `0` | Reservado para audio futuro. |
 | `embed` | boolean | `1` / `0` | Indica que la app corre dentro de un iframe. |
-| `scale` | número | `80`–`110` | Porcentaje de cobertura del viewport. |
+| `scale` | número | `80`–`110` | Porcentaje de cobertura del viewport (afecta solo el alto). |
 
 **Ejemplos:**
 ```
@@ -400,11 +401,6 @@ $src   = esc_url($base . '/?story=' . $story . '&popups=1&overlays=1&mute=1');
   <?php wp_footer(); ?>
 </body>
 </html>
-```
-
-**Para activar debug en desarrollo local:**
-```php
-$src = esc_url($base . '/?story=' . $story . '&debug=1&popups=1&overlays=1&mute=1');
 ```
 
 ---
@@ -552,21 +548,86 @@ CANVAS_LIMITS: {
     maxHeight: 5400,
     maxPixels: 13_000_000,   // mobile 4x = 12.4M px
     maxMemoryMB: 72
-  },
-  downscaleFactor: 0.8,
-  warnThreshold: 0.85
-},
-```
-
-Verificar en consola que aparezca sin warning de límite:
-```
-✅ Dimensiones lógicas: 4240x3685
-✅ Imagen real: 4240x3685
+  }
+}
 ```
 
 ---
 
-## 13. Optimizaciones de performance implementadas
+## 13. Sistema de layout y viewport
+
+### Cómo funciona el sizing del canvas
+
+El canvas **no tiene tamaño fijo** — sus dimensiones en px son un snapshot calculado en cada resize. La cadena es:
+
+```
+window.resize / ResizeObserver
+  → applyViewportCoverage()   ← calcula vw/vh del wrapper
+  → setCanvasDPR()            ← lee wrapper.getBoundingClientRect()
+  → canvas.style.width/height = displayW/H + 'px'
+  → cameraInstance.setViewport(displayW, displayH)
+  → overlay.resize(displayW, displayH)
+```
+
+### Reglas actuales de viewport
+
+| Dimensión | Comportamiento |
+|---|---|
+| **Ancho** | Siempre `window.innerWidth` — ocupa el 100% del viewport horizontal |
+| **Alto** | Siempre `window.innerHeight` — ocupa el 100% del viewport vertical |
+| **fill-scale** | Variable CSS `--fill-scale` que solo afecta el `transform: scale()` visual de `.novela.full-bleed` |
+| **coverage** | Parámetro `?scale=` que históricamente reducía ambas dimensiones; actualmente solo afecta el alto (deprecated) |
+
+### CSS crítico del layout
+
+```css
+/* El wrapper siempre ocupa todo el viewport — JS sobreescribe con px exactos */
+#mapa-canvas-wrapper {
+  position: relative;
+  margin: 0 auto;   /* centra el espacio sobrante cuando coverage < 1 */
+  display: block;
+}
+
+/* full-bleed: modo principal en producción */
+.novela.full-bleed {
+  width: 100%;
+  height: 100%;
+  transform: scale(var(--fill-scale));
+  transform-origin: top center;
+}
+
+/* main actúa como flex container para centrado */
+#main-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+```
+
+### Por qué el canvas escribe px fijos (y está bien)
+
+El elemento `<canvas>` requiere dimensiones absolutas para que el bitmap de dibujo coincida exactamente con el display size — de lo contrario hay distorsión. El JS calcula los px correctos en cada resize y los escribe via `style.width/height`. Esto es correcto e intencional, no un bug.
+
+### Debug del layout
+
+```js
+// En consola del browser:
+const w = document.getElementById('mapa-canvas-wrapper');
+console.log(w.getBoundingClientRect());
+console.log(getComputedStyle(w).margin);
+
+// Ver fill-scale actual:
+window.LayoutFill.get(); // → ej: 98.0
+
+// Cambiar fill-scale desde consola:
+window.LayoutFill.set(100); // 100 = sin reducción
+```
+
+---
+
+## 14. Optimizaciones de performance implementadas
 
 | Optimización | Descripción |
 |---|---|
@@ -585,7 +646,7 @@ Verificar en consola que aparezca sin warning de límite:
 
 ---
 
-## 14. Pendientes y roadmap
+## 15. Pendientes y roadmap
 
 ### Pendiente inmediato
 - [ ] Contenido real del Expediente 0001 — reemplazar imágenes de prueba y datos de waypoints con el caso real
