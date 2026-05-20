@@ -25,13 +25,13 @@
       "desktop": {
         "xp": 0.18,
         "yp": 0.1485,
-        "z": 1
+        "z": 1.0
       },
       "yOffset": {
         "default": 0,
         "tall": -90,
-        "medium": -5,
-        "short": 40
+        "medium": -40,
+        "short": 30
       },
       "zMobileProfile": {
         "default": 0.56,
@@ -54,13 +54,13 @@
       "desktop": {
         "xp": 0.51,
         "yp": 0.1132,
-        "z": 1
+        "z": 1.0
       },
       "yOffset": {
         "default": 0,
         "tall": -90,
-        "medium": -5,
-        "short": 40
+        "medium": -40,
+        "short": 30
       },
       "zMobileProfile": {
         "default": 0.56,
@@ -68,10 +68,10 @@
         "medium": 0.6,
         "short": 0.52
       },
-      "label": "TODO — Waypoint 2",
+      "label": "Punto Central",
       "lines": [
-        "TODO — Primera línea narrativa de este segundo punto de la historia.",
-        "TODO — Segunda línea que amplía el contexto y los detalles del evento."
+        "En el corazón del territorio encontramos este lugar estratégico.",
+        "Desde aquí se pueden observar todos los acontecimientos importantes."
       ]
     },
     {
@@ -88,8 +88,8 @@
       "yOffset": {
         "default": 0,
         "tall": -90,
-        "medium": -5,
-        "short": 40
+        "medium": -40,
+        "short": 30
       },
       "zMobileProfile": {
         "default": 0.56,
@@ -97,10 +97,10 @@
         "medium": 0.6,
         "short": 0.52
       },
-      "label": "TODO — Waypoint 3",
+      "label": "Momento Culminante",
       "lines": [
-        "TODO — Primera línea narrativa del tercer punto.",
-        "TODO — Segunda línea con detalles adicionales de este momento clave."
+        "Este es el punto donde todo cambia. Un momento decisivo en la narrativa.",
+        "Los eventos que ocurren aquí tienen consecuencias duraderas."
       ]
     },
     {
@@ -117,8 +117,8 @@
       "yOffset": {
         "default": 0,
         "tall": -90,
-        "medium": -5,
-        "short": 40
+        "medium": -40,
+        "short": 30
       },
       "zMobileProfile": {
         "default": 0.56,
@@ -126,10 +126,10 @@
         "medium": 0.6,
         "short": 0.52
       },
-      "label": "TODO — Waypoint 4",
+      "label": "Momento Culminante",
       "lines": [
-        "TODO — Primera línea narrativa del cuarto punto.",
-        "TODO — Segunda línea que contextualiza los hechos de esta etapa."
+        "Este es el punto donde todo cambia. Un momento decisivo en la narrativa.",
+        "Los eventos que ocurren aquí tienen consecuencias duraderas."
       ]
     },
     {
@@ -146,8 +146,8 @@
       "yOffset": {
         "default": 0,
         "tall": -90,
-        "medium": -5,
-        "short": 40
+        "medium": -40,
+        "short": 30
       },
       "zMobileProfile": {
         "default": 0.56,
@@ -155,10 +155,10 @@
         "medium": 0.6,
         "short": 0.52
       },
-      "label": "TODO — Waypoint 5",
+      "label": "Momento Culminanteeeee",
       "lines": [
-        "TODO — Primera línea narrativa del quinto punto.",
-        "TODO — Segunda línea sobre los hechos de esta etapa de la historia."
+        "Este es el punto donde eeeeeeeeeeeetodo cambia. Un momento decisivo en la narrativa.",
+        "Los eventos que ocurren aquí tienen consecuencias duraderas."
       ]
     },
     {
@@ -175,8 +175,8 @@
       "yOffset": {
         "default": 0,
         "tall": -90,
-        "medium": -5,
-        "short": 40
+        "medium": -40,
+        "short": 30
       },
       "zMobileProfile": {
         "default": 0.56,
@@ -184,10 +184,10 @@
         "medium": 0.6,
         "short": 0.52
       },
-      "label": "TODO — Waypoint 6",
+      "label": "mmmmmMomento Culminanteeeee",
       "lines": [
-        "TODO — Primera línea narrativa del sexto y último punto.",
-        "TODO — Segunda línea con el cierre narrativo de esta etapa."
+        "Este esu748484484884 el punto donde eeeeeeeeeeeetodo cambia. Un momento decisivo en la narrativa.",
+        "Los eventos que ocurren aquí tienen consecuencias duraderas."
       ]
     },
     {
@@ -215,8 +215,8 @@
       },
       "label": "TODO — Waypoint 7",
       "lines": [
-        "TODO — Primera línea narrativa del waypoint 7.",
-        "TODO — Segunda línea que amplía el contexto de este momento."
+        "TODO — Primera línea waypoint 7.",
+        "TODO — Segunda línea."
       ]
     },
     {
@@ -244,8 +244,8 @@
       },
       "label": "TODO — Waypoint 8",
       "lines": [
-        "TODO — Primera línea narrativa del waypoint 8.",
-        "TODO — Segunda línea que amplía el contexto de este momento."
+        "TODO — Primera línea waypoint 8.",
+        "TODO — Segunda línea."
       ]
     },
     {
@@ -273,8 +273,8 @@
       },
       "label": "TODO — Waypoint 9",
       "lines": [
-        "TODO — Primera línea narrativa del waypoint 9.",
-        "TODO — Segunda línea que amplía el contexto de este momento."
+        "TODO — Primera línea waypoint 9.",
+        "TODO — Segunda línea."
       ]
     },
     {
@@ -302,8 +302,8 @@
       },
       "label": "TODO — Waypoint 10",
       "lines": [
-        "TODO — Primera línea narrativa del waypoint 10.",
-        "TODO — Segunda línea que amplía el contexto de este momento."
+        "TODO — Primera línea waypoint 10.",
+        "TODO — Segunda línea."
       ]
     },
     {
@@ -331,8 +331,8 @@
       },
       "label": "TODO — Waypoint 11",
       "lines": [
-        "TODO — Primera línea narrativa del waypoint 11.",
-        "TODO — Segunda línea que amplía el contexto de este momento."
+        "TODO — Primera línea waypoint 11.",
+        "TODO — Segunda línea."
       ]
     },
     {
@@ -360,8 +360,8 @@
       },
       "label": "TODO — Waypoint 12",
       "lines": [
-        "TODO — Primera línea narrativa del waypoint 12.",
-        "TODO — Segunda línea que amplía el contexto de este momento."
+        "TODO — Primera línea waypoint 12.",
+        "TODO — Segunda línea."
       ]
     }
   ],
@@ -561,735 +561,352 @@
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -26,
-          "offsetY": -301,
-          "width": 370,
-          "height": 200,
-          "rotation": 0
+          "offsetX": -20,
+          "offsetY": -170,
+          "width": 306,
+          "height": 226,
+          "rotation": 6
         },
         "desktop": {
-          "offsetX": -465,
-          "offsetY": -61,
-          "width": 388,
-          "height": 230,
+          "offsetX": -90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
           "rotation": 0
         },
-        "title": "TODO — Título del evento principal",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
-        },
-        "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción detallada del evento documentado en este waypoint. Reemplazar con la información real del caso.",
-        "involved": [
-          {
-            "id": "person11",
-            "name": "TODO — Nombre persona A",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person12",
-            "name": "TODO — Nombre persona B",
-            "avatar": "./assets/persona_1-2.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          },
-          {
-            "id": "person13",
-            "name": "TODO — Nombre persona C",
-            "avatar": "./assets/persona_1-3.png",
-            "role": "TODO — Rol"
-          }
-        ],
-        "echos": {
-          "person11": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona A en este evento."
-            }
-          ],
-          "person12": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona B en este evento."
-            },
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO"
-              },
-              "description": "TODO — Segunda interacción documentada."
-            }
-          ],
-          "person13": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona C en este evento."
-            }
-          ]
-        }
+        "title": "Evolución del Personaje",
+        "body": "Cómo ha cambiado el protagonista desde el inicio. Nuevas perspectivas y aprendizajes adquiridos."
       },
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -5,
-          "offsetY": 24,
-          "width": 300,
-          "height": 180,
-          "rotation": -5,
-          "radius": 0
+          "offsetX": -15,
+          "offsetY": 88,
+          "width": 340,
+          "height": 206,
+          "rotation": -7
         },
         "desktop": {
-          "offsetX": -115,
-          "offsetY": -101,
-          "width": 220,
-          "height": 160,
-          "rotation": 8
+          "offsetX": 90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
-        "title": "TODO — Evento secundario en este punto",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
-        },
-        "location": "TODO — Lugar secundario, Ciudad.",
-        "description": "TODO — Descripción detallada de este evento secundario en la misma ubicación.",
-        "involved": [
-          {
-            "id": "person14",
-            "name": "TODO — Nombre persona D",
-            "avatar": "./assets/persona_1-4.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person15",
-            "name": "TODO — Nombre persona E",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          }
-        ],
-        "echos": {
-          "person14": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona D."
-            }
-          ],
-          "person15": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona E."
-            }
-          ]
-        }
+        "title": "Nuevos Encuentros",
+        "body": "Personas que aparecen en este punto central. Su papel en el desarrollo de los eventos."
       }
     ],
     "2": [
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -26,
-          "offsetY": -301,
-          "width": 370,
-          "height": 200,
+          "offsetX": -160,
+          "offsetY": -180,
+          "width": 136,
+          "height": 136,
           "rotation": 0
         },
         "desktop": {
-          "offsetX": -465,
-          "offsetY": -61,
-          "width": 388,
-          "height": 230,
+          "offsetX": -90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
           "rotation": 0
         },
-        "title": "TODO — Título del evento principal",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
-        },
-        "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción detallada del evento documentado en este waypoint. Reemplazar con la información real del caso.",
-        "involved": [
-          {
-            "id": "person21",
-            "name": "TODO — Nombre persona A",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person22",
-            "name": "TODO — Nombre persona B",
-            "avatar": "./assets/persona_1-2.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          },
-          {
-            "id": "person23",
-            "name": "TODO — Nombre persona C",
-            "avatar": "./assets/persona_1-3.png",
-            "role": "TODO — Rol"
-          }
-        ],
-        "echos": {
-          "person21": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona A en este evento."
-            }
-          ],
-          "person22": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona B en este evento."
-            },
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO"
-              },
-              "description": "TODO — Segunda interacción documentada."
-            }
-          ],
-          "person23": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona C en este evento."
-            }
-          ]
-        }
+        "title": "Transformación Final",
+        "body": "El estado final del personaje. Cómo los acontecimientos han definido su destino."
       },
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -5,
-          "offsetY": 24,
-          "width": 300,
-          "height": 180,
-          "rotation": -5,
-          "radius": 0
+          "offsetX": 160,
+          "offsetY": -180,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
         "desktop": {
-          "offsetX": -115,
-          "offsetY": -101,
-          "width": 220,
-          "height": 160,
-          "rotation": 8
+          "offsetX": 90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
-        "title": "TODO — Evento secundario en este punto",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
+        "title": "Testigos del Desenlace",
+        "body": "Quiénes están presentes en este momento crucial. Su reacción ante los eventos finales."
+      },
+      {
+        "type": "hotspot",
+        "mobile": {
+          "offsetX": -160,
+          "offsetY": 180,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
-        "location": "TODO — Lugar secundario, Ciudad.",
-        "description": "TODO — Descripción detallada de este evento secundario en la misma ubicación.",
-        "involved": [
-          {
-            "id": "person24",
-            "name": "TODO — Nombre persona D",
-            "avatar": "./assets/persona_1-4.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person25",
-            "name": "TODO — Nombre persona E",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          }
-        ],
-        "echos": {
-          "person24": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona D."
-            }
-          ],
-          "person25": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona E."
-            }
-          ]
-        }
+        "desktop": {
+          "offsetX": -90,
+          "offsetY": 90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "title": "Legado Material",
+        "body": "Objetos que permanecen como testimonio. Evidencia física de todo lo ocurrido."
+      },
+      {
+        "type": "hotspot",
+        "mobile": {
+          "offsetX": 160,
+          "offsetY": 80,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "desktop": {
+          "offsetX": 90,
+          "offsetY": 90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "title": "Lugar del Destino",
+        "body": "El significado final de esta ubicación. Por qué todo termina precisamente aquí."
       }
     ],
     "3": [
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -26,
-          "offsetY": -301,
-          "width": 370,
-          "height": 200,
+          "offsetX": -160,
+          "offsetY": -180,
+          "width": 130,
+          "height": 130,
           "rotation": 0
         },
         "desktop": {
-          "offsetX": -465,
-          "offsetY": -61,
-          "width": 388,
-          "height": 230,
+          "offsetX": -90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
           "rotation": 0
         },
-        "title": "TODO — Título del evento principal",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
-        },
-        "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción detallada del evento documentado en este waypoint. Reemplazar con la información real del caso.",
-        "involved": [
-          {
-            "id": "person31",
-            "name": "TODO — Nombre persona A",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person32",
-            "name": "TODO — Nombre persona B",
-            "avatar": "./assets/persona_1-2.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          },
-          {
-            "id": "person33",
-            "name": "TODO — Nombre persona C",
-            "avatar": "./assets/persona_1-3.png",
-            "role": "TODO — Rol"
-          }
-        ],
-        "echos": {
-          "person31": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona A en este evento."
-            }
-          ],
-          "person32": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona B en este evento."
-            },
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO"
-              },
-              "description": "TODO — Segunda interacción documentada."
-            }
-          ],
-          "person33": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona C en este evento."
-            }
-          ]
-        }
+        "title": "Testigos del Desenlace cuando es de tipo mapa",
+        "body": "Quiénes están presentes en este momento crucial. su relacion y otras cosas"
       },
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -5,
-          "offsetY": 24,
-          "width": 300,
-          "height": 180,
-          "rotation": -5,
-          "radius": 0
+          "offsetX": 160,
+          "offsetY": -180,
+          "width": 130,
+          "height": 130,
+          "rotation": 0
         },
         "desktop": {
-          "offsetX": -115,
-          "offsetY": -101,
-          "width": 220,
-          "height": 160,
-          "rotation": 8
+          "offsetX": 90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
-        "title": "TODO — Evento secundario en este punto",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
+        "title": "Testigos del Desenlace",
+        "body": "Quiénes están presentes en este momento crucial. Su reacción ante los eventos finales."
+      },
+      {
+        "type": "hotspot",
+        "mobile": {
+          "offsetX": -160,
+          "offsetY": 80,
+          "width": 100,
+          "height": 180,
+          "radius": 10
         },
-        "location": "TODO — Lugar secundario, Ciudad.",
-        "description": "TODO — Descripción detallada de este evento secundario en la misma ubicación.",
-        "involved": [
-          {
-            "id": "person34",
-            "name": "TODO — Nombre persona D",
-            "avatar": "./assets/persona_1-4.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person35",
-            "name": "TODO — Nombre persona E",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          }
-        ],
-        "echos": {
-          "person34": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona D."
-            }
-          ],
-          "person35": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona E."
-            }
-          ]
-        }
+        "desktop": {
+          "offsetX": -90,
+          "offsetY": 90,
+          "width": 150,
+          "height": 120,
+          "radius": 10
+        },
+        "title": "Legado Material",
+        "body": "Objetos que permanecen como testimonio. Evidencia física de todo lo ocurrido."
+      },
+      {
+        "type": "hotspot",
+        "mobile": {
+          "offsetX": 160,
+          "offsetY": 80,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "desktop": {
+          "offsetX": 90,
+          "offsetY": 90,
+          "width": 130,
+          "height": 90,
+          "rotation": 0
+        },
+        "title": "Lugar del Destino",
+        "body": "El significado final de esta ubicación. Por qué todo termina precisamente aquí."
       }
     ],
     "4": [
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -26,
-          "offsetY": -301,
-          "width": 370,
-          "height": 200,
+          "offsetX": -160,
+          "offsetY": -180,
+          "width": 130,
+          "height": 130,
           "rotation": 0
         },
         "desktop": {
-          "offsetX": -465,
-          "offsetY": -61,
-          "width": 388,
-          "height": 230,
+          "offsetX": -90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
           "rotation": 0
         },
-        "title": "TODO — Título del evento principal",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
-        },
-        "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción detallada del evento documentado en este waypoint. Reemplazar con la información real del caso.",
-        "involved": [
-          {
-            "id": "person41",
-            "name": "TODO — Nombre persona A",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person42",
-            "name": "TODO — Nombre persona B",
-            "avatar": "./assets/persona_1-2.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          },
-          {
-            "id": "person43",
-            "name": "TODO — Nombre persona C",
-            "avatar": "./assets/persona_1-3.png",
-            "role": "TODO — Rol"
-          }
-        ],
-        "echos": {
-          "person41": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona A en este evento."
-            }
-          ],
-          "person42": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona B en este evento."
-            },
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO"
-              },
-              "description": "TODO — Segunda interacción documentada."
-            }
-          ],
-          "person43": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona C en este evento."
-            }
-          ]
-        }
+        "title": "Reflexión Final",
+        "body": "El momento de entender todo lo vivido. Un espacio para procesar."
       },
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -5,
-          "offsetY": 24,
-          "width": 300,
-          "height": 180,
-          "rotation": -5,
-          "radius": 0
+          "offsetX": 160,
+          "offsetY": -180,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
         "desktop": {
-          "offsetX": -115,
-          "offsetY": -101,
-          "width": 220,
-          "height": 160,
-          "rotation": 8
+          "offsetX": 90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
-        "title": "TODO — Evento secundario en este punto",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
+        "title": "Testigos del Final",
+        "body": "Quiénes presencian el momento culminante. Su rol en la conclusión."
+      },
+      {
+        "type": "hotspot",
+        "mobile": {
+          "offsetX": -160,
+          "offsetY": 180,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
-        "location": "TODO — Lugar secundario, Ciudad.",
-        "description": "TODO — Descripción detallada de este evento secundario en la misma ubicación.",
-        "involved": [
-          {
-            "id": "person44",
-            "name": "TODO — Nombre persona D",
-            "avatar": "./assets/persona_1-4.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person45",
-            "name": "TODO — Nombre persona E",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          }
-        ],
-        "echos": {
-          "person44": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona D."
-            }
-          ],
-          "person45": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona E."
-            }
-          ]
-        }
+        "desktop": {
+          "offsetX": -90,
+          "offsetY": 90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "title": "Símbolos del Cierre",
+        "body": "Objetos que representan la conclusión. Su significado simbólico final."
+      },
+      {
+        "type": "hotspot",
+        "mobile": {
+          "offsetX": 160,
+          "offsetY": 180,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "desktop": {
+          "offsetX": 90,
+          "offsetY": 90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "title": "Centro del Desenlace",
+        "body": "El punto exacto donde todo converge y se resuelve."
       }
     ],
     "5": [
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -26,
-          "offsetY": -301,
-          "width": 370,
-          "height": 200,
+          "offsetX": -160,
+          "offsetY": -180,
+          "width": 136,
+          "height": 136,
           "rotation": 0
         },
         "desktop": {
-          "offsetX": -465,
-          "offsetY": -61,
-          "width": 388,
-          "height": 230,
+          "offsetX": -90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
           "rotation": 0
         },
-        "title": "TODO — Título del evento principal",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
-        },
-        "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción detallada del evento documentado en este waypoint. Reemplazar con la información real del caso.",
-        "involved": [
-          {
-            "id": "person51",
-            "name": "TODO — Nombre persona A",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person52",
-            "name": "TODO — Nombre persona B",
-            "avatar": "./assets/persona_1-2.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          },
-          {
-            "id": "person53",
-            "name": "TODO — Nombre persona C",
-            "avatar": "./assets/persona_1-3.png",
-            "role": "TODO — Rol"
-          }
-        ],
-        "echos": {
-          "person51": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona A en este evento."
-            }
-          ],
-          "person52": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona B en este evento."
-            },
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO"
-              },
-              "description": "TODO — Segunda interacción documentada."
-            }
-          ],
-          "person53": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona C en este evento."
-            }
-          ]
-        }
+        "title": "Después de Todo",
+        "body": "Cómo termina el protagonista después de esta experiencia. Su estado final."
       },
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -5,
-          "offsetY": 24,
-          "width": 300,
-          "height": 180,
-          "rotation": -5,
-          "radius": 0
+          "offsetX": 160,
+          "offsetY": -180,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
         "desktop": {
-          "offsetX": -115,
-          "offsetY": -101,
-          "width": 220,
-          "height": 160,
-          "rotation": 8
+          "offsetX": 90,
+          "offsetY": -90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
-        "title": "TODO — Evento secundario en este punto",
-        "image": "/assets/mapa-1.webp",
-        "datetime": {
-          "date": "TODO — DD/MM/AAAA",
-          "time": "TODO — HH:MM",
-          "timeColor": "#FF4444"
+        "title": "Vidas Transformadas",
+        "body": "Cómo han cambiado todas las personas involucradas. El impacto duradero."
+      },
+      {
+        "type": "hotspot",
+        "mobile": {
+          "offsetX": -160,
+          "offsetY": 180,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
         },
-        "location": "TODO — Lugar secundario, Ciudad.",
-        "description": "TODO — Descripción detallada de este evento secundario en la misma ubicación.",
-        "involved": [
-          {
-            "id": "person54",
-            "name": "TODO — Nombre persona D",
-            "avatar": "./assets/persona_1-4.png",
-            "role": "TODO — Rol"
-          },
-          {
-            "id": "person55",
-            "name": "TODO — Nombre persona E",
-            "avatar": "./assets/persona_1-1.png",
-            "role": "TODO — Rol",
-            "highlighted": true
-          }
-        ],
-        "echos": {
-          "person54": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona D."
-            }
-          ],
-          "person55": [
-            {
-              "datetime": {
-                "date": "TODO — DD/MM/AAAA",
-                "time": "TODO — HH:MM"
-              },
-              "description": "TODO — Describir participación de persona E."
-            }
-          ]
-        }
+        "desktop": {
+          "offsetX": -90,
+          "offsetY": 90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "title": "Memoria Tangible",
+        "body": "Lo que permanece físicamente como recordatorio de toda la historia."
+      },
+      {
+        "type": "hotspot",
+        "mobile": {
+          "offsetX": 160,
+          "offsetY": 180,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "desktop": {
+          "offsetX": 90,
+          "offsetY": 90,
+          "width": 136,
+          "height": 136,
+          "rotation": 0
+        },
+        "title": "Lugar de Reflexión",
+        "body": "El último lugar donde la historia se contempla. Un espacio para entender todo lo vivido."
       }
     ],
     "6": [
@@ -1317,61 +934,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw6h0a",
+            "id": "pf1w6h0a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw6h0b",
+            "id": "pf1w6h0b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw6h0c",
+            "id": "pf1w6h0c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw6h0a": [
+          "pf1w6h0a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw6h0b": [
+          "pf1w6h0b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw6h0c": [
+          "pf1w6h0c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -1401,61 +1018,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw6h1a",
+            "id": "pf1w6h1a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw6h1b",
+            "id": "pf1w6h1b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw6h1c",
+            "id": "pf1w6h1c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw6h1a": [
+          "pf1w6h1a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw6h1b": [
+          "pf1w6h1b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw6h1c": [
+          "pf1w6h1c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -1486,61 +1103,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw7h0a",
+            "id": "pf1w7h0a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw7h0b",
+            "id": "pf1w7h0b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw7h0c",
+            "id": "pf1w7h0c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw7h0a": [
+          "pf1w7h0a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw7h0b": [
+          "pf1w7h0b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw7h0c": [
+          "pf1w7h0c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -1570,61 +1187,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw7h1a",
+            "id": "pf1w7h1a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw7h1b",
+            "id": "pf1w7h1b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw7h1c",
+            "id": "pf1w7h1c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw7h1a": [
+          "pf1w7h1a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw7h1b": [
+          "pf1w7h1b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw7h1c": [
+          "pf1w7h1c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -1655,61 +1272,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw8h0a",
+            "id": "pf1w8h0a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw8h0b",
+            "id": "pf1w8h0b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw8h0c",
+            "id": "pf1w8h0c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw8h0a": [
+          "pf1w8h0a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw8h0b": [
+          "pf1w8h0b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw8h0c": [
+          "pf1w8h0c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -1739,61 +1356,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw8h1a",
+            "id": "pf1w8h1a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw8h1b",
+            "id": "pf1w8h1b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw8h1c",
+            "id": "pf1w8h1c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw8h1a": [
+          "pf1w8h1a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw8h1b": [
+          "pf1w8h1b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw8h1c": [
+          "pf1w8h1c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -1824,61 +1441,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw9h0a",
+            "id": "pf1w9h0a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw9h0b",
+            "id": "pf1w9h0b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw9h0c",
+            "id": "pf1w9h0c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw9h0a": [
+          "pf1w9h0a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw9h0b": [
+          "pf1w9h0b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw9h0c": [
+          "pf1w9h0c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -1908,61 +1525,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw9h1a",
+            "id": "pf1w9h1a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw9h1b",
+            "id": "pf1w9h1b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw9h1c",
+            "id": "pf1w9h1c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw9h1a": [
+          "pf1w9h1a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw9h1b": [
+          "pf1w9h1b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw9h1c": [
+          "pf1w9h1c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -1993,61 +1610,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw10h0a",
+            "id": "pf1w10h0a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw10h0b",
+            "id": "pf1w10h0b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw10h0c",
+            "id": "pf1w10h0c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw10h0a": [
+          "pf1w10h0a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw10h0b": [
+          "pf1w10h0b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw10h0c": [
+          "pf1w10h0c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -2077,61 +1694,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw10h1a",
+            "id": "pf1w10h1a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw10h1b",
+            "id": "pf1w10h1b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw10h1c",
+            "id": "pf1w10h1c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw10h1a": [
+          "pf1w10h1a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw10h1b": [
+          "pf1w10h1b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw10h1c": [
+          "pf1w10h1c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -2162,61 +1779,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw11h0a",
+            "id": "pf1w11h0a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw11h0b",
+            "id": "pf1w11h0b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw11h0c",
+            "id": "pf1w11h0c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw11h0a": [
+          "pf1w11h0a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw11h0b": [
+          "pf1w11h0b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw11h0c": [
+          "pf1w11h0c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
@@ -2246,61 +1863,61 @@
           "timeColor": "#FF4444"
         },
         "location": "TODO — Lugar, Ciudad, País.",
-        "description": "TODO — Descripción del evento documentado en este punto. Reemplazar con información real.",
+        "description": "TODO — Descripción del evento. Reemplazar con información real.",
         "involved": [
           {
-            "id": "pw11h1a",
+            "id": "pf1w11h1a",
             "name": "TODO — Persona A",
             "avatar": "./assets/persona_1-1.png",
             "role": "TODO — Rol"
           },
           {
-            "id": "pw11h1b",
+            "id": "pf1w11h1b",
             "name": "TODO — Persona B",
             "avatar": "./assets/persona_1-2.png",
             "role": "TODO — Rol",
             "highlighted": true
           },
           {
-            "id": "pw11h1c",
+            "id": "pf1w11h1c",
             "name": "TODO — Persona C",
             "avatar": "./assets/persona_1-3.png",
             "role": "TODO — Rol"
           }
         ],
         "echos": {
-          "pw11h1a": [
+          "pf1w11h1a": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona A."
+              "description": "TODO — Participación persona A."
             }
           ],
-          "pw11h1b": [
+          "pf1w11h1b": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona B."
+              "description": "TODO — Participación persona B."
             },
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Segunda interacción de persona B."
+              "description": "TODO — Segunda interacción persona B."
             }
           ],
-          "pw11h1c": [
+          "pf1w11h1c": [
             {
               "datetime": {
                 "date": "TODO — DD/MM/AAAA",
                 "time": "TODO — HH:MM"
               },
-              "description": "TODO — Participación de persona C."
+              "description": "TODO — Participación persona C."
             }
           ]
         }
