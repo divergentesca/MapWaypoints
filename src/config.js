@@ -65,14 +65,14 @@ export const GLOBAL_CONFIG = {
     desktop: {
       maxWidth: 4096,
       maxHeight: 4096,
-      maxPixels: 12_000_000,  // ~4000×3000
+      maxPixels: 16_000_000,  // ~4000×3000
       maxMemoryMB: 150
     },
     mobile: {
-      maxWidth: 1600,
-      maxHeight: 3200,        // ✅ Soporta 4000px altura
-      maxPixels: 3_000_000,   // ~2000×4000
-      maxMemoryMB: 48
+      maxWidth: 2400,
+      maxHeight: 5400,        // ✅ Soporta 4000px altura
+      maxPixels: 13_000_000,  // ~2000×4000
+      maxMemoryMB: 72
     },
     downscaleFactor: 0.8,
     warnThreshold: 0.85       // Alertar cuando use >85% del límite

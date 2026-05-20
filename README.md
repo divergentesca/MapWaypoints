@@ -17,8 +17,9 @@
 9. [Flujo de desarrollo](#9-flujo-de-desarrollo)
 10. [Agregar una nueva historia](#10-agregar-una-nueva-historia)
 11. [Agregar un nuevo mapa a una historia](#11-agregar-un-nuevo-mapa-a-una-historia)
-12. [Optimizaciones de performance implementadas](#12-optimizaciones-de-performance-implementadas)
-13. [Pendientes y roadmap](#13-pendientes-y-roadmap)
+12. [Cambiar la imagen del mapa](#12-cambiar-la-imagen-del-mapa)
+13. [Optimizaciones de performance implementadas](#13-optimizaciones-de-performance-implementadas)
+14. [Pendientes y roadmap](#14-pendientes-y-roadmap)
 
 ---
 
@@ -85,8 +86,8 @@ map-waypoints/
 ├── public/                       ← Archivos estáticos (Vite los copia a dist/ sin procesar)
 │   ├── assets/                   ← Imágenes, fuentes, GIFs
 │   │   ├── fonts/                ← Inter woff2 (self-hosted)
-│   │   ├── mapa-mobile.webp      ← Imagen del mapa mobile (con fallback .jpg)
-│   │   ├── mapa-dektop.webp      ← Imagen del mapa desktop (con fallback .jpg)
+│   │   ├── mapa-mobile-x4.webp   ← Imagen del mapa mobile (2338×5313px, 4 filas × 3 cols)
+│   │   ├── mapa-dektop-4x.webp   ← Imagen del mapa desktop (4240×3685px, 4 filas × 3 cols)
 │   │   └── persona_1-*.gif       ← Avatares animados de personas
 │   │
 │   └── data/                     ← Sistema de datos de historias
@@ -117,7 +118,7 @@ map-waypoints/
 ## 4. Módulos JavaScript
 
 ### `app.js` — Orquestador principal
-Contiene el loop de animación (`requestAnimationFrame`), el sistema de dirty flags, el boot de la aplicación y la lógica de viewpor/resize.
+Contiene el loop de animación (`requestAnimationFrame`), el sistema de dirty flags, el boot de la aplicación y la lógica de viewport/resize.
 
 **Responsabilidades clave:**
 - Parsear parámetros URL (`parseUrlToggles`)
@@ -137,8 +138,8 @@ Maneja la carga de historias, mapas e imágenes con caché inteligente.
 
 **Métodos principales:**
 ```js
-mapManager.loadStory(url)     // Carga story.json, puebla PHASES y MAPS_CONFIG
-mapManager.loadMap(mapId)     // Fetch lazy del JSON del mapa, cachea en MAPS_CONFIG
+mapManager.loadStory(url)         // Carga story.json, puebla PHASES y MAPS_CONFIG
+mapManager.loadMap(mapId)         // Fetch lazy del JSON del mapa, cachea en MAPS_CONFIG
 mapManager.getCurrentPhaseMaps()  // Retorna mapas de la fase activa
 mapManager.setPhase(phaseId)      // Cambia fase y pre-carga la siguiente
 ```
@@ -227,14 +228,14 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
   "name": "Recorrido 1",
   "phase": "fase1",
   "mapImage": {
-    "mobile":  { "src": "/assets/mapa-mobile.webp?v=...", "logicalW": 2336, "logicalH": 4192 },
-    "desktop": { "src": "/assets/mapa-dektop.webp?v=...", "logicalW": 4240, "logicalH": 2608 },
+    "mobile":  { "src": "/assets/mapa-mobile-x4.webp?v=2026-05-20", "logicalW": 2338, "logicalH": 5313 },
+    "desktop": { "src": "/assets/mapa-dektop-4x.webp?v=2026-05-20", "logicalW": 4240, "logicalH": 3685 },
     "useNaturalSize": false
   },
   "waypoints": [
     {
-      "mobile":  { "xp": 0.17, "yp": 0.20, "z": 0.90 },
-      "desktop": { "xp": 0.18, "yp": 0.21, "z": 1.0 },
+      "mobile":  { "xp": 0.17, "yp": 0.1579, "z": 0.9 },
+      "desktop": { "xp": 0.18, "yp": 0.1485, "z": 1 },
       "yOffset": { "default": 0, "tall": -90, "medium": -5, "short": 40 },
       "zMobileProfile": { "default": 0.56, "tall": 0.66, "medium": 0.60, "short": 0.52 },
       "label": "Inicio del Viaje",
@@ -267,15 +268,17 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
 ```
 
 **Campos de waypoint:**
-- `xp / yp` — Posición relativa en el mapa (0.0 a 1.0)
+- `xp / yp` — Posición relativa en el mapa (0.0 a 1.0). Se multiplica por `logicalW/H` para obtener coordenadas absolutas.
 - `z` — Nivel de zoom en ese waypoint
 - `yOffset` — Ajuste vertical según perfil de altura del dispositivo
-- `zMobileProfile` — Zoom específico por perfil de pantalla mobile (`tall`, `medium`, `short`)
+- `zMobileProfile` — Zoom específico por perfil de pantalla mobile
 
 **Perfiles de altura mobile:**
 - `short` — pantallas ≤640px de alto
 - `medium` — pantallas 641-820px de alto
 - `tall` — pantallas >820px de alto
+
+**⚠️ Al cambiar la imagen del mapa:** si el nuevo `logicalH` es distinto, los `yp` deben recalcularse. Ver sección 12.
 
 ### `index.json` — Catálogo de historias
 
@@ -301,39 +304,34 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
 
 ## 6. Parámetros URL
 
-Todos los parámetros se pasan como query string en la URL de la app en Vercel.
-
 | Parámetro | Tipo | Valores | Descripción |
 |---|---|---|---|
-| `story` | string | `costa-rica/expedientes/0001` | ID de la historia a cargar. Sin este parámetro carga el story default. |
-| `popups` | boolean | `1` / `0` | Activa o desactiva los popups al hacer clic en hotspots. |
-| `overlays` | boolean | `1` / `0` | Activa o desactiva los overlays DOM (iconos sobre el mapa). |
-| `debug` | boolean | `1` / `0` | Muestra grilla, labels de waypoints y rectángulos de hotspots. |
+| `story` | string | `costa-rica/expedientes/0001` | ID de la historia. Sin este parámetro carga el story default. |
+| `popups` | boolean | `1` / `0` | Activa popups al hacer clic en hotspots. |
+| `overlays` | boolean | `1` / `0` | Activa overlays DOM (iconos sobre el mapa). |
+| `debug` | boolean | `1` / `0` | Muestra grilla, labels y rectángulos de hotspots. |
 | `editor` | boolean | `1` / `0` | Carga el editor visual bajo demanda. |
 | `mute` | boolean | `1` / `0` | Reservado para audio futuro. |
 | `embed` | boolean | `1` / `0` | Indica que la app corre dentro de un iframe. |
-| `scale` | número | `80`–`110` | Porcentaje de cobertura del viewport (80% = 0.8). |
+| `scale` | número | `80`–`110` | Porcentaje de cobertura del viewport. |
 
 **Ejemplos:**
 ```
-# Producción normal
+# Producción
 https://map-waypoints.vercel.app/?story=costa-rica/expedientes/0001&popups=1&overlays=1&mute=1
 
 # Desarrollo con debug
-https://map-waypoints.vercel.app/?story=costa-rica/expedientes/0001&debug=1&popups=1&overlays=1&mute=1
+http://localhost:5173/?story=costa-rica/expedientes/0001&debug=1&popups=1&overlays=1
 
 # Editor visual
-https://map-waypoints.vercel.app/?editor=1&debug=1
-
-# Dentro de iframe WordPress
-https://map-waypoints.vercel.app/?story=costa-rica/expedientes/0001&popups=1&overlays=1&mute=1&embed=1
+http://localhost:5173/?editor=1&debug=1
 ```
 
 ---
 
 ## 7. Sistema de distribución — WordPress
 
-### Opción A — Snippet HTML (Gutenberg / Elementor / cualquier bloque HTML)
+### Opción A — Snippet HTML
 
 ```html
 <div id="mapa-wrapper" style="width:100%;background:#000;overflow:visible;margin:0;padding:0;">
@@ -404,19 +402,7 @@ $src   = esc_url($base . '/?story=' . $story . '&popups=1&overlays=1&mute=1');
 </html>
 ```
 
-**Uso en WordPress:**
-1. Subir el archivo PHP al tema activo
-2. Crear nueva página en WordPress Admin
-3. En el panel derecho → Atributos → Plantilla → "Mapa Interactivo Fullscreen"
-4. Publicar
-
-**Para pasar historia específica via URL de WordPress:**
-```
-https://tusitio.com/expediente-0001/?story=costa-rica/expedientes/0001
-```
-
 **Para activar debug en desarrollo local:**
-Cambiar línea 8 del PHP a:
 ```php
 $src = esc_url($base . '/?story=' . $story . '&debug=1&popups=1&overlays=1&mute=1');
 ```
@@ -433,180 +419,154 @@ $src = esc_url($base . '/?story=' . $story . '&debug=1&popups=1&overlays=1&mute=
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options",       "value": "ALLOWALL" },
-        { "key": "Content-Security-Policy","value": "frame-ancestors *;" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" }
+        { "key": "X-Frame-Options",        "value": "ALLOWALL" },
+        { "key": "Content-Security-Policy", "value": "frame-ancestors *;" },
+        { "key": "X-Content-Type-Options",  "value": "nosniff" },
+        { "key": "Referrer-Policy",         "value": "strict-origin-when-cross-origin" }
       ]
     }
   ]
 }
 ```
 
-`X-Frame-Options: ALLOWALL` y `frame-ancestors *` son necesarios para que el iframe funcione en cualquier dominio de cliente.
-
-### `vite.config.js`
-
-```js
-export default defineConfig({
-  root: 'src',        // HTML y JS de entrada están en src/
-  publicDir: '../public',  // Archivos estáticos (data/, assets/)
-  build: {
-    outDir: '../dist',     // Output del build
-    emptyOutDir: true,
-  },
-});
-```
-
 ### Comandos
 
 ```bash
-npm run dev      # Servidor de desarrollo con HMR en localhost:5173
+npm run dev      # Servidor de desarrollo en localhost:5173
 npm run build    # Build de producción → genera dist/
 npm run preview  # Preview del build antes de deploy
-```
 
-### Deploy a Vercel
+# Deploy
+git add . && git commit -m "descripción" && git push
+# Vercel despliega automáticamente al detectar el push
 
-```bash
-# Opción 1: via CLI
-npx vercel --prod
-
-# Opción 2: push a GitHub (si tienes integración configurada)
-git add .
-git commit -m "descripción del cambio"
-git push origin main
-# Vercel detecta el push y despliega automáticamente
+# Verificar headers en producción
+curl -I https://map-waypoints.vercel.app/
 ```
 
 ---
 
 ## 9. Flujo de desarrollo
 
-### Desarrollar y ajustar una historia
-
 ```bash
 # 1. Iniciar servidor local
 npm run dev
 
-# 2. Abrir en browser con parámetros de desarrollo
+# 2. Abrir con parámetros de desarrollo
 # http://localhost:5173/?story=costa-rica/expedientes/0001&debug=1&popups=1&overlays=1
 
-# 3. Abrir editor visual para ajustar hotspots
+# 3. Ajustar hotspots con el editor visual
 # http://localhost:5173/?editor=1&debug=1
 
-# 4. Al terminar, hacer build
+# 4. Build y deploy
 npm run build
-
-# 5. Deploy
 git add . && git commit -m "actualiza historia 0001" && git push
-```
-
-### Verificar que el deploy funcionó
-
-```bash
-# Verificar headers de iframe
-curl -I https://map-waypoints.vercel.app/
-
-# Debe mostrar:
-# x-frame-options: ALLOWALL
-# content-security-policy: frame-ancestors *;
 ```
 
 ---
 
 ## 10. Agregar una nueva historia
 
-### Paso 1 — Crear carpeta
-
 ```bash
-mkdir -p public/data/stories/{pais}/expedientes/{numero}/maps
-# Ejemplo:
+# 1. Crear carpeta
 mkdir -p public/data/stories/panama/expedientes/0001/maps
-```
 
-### Paso 2 — Crear `story.json`
-
-Copiar de una historia existente y editar:
-```bash
+# 2. Copiar y editar story.json
 cp public/data/stories/costa-rica/expedientes/0001/story.json \
    public/data/stories/panama/expedientes/0001/story.json
-```
 
-Editar el `id`, `title`, `description`, `thumbnail` y fases.
-
-### Paso 3 — Crear archivos de mapas
-
-```bash
+# 3. Copiar y editar mapas
 cp public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1.json \
    public/data/stories/panama/expedientes/0001/maps/mapa_f1.json
-# Repetir para f2, f3, etc.
-```
 
-Editar cada JSON: imagen del mapa, waypoints, icons.
+# 4. Registrar en index.json (agregar entrada al array "stories")
 
-### Paso 4 — Registrar en el catálogo
-
-Agregar entrada en `public/data/index.json`:
-```json
-{
-  "id": "panama/expedientes/0001",
-  "title": "Expediente Panamá 0001",
-  "url": "/?story=panama/expedientes/0001",
-  "published": true,
-  "date": "2025-07-01",
-  "country": "Panamá",
-  "tags": ["expediente"]
-}
-```
-
-### Paso 5 — Verificar y deploy
-
-```bash
-# Verificar en local
+# 5. Verificar y deploy
 # http://localhost:5173/?story=panama/expedientes/0001&debug=1&popups=1
-
-npm run build
-git add . && git commit -m "agrega expediente Panama 0001" && git push
+npm run build && git add . && git commit -m "agrega Panama 0001" && git push
 ```
 
 ---
 
 ## 11. Agregar un nuevo mapa a una historia
 
-Un mapa es un "recorrido" dentro de una fase. Una fase puede tener múltiples mapas.
-
-### En `story.json` de la historia
+En `story.json`, agregar el ID al array `maps` de la fase y una entrada en `mapsIndex`:
 
 ```json
 {
-  "phases": [
-    {
-      "id": "fase1",
-      "maps": ["mapa_f1", "mapa_f1b"]  // ← agregar el nuevo ID aquí
-    }
-  ],
+  "phases": [{ "id": "fase1", "maps": ["mapa_f1", "mapa_f1b"] }],
   "mapsIndex": {
-    "mapa_f1":  { "id": "mapa_f1",  "name": "Recorrido 1", "phase": "fase1" },
-    "mapa_f1b": { "id": "mapa_f1b", "name": "Recorrido 1B", "phase": "fase1" }  // ← nuevo
+    "mapa_f1":  { "id": "mapa_f1",  "name": "Recorrido 1",  "phase": "fase1" },
+    "mapa_f1b": { "id": "mapa_f1b", "name": "Recorrido 1B", "phase": "fase1" }
   }
 }
 ```
 
-### Crear el archivo del nuevo mapa
-
-```bash
-cp public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1.json \
-   public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1b.json
-```
-
-Editar con la imagen y waypoints del nuevo recorrido.
-
-El selector de mapas en la UI aparece automáticamente cuando una fase tiene más de un mapa.
+Crear el archivo del mapa nuevo copiando uno existente y editando imagen y waypoints. El selector de mapas en la UI aparece automáticamente cuando hay más de uno por fase.
 
 ---
 
-## 12. Optimizaciones de performance implementadas
+## 12. Cambiar la imagen del mapa
+
+### Paso 1 — Obtener dimensiones reales
+
+```bash
+sips -g pixelWidth -g pixelHeight public/assets/nueva-imagen.webp
+```
+
+### Paso 2 — Actualizar `mapImage` en el JSON
+
+```json
+"mapImage": {
+  "mobile":  { "src": "/assets/nueva-mobile.webp?v=YYYY-MM-DD", "logicalW": W, "logicalH": H },
+  "desktop": { "src": "/assets/nueva-desktop.webp?v=YYYY-MM-DD", "logicalW": W, "logicalH": H }
+}
+```
+
+El `?v=YYYY-MM-DD` fuerza al browser a no usar la versión cacheada.
+
+### Paso 3 — Recalcular `yp` de los waypoints
+
+Si el `logicalH` cambió, todos los `yp` deben ajustarse:
+
+```
+yp_nuevo = (yp_viejo × logicalH_viejo) / logicalH_nuevo
+```
+
+Los `offsetX/offsetY` de los hotspots **no necesitan cambio** — son relativos al waypoint y se ajustan automáticamente.
+
+### Paso 4 — Verificar `CANVAS_LIMITS` en `src/config.js`
+
+Límites actuales (calibrados para las imágenes 4x):
+
+```js
+CANVAS_LIMITS: {
+  desktop: {
+    maxWidth: 4096,
+    maxHeight: 4096,
+    maxPixels: 16_000_000,   // desktop 4x = 15.6M px
+    maxMemoryMB: 150
+  },
+  mobile: {
+    maxWidth: 2400,
+    maxHeight: 5400,
+    maxPixels: 13_000_000,   // mobile 4x = 12.4M px
+    maxMemoryMB: 72
+  },
+  downscaleFactor: 0.8,
+  warnThreshold: 0.85
+},
+```
+
+Verificar en consola que aparezca sin warning de límite:
+```
+✅ Dimensiones lógicas: 4240x3685
+✅ Imagen real: 4240x3685
+```
+
+---
+
+## 13. Optimizaciones de performance implementadas
 
 | Optimización | Descripción |
 |---|---|
@@ -619,29 +579,28 @@ El selector de mapas en la UI aparece automáticamente cuando una fase tiene má
 | **Preload de fase siguiente** | Al cargar una fase, la siguiente se pre-carga en background. |
 | **Memory monitor** | Muestrea uso de heap. Si supera 85% activa warnings. |
 | **DPR limitado** | devicePixelRatio máximo: 1.6 desktop, 1.5 mobile. Evita canvas gigantes. |
-| **Canvas size validation** | Valida y ajusta dimensiones del canvas según límites por dispositivo. |
+| **Canvas size validation** | Valida y ajusta dimensiones del canvas según `CANVAS_LIMITS` en `config.js`. |
 | **Idle FPS throttling** | Cuando no hay animación activa, el loop corre a 30fps en vez de 60fps. |
 | **Editor bajo demanda** | `editor.js` solo se carga con `?editor=1`. No está en el bundle de producción. |
 
 ---
 
-## 13. Pendientes y roadmap
+## 14. Pendientes y roadmap
 
 ### Pendiente inmediato
-- [ ] Contenido real del Expediente 0001 (imágenes, waypoints, datos)
+- [ ] Contenido real del Expediente 0001 — reemplazar imágenes de prueba y datos de waypoints con el caso real
 - [ ] `thumb.webp` para el catálogo `index.json`
-- [ ] Resolver el colapso del iframe en el WordPress online (divergentes.com)
-- [ ] Waypoints 4 y 5 de `mapa_f1` tienen coordenadas fuera de rango — ajustar `xp/yp`
+- [ ] Resolver el colapso del iframe en WordPress online (divergentes.com) — guard de altura mínima en el listener
 
 ### Corto plazo
-- [ ] Plugin WordPress completo con shortcode `[mapa_interactivo]` y panel de ajustes
-- [ ] LRU cache para imágenes (límite de ~30 entradas en `imageCache`)
+- [ ] Plugin WordPress con shortcode `[mapa_interactivo story="..."]` y panel de ajustes
+- [ ] LRU cache para imágenes (límite de ~30 entradas en `imageCache` — hoy crece ilimitado)
 - [ ] Virtualización de overlays DOM fuera de viewport
 
 ### Mediano plazo
-- [ ] Lobby — página `lobby.html` que lee `index.json` y muestra tarjetas de historias
-- [ ] Soporte `?story=` en el plugin PHP (pasar historia desde URL de WordPress)
+- [ ] Lobby — página que lee `index.json` y muestra tarjetas de historias (activar cuando haya 2+ historias)
 - [ ] Segunda historia para validar el sistema multi-historia completo
+- [ ] Hotspots con coordenadas proporcionales (`xp/yp`) en vez de `offsetX/offsetY` en píxeles
 
 ### Futuro
 - [ ] Web Component `<mapa-interactivo>` para distribución sin iframe

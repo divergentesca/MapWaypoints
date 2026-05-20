@@ -4,14 +4,14 @@
   "phase": "fase1",
   "mapImage": {
     "mobile": {
-      "src": "/assets/mapa-mobile.webp?v=2025-11-20-2",
-      "logicalW": 2336,
-      "logicalH": 4192
+      "src": "/assets/mapa-mobile-x4.webp?v=2026-05-20",
+      "logicalW": 2338,
+      "logicalH": 5313
     },
     "desktop": {
-      "src": "/assets/mapa-dektop.webp?v=2025-11-20-2",
+      "src": "/assets/mapa-dektop-4x.webp?v=2026-05-20",
       "logicalW": 4240,
-      "logicalH": 2608
+      "logicalH": 3685
     },
     "useNaturalSize": false
   },
@@ -19,12 +19,12 @@
     {
       "mobile": {
         "xp": 0.17,
-        "yp": 0.2,
+        "yp": 0.1579,
         "z": 0.9
       },
       "desktop": {
         "xp": 0.18,
-        "yp": 0.21,
+        "yp": 0.1485,
         "z": 1
       },
       "yOffset": {
@@ -48,12 +48,12 @@
     {
       "mobile": {
         "xp": 0.51,
-        "yp": 0.2,
+        "yp": 0.1579,
         "z": 0.56
       },
       "desktop": {
         "xp": 0.51,
-        "yp": 0.16,
+        "yp": 0.1132,
         "z": 1
       },
       "yOffset": {
@@ -77,12 +77,12 @@
     {
       "mobile": {
         "xp": 0.84,
-        "yp": 0.2,
+        "yp": 0.1579,
         "z": 0.56
       },
       "desktop": {
         "xp": 0.83,
-        "yp": 0.16,
+        "yp": 0.1132,
         "z": 0.91
       },
       "yOffset": {
@@ -106,12 +106,12 @@
     {
       "mobile": {
         "xp": 0.17,
-        "yp": 0.54,
+        "yp": 0.4262,
         "z": 0.56
       },
       "desktop": {
         "xp": 0.18,
-        "yp": 0.5,
+        "yp": 0.3537,
         "z": 0.91
       },
       "yOffset": {
@@ -135,12 +135,12 @@
     {
       "mobile": {
         "xp": 0.51,
-        "yp": 0.54,
+        "yp": 0.4262,
         "z": 0.56
       },
       "desktop": {
         "xp": 0.51,
-        "yp": 0.5,
+        "yp": 0.3537,
         "z": 0.91
       },
       "yOffset": {
@@ -164,12 +164,12 @@
     {
       "mobile": {
         "xp": 0.84,
-        "yp": 0.54,
+        "yp": 0.4262,
         "z": 0.56
       },
       "desktop": {
         "xp": 0.83,
-        "yp": 0.5,
+        "yp": 0.3537,
         "z": 0.91
       },
       "yOffset": {

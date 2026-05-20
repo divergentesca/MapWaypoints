@@ -20,6 +20,9 @@
 │   │   ├── mapa-dektop-2.webp
 │   │   ├── mapa-dektop-3.jpg
 │   │   ├── mapa-dektop-3.webp
+│   │   ├── mapa-dektop-3x.jpg
+│   │   ├── mapa-dektop-4x.png
+│   │   ├── mapa-dektop-4x.webp
 │   │   ├── mapa-dektop-copy.jpg
 │   │   ├── mapa-dektop.jpg
 │   │   ├── mapa-dektop.webp
@@ -27,6 +30,9 @@
 │   │   ├── mapa-mobile-2.webp
 │   │   ├── mapa-mobile-3.jpg
 │   │   ├── mapa-mobile-3.webp
+│   │   ├── mapa-mobile-x2.jpg
+│   │   ├── mapa-mobile-x4.png
+│   │   ├── mapa-mobile-x4.webp
 │   │   ├── mapa-mobile.jpg
 │   │   ├── mapa-mobile.webp
 │   │   ├── persona_1-1.gif
@@ -68,6 +74,9 @@
 │   │   ├── mapa-dektop-2.webp
 │   │   ├── mapa-dektop-3.jpg
 │   │   ├── mapa-dektop-3.webp
+│   │   ├── mapa-dektop-3x.jpg
+│   │   ├── mapa-dektop-4x.png
+│   │   ├── mapa-dektop-4x.webp
 │   │   ├── mapa-dektop-copy.jpg
 │   │   ├── mapa-dektop.jpg
 │   │   ├── mapa-dektop.webp
@@ -75,6 +84,9 @@
 │   │   ├── mapa-mobile-2.webp
 │   │   ├── mapa-mobile-3.jpg
 │   │   ├── mapa-mobile-3.webp
+│   │   ├── mapa-mobile-x2.jpg
+│   │   ├── mapa-mobile-x4.png
+│   │   ├── mapa-mobile-x4.webp
 │   │   ├── mapa-mobile.jpg
 │   │   ├── mapa-mobile.webp
 │   │   ├── persona_1-1.gif
@@ -93,6 +105,7 @@
 │   │   └── story.json
 │   ├── mapa-mobile.jpg
 │   └── mapa-mobile.webp
+├── README.md
 ├── src
 │   ├── app.js
 │   ├── Camera.js
@@ -110,4 +123,4 @@
 ├── vercel.json
 └── vite.config.js
 
-18 directories, 93 files
+18 directories, 106 files
