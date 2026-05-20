@@ -203,7 +203,7 @@ function applyViewportCoverage() {
     }
   }
 
-  wrapper.style.width  = vw + 'px';
+  wrapper.style.width  = window.innerWidth + 'px';
   wrapper.style.height = vh + 'px';
   document.body.style.background = '#000';
 
