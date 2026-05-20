@@ -7,6 +7,8 @@ export class MapManager {
     this.currentPhase = PHASES[0]?.id || null;
     this.currentMapId = null;
     this.currentMap = null;
+    this.currentStoryId = null;
+    this.currentStoryUrl = null;
     this.preloadedMaps = new Set();
     this.isMobile = this.checkIsMobile();
     
@@ -24,9 +26,23 @@ export class MapManager {
   }
 
   async loadStory(storyUrl = '/data/story.json') {
+    const DEFAULT_STORY = '/data/story.json';
+    this.currentStoryId = null;
+    this.currentStoryUrl = storyUrl;
     try {
       const res = await fetch(storyUrl);
-      if (!res.ok) throw new Error(`HTTP ${res.status} cargando ${storyUrl}`);
+
+      // Si el servidor responde pero no es JSON válido (ej: devuelve HTML),
+      // detectamos el problema antes de que explote en res.json()
+      const contentType = res.headers.get('content-type') || '';
+      if (!res.ok || !contentType.includes('application/json')) {
+        if (storyUrl !== DEFAULT_STORY) {
+          console.warn(`⚠️ Story "${storyUrl}" no encontrada, usando story default`);
+          return this.loadStory(DEFAULT_STORY);
+        }
+        throw new Error(`HTTP ${res.status} cargando ${storyUrl}`);
+      }
+
       const story = await res.json();
 
       PHASES.length = 0;
@@ -34,6 +50,7 @@ export class MapManager {
 
       Object.keys(MAPS_CONFIG).forEach((key) => delete MAPS_CONFIG[key]);
       Object.assign(MAPS_CONFIG, story.mapsIndex);
+      this.currentStoryId = story.id || null;
 
       if (!this.currentPhase && PHASES.length) {
         this.currentPhase = PHASES[0].id;
@@ -41,6 +58,11 @@ export class MapManager {
 
       console.log(`✅ Story cargada: ${PHASES.length} fases, ${Object.keys(MAPS_CONFIG).length} mapas`);
     } catch (err) {
+      // Si ya estamos en el default y falla, ahí sí es un error real
+      if (storyUrl !== DEFAULT_STORY) {
+        console.warn(`⚠️ Error cargando "${storyUrl}", usando story default`);
+        return this.loadStory(DEFAULT_STORY);
+      }
       console.error('❌ Error cargando story.json:', err);
       throw err;
     }
@@ -390,12 +412,15 @@ export class MapManager {
 
     if (!MAPS_CONFIG[mapId].waypoints) {
       try {
-        const res = await fetch(`/data/maps/${mapId}.json`);
+        const mapUrl = this.currentStoryId
+          ? `/data/stories/${this.currentStoryId}/maps/${mapId}.json`
+          : `/data/maps/${mapId}.json`;
+        const res = await fetch(mapUrl);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const fullData = await res.json();
         Object.assign(MAPS_CONFIG[mapId], fullData);
       } catch (err) {
-        console.error(`❌ Error cargando /data/maps/${mapId}.json:`, err);
+        console.error(`❌ Error cargando mapa desde ${mapUrl}:`, err);
         throw err;
       }
     }
@@ -460,10 +485,13 @@ export class MapManager {
   // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
   getCurrentPhaseMaps() {
     const phase = PHASES.find(p => p.id === this.currentPhase);
-    return phase ? phase.maps.map(id => ({ 
-      id, 
-      name: MAPS_CONFIG[id].name 
-    })) : [];
+    if (!phase) return [];
+    return phase.maps
+      .filter(id => !!MAPS_CONFIG[id])           // guard: ignorar IDs sin entrada en índice
+      .map(id => ({
+        id,
+        name: MAPS_CONFIG[id]?.name || id        // fallback: usar el id si no hay name
+      }));
   }
 
   // ========= ✨ OPTIMIZACIÓN: GETTER CON SOPORTE PARA CACHE RENDERIZADO =========

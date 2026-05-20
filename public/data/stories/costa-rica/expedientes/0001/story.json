@@ -1,0 +1,31 @@
+{
+  "id": "costa-rica/expedientes/0001",
+  "title": "Expediente 0001",
+  "description": "Descripción breve del caso",
+  "thumbnail": "/data/stories/costa-rica/expedientes/0001/thumb.webp",
+  "phases": [
+    {
+      "id": "fase1",
+      "label": "Fase 1",
+      "color": "#1BC6EB",
+      "maps": ["mapa_f1"]
+    },
+    {
+      "id": "fase2",
+      "label": "Fase 2",
+      "color": "#FF6B6B",
+      "maps": ["mapa_f2"]
+    },
+    {
+      "id": "fase3",
+      "label": "Fase 3",
+      "color": "#4ECDC4",
+      "maps": ["mapa_f3"]
+    }
+  ],
+  "mapsIndex": {
+    "mapa_f1": { "id": "mapa_f1", "name": "Recorrido 1", "phase": "fase1" },
+    "mapa_f2": { "id": "mapa_f2", "name": "Recorrido 2", "phase": "fase2" },
+    "mapa_f3": { "id": "mapa_f3", "name": "Recorrido 3", "phase": "fase3" }
+  }
+}

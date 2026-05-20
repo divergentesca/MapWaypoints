@@ -1,0 +1,15 @@
+{
+  "stories": [
+    {
+      "id": "costa-rica/expedientes/0001",
+      "title": "Expediente 0001",
+      "description": "Descripción breve del caso",
+      "thumbnail": "/data/stories/costa-rica/expedientes/0001/thumb.webp",
+      "url": "/?story=costa-rica/expedientes/0001",
+      "published": true,
+      "date": "2025-06-01",
+      "country": "Costa Rica",
+      "tags": ["expediente"]
+    }
+  ]
+}
