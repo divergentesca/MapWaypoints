@@ -61,6 +61,14 @@
 ├── public
 │   ├── assets
 │   │   ├── default.gif
+│   │   ├── fase-2-mapa-dektop-4x.png
+│   │   ├── fase-2-mapa-dektop-4x.webp
+│   │   ├── fase-2-mapa-mobile-x4.png
+│   │   ├── fase-2-mapa-mobile-x4.webp
+│   │   ├── fase-3-mapa-dektop-4x.png
+│   │   ├── fase-3-mapa-dektop-4x.webp
+│   │   ├── fase-3-mapa-mobile-x4.png
+│   │   ├── fase-3-mapa-mobile-x4.webp
 │   │   ├── fonts
 │   │   │   ├── inter-v20-latin-500.woff2
 │   │   │   ├── inter-v20-latin-600.woff2
@@ -120,8 +128,10 @@
 │   ├── popup_styles.css
 │   ├── style.css
 │   └── UIManager.js
+├── src-p1.txt
+├── src-p2.txt
 ├── test-iframe.html
 ├── vercel.json
 └── vite.config.js
 
-18 directories, 107 files
+18 directories, 117 files

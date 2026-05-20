@@ -42,7 +42,7 @@ Las dimensiones actuales:
 
 ### Coordenadas: tres sistemas distintos
 
-1. **World space** — píxeles del mapa completo (ej: `logicalW=4240, logicalH=3685`). Los waypoints usan `xp/yp` normalizados (0.0–1.0) que se multiplican por estas dimensiones.
+1. **World space** — píxeles del mapa completo (ej: `logicalW=4240, logicalH=2608` en desktop). Los waypoints usan `xp/yp` normalizados (0.0–1.0) que se multiplican por estas dimensiones.
 2. **CSS space** — píxeles lógicos del canvas en pantalla (sin DPR). La cámara opera aquí.
 3. **Device space** — píxeles físicos (`CSS × DPR`). El bitmap del canvas opera aquí.
 
@@ -70,6 +70,7 @@ Los hotspots e iconos son `<div>` posicionados sobre el canvas, **no** dibujados
 | `src/UIManager.js` | Fases, drawer, progreso, selector | UI chrome (no canvas) |
 | `src/style.css` | Layout, `.novela`, `#mapa-canvas-wrapper` | Estilos visuales |
 | `public/data/story.json` | Historia default (fallback) | Datos de prueba |
+| `public/data/index.json` | Catálogo de historias (para Lobby futuro) | Registrar nuevas historias |
 | `public/data/stories/*/story.json` | Historias reales | Contenido editorial |
 
 ---
@@ -102,10 +103,59 @@ No necesitan recalcularse al cambiar la imagen — solo los waypoints base cambi
 ### Versionado de imágenes con query string
 
 ```json
-"src": "/assets/mapa-mobile.webp?v=2026-05-20"
+"src": "/assets/mapa-mobile-x4.webp?v=2026-05-20"
 ```
 
 Cambiar la fecha fuerza al browser a no usar caché. **Siempre actualiza la versión al reemplazar una imagen.**
+
+### Convención de naming de assets por fase
+
+Los assets de Fase 1 no tienen prefijo (legacy). Las fases 2+ usan `fase-N-`:
+
+| Fase | Desktop | Mobile |
+|---|---|---|
+| Fase 1 | `mapa-dektop-4x.webp` | `mapa-mobile-x4.webp` |
+| Fase 2 | `fase-2-mapa-dektop-4x.webp` | `fase-2-mapa-mobile-x4.webp` |
+| Fase 3 | `fase-3-mapa-dektop-4x.webp` | `fase-3-mapa-mobile-x4.webp` |
+
+Los tres pares (fase 1, 2, 3) ya existen en `public/assets/` y están referenciados en los JSON de mapas correspondientes.
+
+### Dimensiones actuales de assets (Expediente 0001)
+
+| Fase | Dispositivo | logicalW | logicalH |
+|---|---|---|---|
+| Fase 1 | desktop | 4240 | 2608 |
+| Fase 1 | mobile | 2338 | 4192 |
+
+Al agregar nuevas imágenes, obtener dimensiones reales con:
+```bash
+sips -g pixelWidth -g pixelHeight public/assets/nueva-imagen.webp
+```
+
+---
+
+## index.json — Catálogo de historias
+
+Archivo en `/public/data/index.json`. Registra todas las historias disponibles. **Actualmente no se lee en runtime** — sirve como referencia editorial y se activará para el Lobby cuando haya 2+ historias publicadas.
+
+```json
+{
+  "stories": [
+    {
+      "id": "costa-rica/expedientes/0001",
+      "title": "Expediente 0001",
+      "thumbnail": "/data/stories/costa-rica/expedientes/0001/thumb.webp",
+      "url": "/?story=costa-rica/expedientes/0001",
+      "published": true,
+      "date": "2025-06-01",
+      "country": "Costa Rica",
+      "tags": ["expediente"]
+    }
+  ]
+}
+```
+
+Agregar una entrada aquí cada vez que se publique una historia nueva.
 
 ---
 
@@ -179,6 +229,7 @@ El editor (`src/editor.js`) se carga **solo** con `?editor=1`. No está en el bu
 | Guardar estado mutable en módulos ES sin una clase | Usar la clase correspondiente (Camera, MapManager, etc.) |
 | Importar librerías pesadas | El proyecto es vanilla JS intencional — sin dependencias de runtime |
 | Modificar `GLOBAL_CONFIG` en runtime | Leer de `appConfig.toggles` para flags de runtime |
+| Poner lógica de producción en `editor.js` | Crear un módulo nuevo o extender los existentes |
 
 ---
 
@@ -214,7 +265,9 @@ git add . && git commit -m "descripción" && git push
 ## Estado del proyecto (Mayo 2026)
 
 - Layout fullscreen estable: ancho y alto siempre `window.innerWidth/Height`
-- Multi-historia funcional via `?story=` 
+- Multi-historia funcional via `?story=`
 - Editor visual funcional con undo/redo
-- Primer expediente real (Costa Rica 0001) en progreso — imágenes de prueba activas
-- WordPress embed via iframe probado localmente, pendiente fix en divergentes.com
+- Assets de las 3 fases presentes en `public/assets/` (con naming `fase-N-*`)
+- Primer expediente real (Costa Rica 0001) en progreso — waypoints y hotspots con datos de prueba
+- WordPress embed via iframe probado localmente
+- **Bug activo:** iframe colapsa a 0px en divergentes.com — fix pendiente (guard de altura mínima)

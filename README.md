@@ -1,6 +1,6 @@
 # Mapa Interactivo Multi-Fase — Documentación Técnica
 
-> **Estado actual:** Producción-ready. Desplegado en Vercel. Integrado en WordPress vía iframe + plantilla PHP fullscreen.
+> **Estado actual:** En desarrollo activo. Expediente 0001 (Costa Rica) desplegado en Vercel con datos de prueba — contenido real en progreso. WordPress embed funcional localmente; fix pendiente en divergentes.com.
 
 ---
 
@@ -87,9 +87,19 @@ map-waypoints/
 ├── public/                       ← Archivos estáticos (Vite los copia a dist/ sin procesar)
 │   ├── assets/                   ← Imágenes, fuentes, GIFs
 │   │   ├── fonts/                ← Inter woff2 (self-hosted)
-│   │   ├── mapa-mobile-x4.webp   ← Imagen del mapa mobile (2338×5313px, 4 filas × 3 cols)
-│   │   ├── mapa-dektop-4x.webp   ← Imagen del mapa desktop (4240×3685px, 4 filas × 3 cols)
-│   │   └── persona_1-*.gif       ← Avatares animados de personas
+│   │   │
+│   │   ├── mapa-mobile-x4.webp        ← Mapa mobile Fase 1 (2338×4192px)
+│   │   ├── mapa-dektop-4x.webp        ← Mapa desktop Fase 1 (4240×2608px)
+│   │   │
+│   │   ├── fase-2-mapa-mobile-x4.webp ← Mapa mobile Fase 2
+│   │   ├── fase-2-mapa-dektop-4x.webp ← Mapa desktop Fase 2
+│   │   │
+│   │   ├── fase-3-mapa-mobile-x4.webp ← Mapa mobile Fase 3
+│   │   ├── fase-3-mapa-dektop-4x.webp ← Mapa desktop Fase 3
+│   │   │
+│   │   ├── mapa-1.webp                ← Foto de hotspot (imagen en popup)
+│   │   ├── persona_1-*.gif            ← Avatares animados de personas
+│   │   └── default.gif               ← Avatar por defecto
 │   │
 │   └── data/                     ← Sistema de datos de historias
 │       ├── story.json            ← Historia DEFAULT (fallback sin ?story=)
@@ -113,6 +123,14 @@ map-waypoints/
 ├── vite.config.js                ← Configuración de build
 └── package.json                  ← Scripts y dependencias
 ```
+
+**Convención de naming de assets por fase:**
+
+| Fase | Desktop | Mobile |
+|---|---|---|
+| Fase 1 (legacy, sin prefijo) | `mapa-dektop-4x.webp` | `mapa-mobile-x4.webp` |
+| Fase 2+ | `fase-2-mapa-dektop-4x.webp` | `fase-2-mapa-mobile-x4.webp` |
+| Fase 3+ | `fase-3-mapa-dektop-4x.webp` | `fase-3-mapa-mobile-x4.webp` |
 
 ---
 
@@ -223,20 +241,22 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
 
 ### `maps/mapa_f1.json` — Estructura de un mapa
 
+Las dimensiones reales de los assets actuales (Expediente 0001, Fase 1):
+
 ```json
 {
   "id": "mapa_f1",
   "name": "Recorrido 1",
   "phase": "fase1",
   "mapImage": {
-    "mobile":  { "src": "/assets/mapa-mobile-x4.webp?v=2026-05-20", "logicalW": 2338, "logicalH": 5313 },
-    "desktop": { "src": "/assets/mapa-dektop-4x.webp?v=2026-05-20", "logicalW": 4240, "logicalH": 3685 },
+    "mobile":  { "src": "/assets/mapa-mobile-x4.webp?v=2026-05-20", "logicalW": 2338, "logicalH": 4192 },
+    "desktop": { "src": "/assets/mapa-dektop-4x.webp?v=2026-05-20", "logicalW": 4240, "logicalH": 2608 },
     "useNaturalSize": false
   },
   "waypoints": [
     {
-      "mobile":  { "xp": 0.17, "yp": 0.1579, "z": 0.9 },
-      "desktop": { "xp": 0.18, "yp": 0.1485, "z": 1 },
+      "mobile":  { "xp": 0.17, "yp": 0.20, "z": 0.9 },
+      "desktop": { "xp": 0.18, "yp": 0.21, "z": 1 },
       "yOffset": { "default": 0, "tall": -90, "medium": -5, "short": 40 },
       "zMobileProfile": { "default": 0.56, "tall": 0.66, "medium": 0.60, "short": 0.52 },
       "label": "Inicio del Viaje",
@@ -283,6 +303,8 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
 
 ### `index.json` — Catálogo de historias
 
+Archivo en `/public/data/index.json`. Registra todas las historias disponibles para el futuro Lobby. **Actualmente no se lee en runtime** — sirve como referencia editorial y se activará cuando haya 2+ historias publicadas.
+
 ```json
 {
   "stories": [
@@ -314,7 +336,7 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
 | `editor` | boolean | `1` / `0` | Carga el editor visual bajo demanda. |
 | `mute` | boolean | `1` / `0` | Reservado para audio futuro. |
 | `embed` | boolean | `1` / `0` | Indica que la app corre dentro de un iframe. |
-| `scale` | número | `80`–`110` | Porcentaje de cobertura del viewport (afecta solo el alto). |
+| `scale` | número | `80`–`110` | Porcentaje de cobertura del viewport (afecta solo el alto). Deprecated. |
 
 **Ejemplos:**
 ```
@@ -325,7 +347,7 @@ https://map-waypoints.vercel.app/?story=costa-rica/expedientes/0001&popups=1&ove
 http://localhost:5173/?story=costa-rica/expedientes/0001&debug=1&popups=1&overlays=1
 
 # Editor visual
-http://localhost:5173/?editor=1&debug=1
+http://localhost:5173/?editor=1&debug=1&story=costa-rica/expedientes/0001
 ```
 
 ---
@@ -363,6 +385,8 @@ http://localhost:5173/?editor=1&debug=1
 })();
 </script>
 ```
+
+> ⚠️ **Bug conocido:** el iframe colapsa a 0px en divergentes.com. El listener de `postMessage` recibe alturas inválidas. Fix pendiente: agregar guard de altura mínima (`min-height: 100vh`) en el CSS del iframe independientemente del mensaje.
 
 ### Opción B — Plantilla PHP fullscreen
 
@@ -452,7 +476,7 @@ npm run dev
 # http://localhost:5173/?story=costa-rica/expedientes/0001&debug=1&popups=1&overlays=1
 
 # 3. Ajustar hotspots con el editor visual
-# http://localhost:5173/?editor=1&debug=1
+# http://localhost:5173/?editor=1&debug=1&story=costa-rica/expedientes/0001
 
 # 4. Build y deploy
 npm run build
@@ -519,7 +543,7 @@ sips -g pixelWidth -g pixelHeight public/assets/nueva-imagen.webp
 }
 ```
 
-El `?v=YYYY-MM-DD` fuerza al browser a no usar la versión cacheada.
+El `?v=YYYY-MM-DD` fuerza al browser a no usar la versión cacheada. **Siempre actualiza la versión al reemplazar una imagen.**
 
 ### Paso 3 — Recalcular `yp` de los waypoints
 
@@ -648,22 +672,30 @@ window.LayoutFill.set(100); // 100 = sin reducción
 
 ## 15. Pendientes y roadmap
 
-### Pendiente inmediato
-- [ ] Contenido real del Expediente 0001 — reemplazar imágenes de prueba y datos de waypoints con el caso real
-- [ ] `thumb.webp` para el catálogo `index.json`
-- [ ] Resolver el colapso del iframe en WordPress online (divergentes.com) — guard de altura mínima en el listener
+### 🔴 Crítico — bloqueante para publicación
 
-### Corto plazo
+- [ ] **Fix iframe colapso en divergentes.com** — el listener de `postMessage` recibe alturas inválidas; agregar guard con `min-height: 100vh` en el CSS del iframe independientemente del mensaje recibido
+
+### 🟡 Inmediato — Expediente 0001
+
+- [ ] Reemplazar imágenes de prueba con imágenes reales del caso
+- [ ] Completar waypoints y hotspots con datos, fechas, personas y ubicaciones reales
+- [ ] Generar `thumb.webp` y registrar en `index.json`
+
+### 🟢 Corto plazo
+
+- [ ] LRU cache para imágenes — `imageCache` crece ilimitado hoy; limitar a ~30 entradas
 - [ ] Plugin WordPress con shortcode `[mapa_interactivo story="..."]` y panel de ajustes
-- [ ] LRU cache para imágenes (límite de ~30 entradas en `imageCache` — hoy crece ilimitado)
 - [ ] Virtualización de overlays DOM fuera de viewport
 
-### Mediano plazo
-- [ ] Lobby — página que lee `index.json` y muestra tarjetas de historias (activar cuando haya 2+ historias)
+### 🔵 Mediano plazo
+
+- [ ] Lobby — activar cuando haya 2+ historias; leer `index.json` y mostrar tarjetas
 - [ ] Segunda historia para validar el sistema multi-historia completo
 - [ ] Hotspots con coordenadas proporcionales (`xp/yp`) en vez de `offsetX/offsetY` en píxeles
 
-### Futuro
+### ⚪ Futuro
+
 - [ ] Web Component `<mapa-interactivo>` para distribución sin iframe
 - [ ] Panel de administración para editar historias sin tocar JSON
 - [ ] Audio/narración sincronizada con waypoints
