@@ -2027,6 +2027,8 @@ export class MapManager {
     this.currentPhase = PHASES[0]?.id || null;
     this.currentMapId = null;
     this.currentMap = null;
+    this.currentStoryId = null;
+    this.currentStoryUrl = null;
     this.preloadedMaps = new Set();
     this.isMobile = this.checkIsMobile();
     
@@ -2045,6 +2047,8 @@ export class MapManager {
 
   async loadStory(storyUrl = '/data/story.json') {
     const DEFAULT_STORY = '/data/story.json';
+    this.currentStoryId = null;
+    this.currentStoryUrl = storyUrl;
     try {
       const res = await fetch(storyUrl);
 
@@ -2066,6 +2070,7 @@ export class MapManager {
 
       Object.keys(MAPS_CONFIG).forEach((key) => delete MAPS_CONFIG[key]);
       Object.assign(MAPS_CONFIG, story.mapsIndex);
+      this.currentStoryId = story.id || null;
 
       if (!this.currentPhase && PHASES.length) {
         this.currentPhase = PHASES[0].id;
@@ -2427,12 +2432,15 @@ export class MapManager {
 
     if (!MAPS_CONFIG[mapId].waypoints) {
       try {
-        const res = await fetch(`/data/maps/${mapId}.json`);
+        const mapUrl = this.currentStoryId
+          ? `/data/stories/${this.currentStoryId}/maps/${mapId}.json`
+          : `/data/maps/${mapId}.json`;
+        const res = await fetch(mapUrl);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const fullData = await res.json();
         Object.assign(MAPS_CONFIG[mapId], fullData);
       } catch (err) {
-        console.error(`❌ Error cargando /data/maps/${mapId}.json:`, err);
+        console.error(`❌ Error cargando mapa desde ${mapUrl}:`, err);
         throw err;
       }
     }
