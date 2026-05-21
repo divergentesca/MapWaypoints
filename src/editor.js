@@ -1055,6 +1055,27 @@ export function initEditor() {
       }
     }));
 
+    // Generar código del waypoint y mostrarlo en consola para copiar al JSON
+    const device = editor.isMobile ? 'mobile' : 'desktop';
+    window.dispatchEvent(new CustomEvent('editor:getWaypointCode', {
+      detail: { waypointIndex: editor.waypointIndex, device }
+    }));
+    window.addEventListener('editor:itemCodeResponse', function handler(ev) {
+      window.removeEventListener('editor:itemCodeResponse', handler);
+      const code = typeof ev.detail.code === 'string'
+        ? ev.detail.code
+        : JSON.stringify(ev.detail.code, null, 2);
+      console.log(
+        `%c📋 Waypoint #${editor.waypointIndex} [${device}] — pega esto en el JSON:`,
+        'color:#FFD700;font-size:13px;font-weight:bold'
+      );
+      console.log(`%c${code}`, 'color:#00FF88;font-family:monospace;font-size:12px');
+      try {
+        navigator.clipboard.writeText(code);
+        console.log('%c✅ Copiado al clipboard', 'color:#00FF88');
+      } catch {}
+    }, { once: true });
+
     // Refrescar datos del waypoint desde el runtime
     window.dispatchEvent(new CustomEvent('editor:getWaypointData', {
       detail: { waypointIndex: editor.waypointIndex }
@@ -1068,7 +1089,7 @@ export function initEditor() {
       editor.selectedItem = null;
       editor.needsRedraw = true;
       window.dispatchEvent(new CustomEvent('editor:redraw'));
-      updateInfo(`💾 Waypoint #${editor.waypointIndex} guardado: (${Math.round(waypoint.x)}, ${Math.round(waypoint.y)}) z:${(waypoint.z||1).toFixed(2)}`);
+      updateInfo(`💾 Waypoint #${editor.waypointIndex} guardado — código en consola`);
     }, { once: true });
   }
 
