@@ -1,6 +1,6 @@
 # Mapa Interactivo Multi-Fase — Documentación Técnica
 
-> **Estado actual:** En desarrollo activo. Expediente 0001 (Costa Rica) desplegado en Vercel con datos de prueba — contenido real en progreso. WordPress embed funcional localmente; fix pendiente en divergentes.com.
+> **Estado actual:** Producción-ready. Desplegado en Vercel. Integrado en WordPress vía iframe + plantilla PHP fullscreen.
 
 ---
 
@@ -31,7 +31,7 @@ Aplicación web de mapas interactivos narrativos para periodismo de investigaci�
 **El modelo de negocio:**
 - Tú produces las historias (JSON + imágenes) y las publicas en Vercel.
 - Los clientes (medios, periodistas) embeben el mapa en su WordPress con un snippet HTML o una plantilla PHP.
-- Cada historia es una URL única: `tu-app.vercel.app/?story=costa-rica/expedientes/0001`
+- Cada historia es una URL única: `map-waypoints.vercel.app/?story=costa-rica/expedientes/0001`
 
 ---
 
@@ -39,7 +39,7 @@ Aplicación web de mapas interactivos narrativos para periodismo de investigaci�
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                  VERCEL (tu-app.vercel.app)          │
+│           VERCEL (map-waypoints.vercel.app)          │
 │                                                     │
 │  ┌──────────┐  fetch   ┌──────────────────────┐    │
 │  │  app.js  │ ──────► │  /data/story.json     │    │
@@ -87,23 +87,17 @@ map-waypoints/
 ├── public/                       ← Archivos estáticos (Vite los copia a dist/ sin procesar)
 │   ├── assets/                   ← Imágenes, fuentes, GIFs
 │   │   ├── fonts/                ← Inter woff2 (self-hosted)
-│   │   │
-│   │   ├── mapa-mobile-x4.webp        ← Mapa mobile Fase 1 (2338×4192px)
-│   │   ├── mapa-dektop-4x.webp        ← Mapa desktop Fase 1 (4240×2608px)
-│   │   │
-│   │   ├── fase-2-mapa-mobile-x4.webp ← Mapa mobile Fase 2
-│   │   ├── fase-2-mapa-dektop-4x.webp ← Mapa desktop Fase 2
-│   │   │
-│   │   ├── fase-3-mapa-mobile-x4.webp ← Mapa mobile Fase 3
-│   │   ├── fase-3-mapa-dektop-4x.webp ← Mapa desktop Fase 3
-│   │   │
-│   │   ├── mapa-1.webp                ← Foto de hotspot (imagen en popup)
-│   │   ├── persona_1-*.gif            ← Avatares animados de personas
-│   │   └── default.gif               ← Avatar por defecto
+│   │   ├── mapa-mobile-x4.webp   ← Imagen mapa mobile (2336×4192px)
+│   │   ├── mapa-dektop-4x.webp   ← Imagen mapa desktop (4240×2608px)
+│   │   ├── fase-2-mapa-mobile-x4.webp  ← Fase 2 mobile
+│   │   ├── fase-2-mapa-dektop-4x.webp  ← Fase 2 desktop
+│   │   ├── fase-3-mapa-mobile-x4.webp  ← Fase 3 mobile
+│   │   ├── fase-3-mapa-dektop-4x.webp  ← Fase 3 desktop
+│   │   └── persona_1-*.gif       ← Avatares animados de personas
 │   │
 │   └── data/                     ← Sistema de datos de historias
 │       ├── story.json            ← Historia DEFAULT (fallback sin ?story=)
-│       ├── index.json            ← Catálogo de todas las historias (para lobby futuro)
+│       ├── index.json            ← Catálogo de todas las historias
 │       ├── maps/                 ← Mapas del story default
 │       │   ├── mapa_f1.json
 │       │   ├── mapa_f2.json
@@ -124,14 +118,6 @@ map-waypoints/
 └── package.json                  ← Scripts y dependencias
 ```
 
-**Convención de naming de assets por fase:**
-
-| Fase | Desktop | Mobile |
-|---|---|---|
-| Fase 1 (legacy, sin prefijo) | `mapa-dektop-4x.webp` | `mapa-mobile-x4.webp` |
-| Fase 2+ | `fase-2-mapa-dektop-4x.webp` | `fase-2-mapa-mobile-x4.webp` |
-| Fase 3+ | `fase-3-mapa-dektop-4x.webp` | `fase-3-mapa-mobile-x4.webp` |
-
 ---
 
 ## 4. Módulos JavaScript
@@ -150,6 +136,11 @@ Contiene el loop de animación (`requestAnimationFrame`), el sistema de dirty fl
 ```js
 markDirty('camera', 'elements', 'dialog', 'minimap', 'debug')
 // Solo redibuja las capas marcadas como sucias
+```
+
+**Toggle de popups en runtime:**
+```js
+window.togglePopupDisplay(true/false)  // habilita/deshabilita popups sin recargar
 ```
 
 ### `MapManager.js` — Gestor de datos y caché
@@ -204,9 +195,9 @@ Renderiza el filtro de fases (botones superiores), el selector de mapas, el draw
 ### `editor.js` — Editor visual
 Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se carga **solo** con `?editor=1` — no afecta el bundle de producción.
 
-**Comandos del editor:**
+**Atajos de teclado:**
 - `E` — Toggle editor on/off
-- `Ctrl+Z / Ctrl+Y` — Undo/Redo
+- `Ctrl+Z / Ctrl+Y` — Undo/Redo (hasta 50 pasos)
 - `Ctrl+D` — Duplicar item
 - `Ctrl+C / Ctrl+V` — Copiar/Pegar
 - `H` — Hide UI
@@ -221,10 +212,6 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
 
 ```json
 {
-  "id": "costa-rica/expedientes/0001",
-  "title": "Expediente 0001",
-  "description": "Descripción breve del caso",
-  "thumbnail": "/data/stories/costa-rica/expedientes/0001/thumb.webp",
   "phases": [
     {
       "id": "fase1",
@@ -234,14 +221,16 @@ Herramienta de desarrollo para posicionar hotspots y overlays visualmente. Se ca
     }
   ],
   "mapsIndex": {
-    "mapa_f1": { "id": "mapa_f1", "name": "Recorrido 1", "phase": "fase1" }
+    "mapa_f1": {
+      "id": "mapa_f1",
+      "name": "Recorrido 1",
+      "phase": "fase1"
+    }
   }
 }
 ```
 
-### `maps/mapa_f1.json` — Estructura de un mapa
-
-Las dimensiones reales de los assets actuales (Expediente 0001, Fase 1):
+### `mapa_fN.json` — Estructura de un mapa con waypoints
 
 ```json
 {
@@ -249,61 +238,48 @@ Las dimensiones reales de los assets actuales (Expediente 0001, Fase 1):
   "name": "Recorrido 1",
   "phase": "fase1",
   "mapImage": {
-    "mobile":  { "src": "/assets/mapa-mobile-x4.webp?v=2026-05-20", "logicalW": 2338, "logicalH": 4192 },
-    "desktop": { "src": "/assets/mapa-dektop-4x.webp?v=2026-05-20", "logicalW": 4240, "logicalH": 2608 },
+    "mobile": {
+      "src": "/assets/mapa-mobile.webp?v=2026-05-21",
+      "logicalW": 2336,
+      "logicalH": 4192
+    },
+    "desktop": {
+      "src": "/assets/mapa-dektop.webp?v=2026-05-21",
+      "logicalW": 4240,
+      "logicalH": 2608
+    },
     "useNaturalSize": false
   },
   "waypoints": [
     {
       "mobile":  { "xp": 0.17, "yp": 0.20, "z": 0.9 },
-      "desktop": { "xp": 0.18, "yp": 0.21, "z": 1 },
+      "desktop": { "xp": 0.18, "yp": 0.21, "z": 1.0 },
       "yOffset": { "default": 0, "tall": -90, "medium": -5, "short": 40 },
       "zMobileProfile": { "default": 0.56, "tall": 0.66, "medium": 0.60, "short": 0.52 },
       "label": "Inicio del Viaje",
-      "lines": ["Texto narrativo línea 1.", "Texto narrativo línea 2."]
-    }
-  ],
-  "icons": {
-    "0": [
-      {
-        "type": "hotspot",
-        "mobile":  { "offsetX": -26, "offsetY": -301, "width": 370, "height": 200, "rotation": 9 },
-        "desktop": { "offsetX": -465, "offsetY": -61, "width": 388, "height": 230, "rotation": -10 },
-        "title": "Llegada al Aeropuerto",
-        "image": "/assets/mapa-1.webp",
-        "datetime": { "date": "15/06/2025", "time": "12:07", "timeColor": "#FF4444" },
-        "location": "Aeropuerto Juan Santamaría (SJO), Alajuela.",
-        "description": "Descripción del evento...",
-        "involved": [
-          { "id": "person1", "name": "Persona #1", "avatar": "./assets/persona_1-1.png", "role": "Pasajero" }
-        ],
-        "echos": {
-          "person1": [
-            { "datetime": { "date": "15/06/2025", "time": "12:07" }, "description": "Detalle del eco..." }
-          ]
+      "lines": ["Texto de la escena.", "Segunda línea opcional."],
+      "hotspots": [
+        {
+          "id": "hs1",
+          "type": "persona",
+          "offsetX": 120,
+          "offsetY": -80,
+          "popup": {
+            "title": "Nombre",
+            "image": "/assets/persona_1-1.gif",
+            "date": "2024-01-15",
+            "location": "San José, Costa Rica",
+            "description": "Descripción detallada.",
+            "personas": []
+          }
         }
-      }
-    ]
-  }
+      ]
+    }
+  ]
 }
 ```
 
-**Campos de waypoint:**
-- `xp / yp` — Posición relativa en el mapa (0.0 a 1.0). Se multiplica por `logicalW/H` para obtener coordenadas absolutas.
-- `z` — Nivel de zoom en ese waypoint
-- `yOffset` — Ajuste vertical según perfil de altura del dispositivo
-- `zMobileProfile` — Zoom específico por perfil de pantalla mobile
-
-**Perfiles de altura mobile:**
-- `short` — pantallas ≤640px de alto
-- `medium` — pantallas 641-820px de alto
-- `tall` — pantallas >820px de alto
-
-**⚠️ Al cambiar la imagen del mapa:** si el nuevo `logicalH` es distinto, los `yp` deben recalcularse. Ver sección 12.
-
 ### `index.json` — Catálogo de historias
-
-Archivo en `/public/data/index.json`. Registra todas las historias disponibles para el futuro Lobby. **Actualmente no se lee en runtime** — sirve como referencia editorial y se activará cuando haya 2+ historias publicadas.
 
 ```json
 {
@@ -327,160 +303,76 @@ Archivo en `/public/data/index.json`. Registra todas las historias disponibles p
 
 ## 6. Parámetros URL
 
-| Parámetro | Tipo | Valores | Descripción |
-|---|---|---|---|
-| `story` | string | `costa-rica/expedientes/0001` | ID de la historia. Sin este parámetro carga el story default. |
-| `popups` | boolean | `1` / `0` | Activa popups al hacer clic en hotspots. |
-| `overlays` | boolean | `1` / `0` | Activa overlays DOM (iconos sobre el mapa). |
-| `debug` | boolean | `1` / `0` | Muestra grilla, labels y rectángulos de hotspots. |
-| `editor` | boolean | `1` / `0` | Carga el editor visual bajo demanda. |
-| `mute` | boolean | `1` / `0` | Reservado para audio futuro. |
-| `embed` | boolean | `1` / `0` | Indica que la app corre dentro de un iframe. |
-| `scale` | número | `80`–`110` | Porcentaje de cobertura del viewport (afecta solo el alto). Deprecated. |
+| Parámetro | Tipo | Descripción |
+|---|---|---|
+| `?story=` | string | ID de la historia (ej: `costa-rica/expedientes/0001`) |
+| `?debug=1` | boolean | Muestra grilla, labels y logs de hotspots |
+| `?editor=1` | boolean | Carga el editor visual de posicionamiento |
+| `?popups=1` | boolean | Activa/desactiva popups al clicar hotspots |
+| `?overlays=0` | boolean | Activa/desactiva overlays DOM |
+| `?embed=1` | boolean | Modo embed (sin chrome del WordPress) |
+| `?scale=` | number | Cobertura de viewport (legacy, afecta solo el alto) |
 
-**Ejemplos:**
-```
-# Producción
-https://map-waypoints.vercel.app/?story=costa-rica/expedientes/0001&popups=1&overlays=1&mute=1
-
-# Desarrollo con debug
-http://localhost:5173/?story=costa-rica/expedientes/0001&debug=1&popups=1&overlays=1
-
-# Editor visual
-http://localhost:5173/?editor=1&debug=1&story=costa-rica/expedientes/0001
+```js
+// Acceso en código via:
+appConfig.toggles.debug    // boolean
+appConfig.toggles.story    // string
+// etc.
 ```
 
 ---
 
 ## 7. Sistema de distribución — WordPress
 
-### Opción A — Snippet HTML
-
+**Snippet HTML básico:**
 ```html
-<div id="mapa-wrapper" style="width:100%;background:#000;overflow:visible;margin:0;padding:0;">
-  <iframe
-    id="mapa-iframe"
-    src="https://map-waypoints.vercel.app/?story=costa-rica/expedientes/0001&popups=1&overlays=1&mute=1"
-    style="width:100%;height:100vh;min-height:500px;border:none;display:block;"
-    allow="fullscreen"
-    loading="eager"
-    title="Expediente 0001 — Costa Rica"
-    scrolling="no"
-  ></iframe>
-</div>
-<script>
-(function() {
-  var iframe = document.getElementById('mapa-iframe');
-  var origin = 'https://map-waypoints.vercel.app';
-  var lastHeight = 0;
-  window.addEventListener('message', function(e) {
-    if (e.origin !== origin) return;
-    if (!e.data || e.data.type !== 'mapa-resize') return;
-    var h = parseInt(e.data.height, 10);
-    if (!h || h < 200) return;
-    if (Math.abs(h - lastHeight) < 5) return;
-    lastHeight = h;
-    if (iframe) iframe.style.height = h + 'px';
-  });
-})();
-</script>
+<iframe
+  src="https://map-waypoints.vercel.app/?story=costa-rica/expedientes/0001"
+  width="100%"
+  height="100vh"
+  frameborder="0"
+  allow="fullscreen"
+  style="border:none; display:block;"
+></iframe>
 ```
 
-> ⚠️ **Bug conocido:** el iframe colapsa a 0px en divergentes.com. El listener de `postMessage` recibe alturas inválidas. Fix pendiente: agregar guard de altura mínima (`min-height: 100vh`) en el CSS del iframe independientemente del mensaje.
-
-### Opción B — Plantilla PHP fullscreen
-
-Archivo: `wp-content/themes/{tema-activo}/page-mapa-fullscreen.php`
-
-```php
-<?php
-/**
- * Template Name: Mapa Interactivo Fullscreen
- * Template Post Type: page
- */
-$story = isset($_GET['story']) ? sanitize_text_field($_GET['story']) : 'costa-rica/expedientes/0001';
-$base  = 'https://map-waypoints.vercel.app';
-$src   = esc_url($base . '/?story=' . $story . '&popups=1&overlays=1&mute=1');
-?>
-<!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-  <meta charset="<?php bloginfo('charset'); ?>">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title><?php wp_title('|', true, 'right'); bloginfo('name'); ?></title>
-  <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    html,body{width:100%;height:100%;overflow:hidden;background:#000}
-    #mapa-fs{width:100%;height:100vh;border:none;display:block}
-  </style>
-</head>
-<body>
-  <iframe
-    id="mapa-fs"
-    src="<?php echo $src; ?>"
-    allow="fullscreen"
-    loading="eager"
-    title="<?php the_title(); ?>"
-  ></iframe>
-  <?php wp_footer(); ?>
-</body>
-</html>
-```
+**Plantilla PHP fullscreen:** Disponible como plantilla de página de WordPress que ocupa el 100% del viewport eliminando header/footer. La app envía `postMessage` con su altura para que el iframe pueda ajustarse.
 
 ---
 
 ## 8. Deploy — Vercel
 
-### `vercel.json` — Headers HTTP
-
-```json
-{
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Frame-Options",        "value": "ALLOWALL" },
-        { "key": "Content-Security-Policy", "value": "frame-ancestors *;" },
-        { "key": "X-Content-Type-Options",  "value": "nosniff" },
-        { "key": "Referrer-Policy",         "value": "strict-origin-when-cross-origin" }
-      ]
-    }
-  ]
-}
-```
-
-### Comandos
-
 ```bash
-npm run dev      # Servidor de desarrollo en localhost:5173
-npm run build    # Build de producción → genera dist/
-npm run preview  # Preview del build antes de deploy
-
-# Deploy
 git add . && git commit -m "descripción" && git push
-# Vercel despliega automáticamente al detectar el push
-
-# Verificar headers en producción
-curl -I https://map-waypoints.vercel.app/
+# Vercel detecta el push y despliega automáticamente
+# URL de producción: https://map-waypoints.vercel.app/
 ```
+
+Headers configurados en `vercel.json`:
+- `X-Frame-Options: ALLOWALL` — permite embedding en iframe
+- Cache headers para assets estáticos
 
 ---
 
 ## 9. Flujo de desarrollo
 
 ```bash
-# 1. Iniciar servidor local
+# 1. Arrancar dev server
 npm run dev
+# → http://localhost:5173
 
-# 2. Abrir con parámetros de desarrollo
-# http://localhost:5173/?story=costa-rica/expedientes/0001&debug=1&popups=1&overlays=1
+# 2. Desarrollar con historia real + debug
+http://localhost:5173/?story=costa-rica/expedientes/0001&debug=1&popups=1&overlays=1
 
-# 3. Ajustar hotspots con el editor visual
-# http://localhost:5173/?editor=1&debug=1&story=costa-rica/expedientes/0001
+# 3. Posicionar hotspots con el editor
+http://localhost:5173/?editor=1&debug=1&story=costa-rica/expedientes/0001
 
-# 4. Build y deploy
+# 4. Verificar solo canvas (sin overlays)
+http://localhost:5173/?story=costa-rica/expedientes/0001&popups=0&overlays=0&debug=1
+
+# 5. Build y deploy
 npm run build
-git add . && git commit -m "actualiza historia 0001" && git push
+git add . && git commit -m "..." && git push
 ```
 
 ---
@@ -532,6 +424,8 @@ Crear el archivo del mapa nuevo copiando uno existente y editando imagen y waypo
 
 ```bash
 sips -g pixelWidth -g pixelHeight public/assets/nueva-imagen.webp
+# O en Linux:
+identify public/assets/nueva-imagen.webp
 ```
 
 ### Paso 2 — Actualizar `mapImage` en el JSON
@@ -543,7 +437,7 @@ sips -g pixelWidth -g pixelHeight public/assets/nueva-imagen.webp
 }
 ```
 
-El `?v=YYYY-MM-DD` fuerza al browser a no usar la versión cacheada. **Siempre actualiza la versión al reemplazar una imagen.**
+El `?v=YYYY-MM-DD` fuerza al browser a no usar la versión cacheada.
 
 ### Paso 3 — Recalcular `yp` de los waypoints
 
@@ -564,13 +458,13 @@ CANVAS_LIMITS: {
   desktop: {
     maxWidth: 4096,
     maxHeight: 4096,
-    maxPixels: 16_000_000,   // desktop 4x = 15.6M px
+    maxPixels: 16_000_000,
     maxMemoryMB: 150
   },
   mobile: {
     maxWidth: 2400,
     maxHeight: 5400,
-    maxPixels: 13_000_000,   // mobile 4x = 12.4M px
+    maxPixels: 13_000_000,
     maxMemoryMB: 72
   }
 }
@@ -608,7 +502,7 @@ window.resize / ResizeObserver
 /* El wrapper siempre ocupa todo el viewport — JS sobreescribe con px exactos */
 #mapa-canvas-wrapper {
   position: relative;
-  margin: 0 auto;   /* centra el espacio sobrante cuando coverage < 1 */
+  margin: 0 auto;
   display: block;
 }
 
@@ -620,7 +514,6 @@ window.resize / ResizeObserver
   transform-origin: top center;
 }
 
-/* main actúa como flex container para centrado */
 #main-content {
   display: flex;
   justify-content: center;
@@ -672,30 +565,22 @@ window.LayoutFill.set(100); // 100 = sin reducción
 
 ## 15. Pendientes y roadmap
 
-### 🔴 Crítico — bloqueante para publicación
+### Pendiente inmediato
+- [ ] Contenido real del Expediente 0001 — reemplazar imágenes de prueba y datos de waypoints con el caso real
+- [ ] `thumb.webp` para el catálogo `index.json`
+- [ ] Resolver el colapso del iframe en WordPress online (divergentes.com) — guard de altura mínima en el listener
 
-- [ ] **Fix iframe colapso en divergentes.com** — el listener de `postMessage` recibe alturas inválidas; agregar guard con `min-height: 100vh` en el CSS del iframe independientemente del mensaje recibido
-
-### 🟡 Inmediato — Expediente 0001
-
-- [ ] Reemplazar imágenes de prueba con imágenes reales del caso
-- [ ] Completar waypoints y hotspots con datos, fechas, personas y ubicaciones reales
-- [ ] Generar `thumb.webp` y registrar en `index.json`
-
-### 🟢 Corto plazo
-
-- [ ] LRU cache para imágenes — `imageCache` crece ilimitado hoy; limitar a ~30 entradas
+### Corto plazo
 - [ ] Plugin WordPress con shortcode `[mapa_interactivo story="..."]` y panel de ajustes
+- [ ] LRU cache para imágenes (límite de ~30 entradas en `imageCache` — hoy crece ilimitado)
 - [ ] Virtualización de overlays DOM fuera de viewport
 
-### 🔵 Mediano plazo
-
-- [ ] Lobby — activar cuando haya 2+ historias; leer `index.json` y mostrar tarjetas
+### Mediano plazo
+- [ ] Lobby — página que lee `index.json` y muestra tarjetas de historias (activar cuando haya 2+ historias)
 - [ ] Segunda historia para validar el sistema multi-historia completo
 - [ ] Hotspots con coordenadas proporcionales (`xp/yp`) en vez de `offsetX/offsetY` en píxeles
 
-### ⚪ Futuro
-
+### Futuro
 - [ ] Web Component `<mapa-interactivo>` para distribución sin iframe
 - [ ] Panel de administración para editar historias sin tocar JSON
 - [ ] Audio/narración sincronizada con waypoints

@@ -1,0 +1,2208 @@
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp0.json
+========================================
+[
+  {
+    "_note": "WP0-H0: Rectángulo izquierdo — evento principal (ej: aeropuerto, llegada)",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -11,
+      "offsetY": -417,
+      "width": 392,
+      "height": 200,
+      "rotation": 9,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -363,
+      "offsetY": -142,
+      "width": 420,
+      "height": 239,
+      "rotation": -10,
+      "radius": 0
+    },
+    "title": "Llegada al Aeropuerto",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "15/06/2025",
+      "time": "12:07",
+      "timeColor": "#FF4444"
+    },
+    "location": "Aeropuerto Juan Santamaría (SJO), Alajuela.",
+    "description": "Roberto Danilo Samcam Ruiz regresa a Costa Rica desde México. No se observan personas o situaciones sospechosas en su permanencia en San José. Sale en taxi formal (Taxi Tap) hacia su vivienda, conducido por José Roberto Naranjo González.",
+    "involved": [
+      {
+        "id": "person1",
+        "name": "Persona #1",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "Pasajero"
+      },
+      {
+        "id": "person2",
+        "name": "Persona #2",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "Conductor",
+        "highlighted": true
+      },
+      {
+        "id": "person3",
+        "name": "Persona #3",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "Testigo"
+      }
+    ],
+    "echos": {
+      "person1": [
+        {
+          "datetime": { "date": "15/06/2025", "time": "11:45" },
+          "description": "Arribo del vuelo internacional desde Ciudad de México."
+        }
+      ],
+      "person2": [
+        {
+          "datetime": { "date": "15/06/2025", "time": "12:07" },
+          "description": "Roberto Danilo Samcam Ruiz aborda el taxi en zona de salidas internacionales."
+        },
+        {
+          "datetime": { "date": "15/06/2025", "time": "14:30" },
+          "description": "Segunda interacción documentada con el conductor en zona residencial."
+        }
+      ],
+      "person3": [
+        {
+          "datetime": { "date": "15/06/2025", "time": "12:10" },
+          "description": "Observación del proceso de abordaje del taxi desde zona de espera."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP0-H1: Círculo superior izquierdo — evento secundario",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 1,
+      "offsetY": -86,
+      "width": 404,
+      "height": 284,
+      "rotation": -8,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 346,
+      "offsetY": -141,
+      "width": 417,
+      "height": 238,
+      "rotation": 25,
+      "radius": 0
+    },
+    "title": "TODO — Título evento círculo superior",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "pf1w0h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w0h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      }
+    ],
+    "echos": {
+      "pf1w0h1a": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "pf1w0h1b": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona B."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP0-H2: Círculo inferior — duplicado del círculo superior, evento terciario",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 84,
+      "offsetY": 145,
+      "width": 77,
+      "height": 77,
+      "rotation": -8,
+      "radius": 20
+    },
+    "desktop": {
+      "offsetX": -9,
+      "offsetY": -180,
+      "width": 170,
+      "height": 170,
+      "rotation": 25,
+      "radius": 84
+    },
+    "title": "TODO — Título evento círculo inferior",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "pf1w0h2a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w0h2b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      }
+    ],
+    "echos": {
+      "pf1w0h2a": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "pf1w0h2b": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona B."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP0-H3: Rectángulo derecho — duplicado del rectángulo izquierdo, evento cuaternario",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 224,
+      "offsetY": 107,
+      "width": 77,
+      "height": 77,
+      "rotation": 24,
+      "radius": 15
+    },
+    "desktop": {
+      "offsetX": -9,
+      "offsetY": 61,
+      "width": 166,
+      "height": 166,
+      "rotation": 24,
+      "radius": 85
+    },
+    "title": "TODO — Título evento rectángulo derecho",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "pf1w0h3a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w0h3b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w0h3c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w0h3a": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "pf1w0h3b": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona B."
+        },
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Segunda interacción persona B."
+        }
+      ],
+      "pf1w0h3c": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp1.json
+========================================
+[
+  {
+    "_note": "WPN-H0: Rectángulo principal — reemplazar N con el número del waypoint",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Título evento principal",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "pf1wNh0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1wNh0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1wNh0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1wNh0a": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "pf1wNh0b": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona B."
+        },
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Segunda interacción persona B."
+        }
+      ],
+      "pf1wNh0c": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp2.json
+========================================
+[
+  {
+    "_note": "WP2-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 2, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 2.",
+    "involved": [
+      {
+        "id": "pf1w2h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w2h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w2h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w2h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w2h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w2h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP2-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 2, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 2.",
+    "involved": [
+      {
+        "id": "pf1w2h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w2h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w2h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w2h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w2h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w2h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp3.json
+========================================
+[
+  {
+    "_note": "WP3-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 3, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 3.",
+    "involved": [
+      {
+        "id": "pf1w3h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w3h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w3h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w3h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w3h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w3h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP3-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 3, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 3.",
+    "involved": [
+      {
+        "id": "pf1w3h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w3h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w3h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w3h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w3h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w3h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp4.json
+========================================
+[
+  {
+    "_note": "WP4-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 4, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 4.",
+    "involved": [
+      {
+        "id": "pf1w4h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w4h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w4h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w4h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w4h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w4h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP4-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 4, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 4.",
+    "involved": [
+      {
+        "id": "pf1w4h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w4h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w4h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w4h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w4h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w4h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp5.json
+========================================
+[
+  {
+    "_note": "WP5-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 5, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 5.",
+    "involved": [
+      {
+        "id": "pf1w5h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w5h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w5h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w5h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w5h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w5h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP5-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 5, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 5.",
+    "involved": [
+      {
+        "id": "pf1w5h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w5h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w5h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w5h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w5h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w5h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp6.json
+========================================
+[
+  {
+    "_note": "WP6-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 6, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 6.",
+    "involved": [
+      {
+        "id": "pf1w6h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w6h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w6h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w6h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w6h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w6h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP6-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 6, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 6.",
+    "involved": [
+      {
+        "id": "pf1w6h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w6h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w6h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w6h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w6h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w6h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp7.json
+========================================
+[
+  {
+    "_note": "WP7-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 7, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 7.",
+    "involved": [
+      {
+        "id": "pf1w7h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w7h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w7h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w7h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w7h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w7h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP7-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 7, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 7.",
+    "involved": [
+      {
+        "id": "pf1w7h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w7h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w7h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w7h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w7h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w7h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp8.json
+========================================
+[
+  {
+    "_note": "WP8-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 8, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 8.",
+    "involved": [
+      {
+        "id": "pf1w8h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w8h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w8h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w8h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w8h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w8h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP8-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 8, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 8.",
+    "involved": [
+      {
+        "id": "pf1w8h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w8h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w8h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w8h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w8h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w8h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp9.json
+========================================
+[
+  {
+    "_note": "WP9-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 9, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 9.",
+    "involved": [
+      {
+        "id": "pf1w9h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w9h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w9h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w9h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w9h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w9h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP9-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 9, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 9.",
+    "involved": [
+      {
+        "id": "pf1w9h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w9h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w9h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w9h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w9h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w9h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp10.json
+========================================
+[
+  {
+    "_note": "WP10-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 10, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 10.",
+    "involved": [
+      {
+        "id": "pf1w10h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w10h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w10h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w10h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w10h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w10h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP10-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 10, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 10.",
+    "involved": [
+      {
+        "id": "pf1w10h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w10h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w10h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w10h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w10h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w10h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wp11.json
+========================================
+[
+  {
+    "_note": "WP11-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 11, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 11.",
+    "involved": [
+      {
+        "id": "pf1w11h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w11h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w11h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w11h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w11h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w11h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP11-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 11, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 11.",
+    "involved": [
+      {
+        "id": "pf1w11h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w11h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w11h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w11h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w11h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w11h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
+========================================
+FILE: public/data/stories/costa-rica/expedientes/0001/maps/mapa_f1_icons/wpN_template.json
+========================================
+[
+  {
+    "type": "hotspot",
+    "_note": "TODO — Ajustar offsets con el editor. Copiar este archivo como wpN.json y reemplazar N por el índice del waypoint.",
+    "mobile": {
+      "offsetX": -200,
+      "offsetY": -200,
+      "width": 200,
+      "height": 140,
+      "rotation": 0
+    },
+    "desktop": {
+      "offsetX": -200,
+      "offsetY": -200,
+      "width": 200,
+      "height": 140,
+      "rotation": 0
+    },
+    "title": "TODO — Título hotspot 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "TODO_pf1wNaN0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "TODO_pf1wNaN0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "TODO_pf1wNaN0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "TODO_pf1wNaN0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "TODO_pf1wNaN0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participación persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interacción persona B."
+        }
+      ],
+      "TODO_pf1wNaN0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participación persona C."
+        }
+      ]
+    }
+  }
+]
+
