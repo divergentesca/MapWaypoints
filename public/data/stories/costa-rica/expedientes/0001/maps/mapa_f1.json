@@ -377,10 +377,10 @@
           "rotation": 9
         },
         "desktop": {
-          "offsetX": -345,
+          "offsetX": -361,
           "offsetY": -141,
-          "width": 388,
-          "height": 230,
+          "width": 418,
+          "height": 238,
           "rotation": -10
         },
         "title": "Llegada al Aeropuerto",
@@ -461,11 +461,12 @@
           "radius": 0
         },
         "desktop": {
-          "offsetX": -3,
-          "offsetY": -175,
-          "width": 150,
-          "height": 156,
-          "rotation": 25
+          "offsetX": -9,
+          "offsetY": -179,
+          "width": 170,
+          "height": 170,
+          "rotation": 25,
+          "radius": 84
         },
         "title": "Encuentro en Zona Residencial",
         "image": "/assets/mapa-1.webp",
@@ -561,18 +562,18 @@
       {
         "type": "hotspot",
         "mobile": {
-          "offsetX": -20,
-          "offsetY": -170,
-          "width": 306,
-          "height": 226,
-          "rotation": 6
+          "offsetX": -353,
+          "offsetY": -131,
+          "width": 418,
+          "height": 240,
+          "rotation": -10
         },
         "desktop": {
-          "offsetX": -90,
-          "offsetY": -90,
-          "width": 136,
-          "height": 136,
-          "rotation": 0
+          "offsetX": -353,
+          "offsetY": -131,
+          "width": 418,
+          "height": 240,
+          "rotation": -10
         },
         "title": "Evolución del Personaje",
         "body": "Cómo ha cambiado el protagonista desde el inicio. Nuevas perspectivas y aprendizajes adquiridos."

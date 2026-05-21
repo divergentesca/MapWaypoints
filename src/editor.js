@@ -736,19 +736,18 @@ export function initEditor() {
         <div style="font-weight: bold; font-size: ${editor.isMobile ? '14px' : '16px'}; color: #FFD700;">
           🎨 EDITOR ADVANCED
         </div>
-        ${editor.isMobile ? `
-          <button id="toggle-ui-collapse" style="
-            padding: 4px 8px;
-            background: #FFD700;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 11px;
-          ">
-            ${editor.uiCollapsed ? '▲' : '▼'}
-          </button>
-        ` : ''}
+        <button id="toggle-ui-collapse" style="
+          padding: 4px 10px;
+          background: #FFD700;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: bold;
+          font-size: 13px;
+          line-height: 1;
+        " title="Colapsar panel (C)">
+          ${editor.uiCollapsed ? '▲' : '▼'}
+        </button>
       </div>
 
       <div id="editor-content" style="display: ${editor.uiCollapsed ? 'none' : 'block'};">
@@ -828,6 +827,11 @@ export function initEditor() {
             <label>H:</label><input type="number" id="prop-h" class="prop-input">
             <label>Rot:</label><input type="number" id="prop-rot" class="prop-input">
           </div>
+          <button id="export-json-btn" style="
+            margin-top:8px; width:100%; padding:8px;
+            background:#FF6B00; border:none; border-radius:6px;
+            color:#fff; font-weight:bold; cursor:pointer; font-size:12px;
+          ">📋 Copy JSON</button>
         </div>
 
         <!-- 🆕 PRESETS -->
@@ -901,6 +905,7 @@ export function initEditor() {
     document.getElementById('paste-btn')?.addEventListener('click', pasteItem);
     document.getElementById('focus-btn')?.addEventListener('click', focusOnItem);
     document.getElementById('save-preset-btn')?.addEventListener('click', savePreset);
+    document.getElementById('export-json-btn')?.addEventListener('click', exportItemJSON);
     document.getElementById('waypoint-selector-btn')?.addEventListener('click', createWaypointSelector);
 
     const collapseBtn = document.getElementById('toggle-ui-collapse');
@@ -1222,7 +1227,7 @@ export function initEditor() {
       return;
     }
 
-    // Grid/Rulers/Hide
+    // Grid/Rulers/Hide/Collapse
     if (e.key === 'g' || e.key === 'G') {
       document.getElementById('toggle-grid')?.click();
       e.preventDefault();
@@ -1234,6 +1239,12 @@ export function initEditor() {
     if (e.key === 'h' || e.key === 'H') {
       if (editor.isMobile) document.getElementById('toggle-ui-collapse')?.click();
       e.preventDefault();
+    }
+    if (e.key === 'c' || e.key === 'C') {
+      if (!e.ctrlKey && !e.metaKey) {
+        document.getElementById('toggle-ui-collapse')?.click();
+        e.preventDefault();
+      }
     }
 
     editor.gridSnap = e.shiftKey;
@@ -1704,6 +1715,48 @@ export function initEditor() {
     canvas.style.cursor = editor.active ? 'crosshair' : 'default';
     editor.needsRedraw = true;
     window.dispatchEvent(new CustomEvent('editor:redraw'));
+  }
+
+  function exportItemJSON() {
+    if (!editor.selectedItem) return;
+
+    const item = editor.items[editor.selectedItem.index];
+    if (!item || !editor.waypoint) return;
+
+    const wp = editor.waypoint;
+    const offsetX = Math.round(item.x - wp.x);
+    const offsetY = Math.round(item.y - wp.y);
+
+    const json = {
+      type: item.type || "hotspot",
+      mobile: {
+        offsetX,
+        offsetY,
+        width: Math.round(item.width),
+        height: Math.round(item.height),
+        rotation: item.rotation || 0
+      },
+      desktop: {
+        offsetX,
+        offsetY,
+        width: Math.round(item.width),
+        height: Math.round(item.height),
+        rotation: item.rotation || 0
+      },
+      title: item.title || "TODO — Título",
+      body: item.body || "TODO — Descripción..."
+    };
+
+    const str = JSON.stringify(json, null, 2);
+    navigator.clipboard.writeText(str).then(() => {
+      updateInfo('✅ JSON copiado al clipboard!');
+      console.log('%c📋 JSON copiado al clipboard', 'color:#FF6B00;font-weight:bold');
+      console.log('%c' + str, 'color:#00FF88;font-family:monospace;font-size:12px');
+    }).catch(() => {
+      console.log('%c📋 JSON:', 'color:#FF6B00;font-weight:bold');
+      console.log(str);
+      updateInfo('⚠️ No se pudo copiar — JSON en consola');
+    });
   }
 
   function generateCode() {
