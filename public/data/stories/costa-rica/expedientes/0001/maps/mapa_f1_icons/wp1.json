@@ -1,0 +1,76 @@
+[
+  {
+    "_note": "WPN-H0: Rectángulo principal — reemplazar N con el número del waypoint",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Título evento principal",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "pf1wNh0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1wNh0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1wNh0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1wNh0a": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "pf1wNh0b": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona B."
+        },
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Segunda interacción persona B."
+        }
+      ],
+      "pf1wNh0c": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona C."
+        }
+      ]
+    }
+  }
+]

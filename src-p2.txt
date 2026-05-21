@@ -1,3 +1,6 @@
+========================================
+FILE: src/editor.js
+========================================
 // ========= 🎨 EDITOR VISUAL AVANZADO - FULL FEATURED =========
 // Versión modular para carga bajo demanda
 
@@ -1507,7 +1510,6 @@ export function initEditor() {
 
         if (x >= item.x - hw && x <= item.x + hw && y >= item.y - hh && y <= item.y + hh) {
           editor.selectedItem = { item, index: i };
-          window.__editorSelectedIndex = i; // sync badge highlight en canvas
           editor.mode = 'drag';
           editor.dragStart = { x, y };
           editor.itemStart = { ...item };
@@ -1727,44 +1729,34 @@ export function initEditor() {
     const wp = editor.waypoint;
     const offsetX = Math.round(item.x - wp.x);
     const offsetY = Math.round(item.y - wp.y);
-    const width    = Math.round(item.width);
-    const height   = Math.round(item.height);
-    const rotation = Math.round(item.rotation || 0);
-    const radius   = item.radius || 0;
 
-    const STRIP = new Set(['x','y','waypointIndex','debugColor','_editorId','_rawMobile','_rawDesktop']);
-
-    const mobileBase = item._rawMobile || {};
-    const desktopBase = item._rawDesktop || {};
-
-    const mobileOut  = { ...mobileBase,  offsetX, offsetY, width, height, rotation, radius };
-    const desktopOut = { ...desktopBase, offsetX, offsetY, width, height, rotation, radius };
-
-    if (radius === 0 && !('radius' in mobileBase))  delete mobileOut.radius;
-    if (radius === 0 && !('radius' in desktopBase)) delete desktopOut.radius;
-
-    const json = {};
-    if (item._note) json._note = item._note;
-    json.type    = item.type || 'hotspot';
-    json.mobile  = mobileOut;
-    json.desktop = desktopOut;
-
-    const ORDER = ['title','image','datetime','location','description','involved','echos','body'];
-    ORDER.forEach(k => { if (item[k] !== undefined) json[k] = item[k]; });
-
-    Object.keys(item).forEach(k => {
-      if (!STRIP.has(k) && !(k in json) && !['type','mobile','desktop','_note'].includes(k)) {
-        json[k] = item[k];
-      }
-    });
+    const json = {
+      type: item.type || "hotspot",
+      mobile: {
+        offsetX,
+        offsetY,
+        width: Math.round(item.width),
+        height: Math.round(item.height),
+        rotation: item.rotation || 0
+      },
+      desktop: {
+        offsetX,
+        offsetY,
+        width: Math.round(item.width),
+        height: Math.round(item.height),
+        rotation: item.rotation || 0
+      },
+      title: item.title || "TODO — Título",
+      body: item.body || "TODO — Descripción..."
+    };
 
     const str = JSON.stringify(json, null, 2);
     navigator.clipboard.writeText(str).then(() => {
-      updateInfo('✅ JSON completo copiado — pega directo en wpN.json');
-      console.log('%c📋 JSON completo copiado', 'color:#FF6B00;font-weight:bold');
+      updateInfo('✅ JSON copiado al clipboard!');
+      console.log('%c📋 JSON copiado al clipboard', 'color:#FF6B00;font-weight:bold');
       console.log('%c' + str, 'color:#00FF88;font-family:monospace;font-size:12px');
     }).catch(() => {
-      console.log('%c📋 JSON completo:', 'color:#FF6B00;font-weight:bold');
+      console.log('%c📋 JSON:', 'color:#FF6B00;font-weight:bold');
       console.log(str);
       updateInfo('⚠️ No se pudo copiar — JSON en consola');
     });
@@ -1874,3 +1866,1233 @@ export function initEditor() {
       });
     }
 } // ← cierra initEditor
+========================================
+FILE: src/index.html
+========================================
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description"
+    content="Mapa interactivo multi-fase que narra un viaje a través de puntos clave, con zooms, hotspots y contenido narrativo.">
+  <meta name="color-scheme" content="dark light">
+  <!-- Content Security Policy: Configuración para desarrollo -->
+  <!-- 
+    DESARROLLO: Incluye 'unsafe-inline' y 'unsafe-eval' para Vite HMR y debugging
+    PRODUCCIÓN: Remover 'unsafe-eval' y minimizar 'unsafe-inline' usando nonces/hashes
+    
+    Directivas actuales:
+    - script-src: Permite módulos ES6 y eval para Vite dev server
+    - style-src: Permite estilos inline (componentes dinámicos)
+    - connect-src: Permite WebSocket para HMR (ws:/wss:)
+    - img-src: Permite data URIs y blobs para imágenes dinámicas
+  -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' ws: wss:;">
+  <title>Mapa Interactivo Multi-Fase</title>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-v20-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./popup_styles.css">
+  <link rel="preload" href="/assets/mapa-mobile.webp?v=2025-11-20-2" as="image" type="image/webp" media="(max-width: 899px)">
+  <link rel="preload" href="/assets/mapa-dektop.webp?v=2025-11-20-2" as="image" type="image/webp" media="(min-width: 900px)">
+
+
+
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      font-family: 'Inter', sans-serif;
+    }
+
+    #mapa-canvas-wrapper {
+      width: 100vw;
+      height: 100%;
+      position: relative;
+    }
+
+    .loading-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+
+    canvas {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <!-- <a class="skip-link" href="#main-content">.</a> -->
+
+  <header class="top-bar" role="banner">
+    <!-- Filtro de fases (Desktop) -->
+    <div class="phase-filter" id="phase-filter" role="group" aria-label="Filtro de fases"></div>
+
+    <!-- Selector de mapas -->
+    <div class="map-selector-wrapper" id="map-selector"></div>
+  </header>
+
+  <main id="main-content" role="main" tabindex="-1">
+    <div id="mapa-canvas-wrapper" class="novela" data-phase="fase1">
+
+      <!-- Botón hamburguesa (Mobile) -->
+      <button class="hamburger" aria-label="Abrir menú" aria-controls="menu-puntos" aria-expanded="false">
+        ☰
+      </button>
+
+      <!-- Drawer/Menú lateral -->
+      <nav id="menu-puntos" class="drawer" aria-hidden="true">
+        <header class="drawer__head">
+          <strong>Puntos del mapa</strong>
+          <button class="drawer__close" aria-label="Cerrar menú">×</button>
+        </header>
+        <ol class="drawer__list" id="drawer-list"></ol>
+      </nav>
+
+      <!-- Backdrop del drawer -->
+      <div class="drawer-backdrop" hidden></div>
+
+      <!-- Capa DOM para overlays -->
+      <div id="overlay-layer" class="overlay-root" aria-hidden="true"></div>
+
+      <!-- Canvas principal -->
+      <canvas id="mapa-canvas" width="1280" height="920" aria-label="Mapa interactivo"></canvas>
+
+      <!-- Canvas overlay del editor (no recibe eventos) -->
+      <canvas id="editor-layer" width="1280" height="920" aria-hidden="true"></canvas>
+
+      <!-- Loading spinner -->
+      <div id="loading-spinner" class="loading-spinner" hidden>
+        <svg viewBox="0 0 50 50" class="spinner-svg" aria-hidden="true">
+          <circle class="ring" cx="25" cy="25" r="20"></circle>
+          <circle class="dot" cx="25" cy="5" r="3"></circle>
+        </svg>
+        <div class="loading-text">Cargando…</div>
+      </div>
+
+      <!-- Controles de navegación -->
+      <div class="ui" aria-label="Controles de navegación">
+        <button class="btn prev" aria-label="Anterior" title="Anterior (◀)">◀</button>
+        <div class="progress" aria-hidden="true"></div>
+        <button class="btn next" aria-label="Siguiente" title="Siguiente (▶)">▶</button>
+      </div>
+
+      <!-- Minimap -->
+      <canvas id="minimap" width="200" height="120" aria-hidden="true"></canvas>
+
+      <!-- Popup modal backdrop -->
+      <div id="popup-backdrop" class="popup-backdrop" hidden></div>
+
+      <!-- Popup modal - Estructura simple (por defecto) -->
+      <div id="popup" class="popup popup-simple" role="dialog" aria-modal="true" aria-labelledby="popup-title" hidden>
+        <button id="popup-close" class="popup-close" aria-label="Cerrar">×</button>
+        <h3 id="popup-title"></h3>
+        <div id="popup-body"></div>
+      </div>
+
+      <!-- Popup modal - Estructura detallada mejorada -->
+      <div id="popup-detailed" class="popup popup-detailed" role="dialog" aria-modal="true"
+        aria-labelledby="popup-detailed-title" hidden>
+        <!-- Handle para arrastrar en móvil -->
+        <div class="popup-detailed__drag-handle" aria-hidden="true"></div>
+
+        <!-- Botón de cerrar -->
+        <button id="popup-detailed-close" class="popup-close" aria-label="Cerrar">×</button>
+
+        <!-- Imagen principal con overlay -->
+        <div class="popup-detailed__image-wrapper">
+          <img id="popup-detailed-image" class="popup-detailed__image" alt="" loading="lazy" decoding="async" />
+        </div>
+
+        <!-- Contenido principal con scroll -->
+        <div class="popup-detailed__content">
+          <!-- Título -->
+          <h3 id="popup-detailed-title" class="popup-detailed__title"></h3>
+
+          <!-- Fecha y hora -->
+          <div class="popup-detailed__datetime">
+            <span id="popup-detailed-date" class="popup-detailed__date"></span>
+            <span id="popup-detailed-time" class="popup-detailed__time"></span>
+          </div>
+
+          <!-- Ubicación con ícono -->
+          <div id="popup-detailed-location" class="popup-detailed__location"></div>
+
+          <!-- Descripción -->
+          <div id="popup-detailed-description" class="popup-detailed__description"></div>
+
+          <!-- Sección de implicados -->
+          <div id="popup-detailed-involved-section" class="popup-detailed__involved-section" hidden>
+            <div class="popup-detailed__section-divider"></div>
+            <h4 class="popup-detailed__section-title">Implicados</h4>
+            <div id="popup-detailed-involved" class="popup-detailed__involved"></div>
+          </div>
+
+          <!-- Sección de echos -->
+          <div id="popup-detailed-echos-section" class="popup-detailed__echos-section" hidden>
+            <div class="popup-detailed__section-divider"></div>
+            <h4 id="popup-detailed-echos-title" class="popup-detailed__section-title"></h4>
+            <div id="popup-detailed-echos" class="popup-detailed__echos"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen reader live region -->
+      <div class="sr-live" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <!-- ÚNICO script de entrada -->
+  <script type="module" src="/app.js"></script>
+
+</body>
+
+</html>
+========================================
+FILE: src/main.js
+========================================
+import './style.css';
+import './app.js'; // importa tu app principal
+
+========================================
+FILE: src/MapManager.js
+========================================
+// ========= GESTOR DE MAPAS (Lazy Loading & Cache + Performance Optimizations) =========
+import { PHASES, MAPS_CONFIG, GLOBAL_CONFIG } from './config.js';
+
+export class MapManager {
+  constructor() {
+    this.imageCache = new Map();
+    this.currentPhase = PHASES[0]?.id || null;
+    this.currentMapId = null;
+    this.currentMap = null;
+    this.currentStoryId = null;
+    this.currentStoryUrl = null;
+    this.preloadedMaps = new Set();
+    this.isMobile = this.checkIsMobile();
+    
+    // ✨ OPTIMIZACIÓN 1: Detección de WebP
+    this.supportsWebP = false;
+    this.checkWebPSupport();
+    
+    // ✨ OPTIMIZACIÓN 2: Cache de imágenes renderizadas para iconos
+    this.renderedCache = new Map();
+    
+    this.mediaQuery = window.matchMedia(`(max-width: ${GLOBAL_CONFIG.MOBILE_BREAKPOINT - 1}px)`);
+    this.mediaQuery.addEventListener('change', (e) => {
+      this.isMobile = e.matches;
+    });
+  }
+
+  async loadStory(storyUrl = '/data/story.json') {
+    const DEFAULT_STORY = '/data/story.json';
+    this.currentStoryId = null;
+    this.currentStoryUrl = storyUrl;
+    try {
+      const res = await fetch(storyUrl);
+
+      // Si el servidor responde pero no es JSON válido (ej: devuelve HTML),
+      // detectamos el problema antes de que explote en res.json()
+      const contentType = res.headers.get('content-type') || '';
+      if (!res.ok || !contentType.includes('application/json')) {
+        if (storyUrl !== DEFAULT_STORY) {
+          console.warn(`⚠️ Story "${storyUrl}" no encontrada, usando story default`);
+          return this.loadStory(DEFAULT_STORY);
+        }
+        throw new Error(`HTTP ${res.status} cargando ${storyUrl}`);
+      }
+
+      const story = await res.json();
+
+      PHASES.length = 0;
+      story.phases.forEach((phase) => PHASES.push(phase));
+
+      Object.keys(MAPS_CONFIG).forEach((key) => delete MAPS_CONFIG[key]);
+      Object.assign(MAPS_CONFIG, story.mapsIndex);
+      this.currentStoryId = story.id || null;
+
+      if (!this.currentPhase && PHASES.length) {
+        this.currentPhase = PHASES[0].id;
+      }
+
+      console.log(`✅ Story cargada: ${PHASES.length} fases, ${Object.keys(MAPS_CONFIG).length} mapas`);
+    } catch (err) {
+      // Si ya estamos en el default y falla, ahí sí es un error real
+      if (storyUrl !== DEFAULT_STORY) {
+        console.warn(`⚠️ Error cargando "${storyUrl}", usando story default`);
+        return this.loadStory(DEFAULT_STORY);
+      }
+      console.error('❌ Error cargando story.json:', err);
+      throw err;
+    }
+  }
+
+  checkIsMobile() {
+    return window.matchMedia(`(max-width: ${GLOBAL_CONFIG.MOBILE_BREAKPOINT - 1}px)`).matches;
+  }
+
+  // ========= ✨ OPTIMIZACIÓN: DETECCIÓN DE WEBP =========
+  async checkWebPSupport() {
+    if (!('createImageBitmap' in window)) {
+      this.supportsWebP = false;
+      return;
+    }
+
+    const webpData = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+    
+    try {
+      const img = new Image();
+      const loadPromise = new Promise((resolve) => {
+        img.onload = () => resolve(img.height === 1);
+        img.onerror = () => resolve(false);
+      });
+      img.src = webpData;
+      this.supportsWebP = await loadPromise;
+      
+      if (this.supportsWebP) {
+        console.log('✅ WebP soportado - imágenes optimizadas disponibles');
+      }
+    } catch (e) {
+      this.supportsWebP = false;
+    }
+  }
+
+  // ========= ✨ OPTIMIZACIÓN: INTENTAR CARGAR WEBP PRIMERO =========
+  getOptimizedImagePath(src) {
+    // Si WebP no está soportado, devolver ruta original
+    if (!this.supportsWebP) return src;
+    
+    // Si ya es WebP, no hacer nada
+    if (src.endsWith('.webp')) return src;
+    
+    // Intentar reemplazar extensión por .webp
+    return src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+  }
+
+  // ========= CARGA DE IMÁGENES CON OPTIMIZACIÓN WEBP =========
+  loadImage(src, preRenderSize = null) {
+    return new Promise((resolve, reject) => {
+      // Cache key incluye tamaño si hay pre-renderizado
+      const cacheKey = preRenderSize ? `${src}_${preRenderSize}` : src;
+      
+      if (this.imageCache.has(cacheKey)) {
+        return resolve(this.imageCache.get(cacheKey));
+      }
+      
+      // ✨ OPTIMIZACIÓN: Intentar WebP primero
+      const optimizedSrc = this.getOptimizedImagePath(src);
+      const img = new Image();
+      
+      if (/^https?:\/\//i.test(optimizedSrc)) {
+        img.crossOrigin = 'anonymous';
+      }
+      
+      // Optimizaciones de carga existentes
+      try { img.decoding = 'async'; } catch {}
+      if ('loading' in HTMLImageElement.prototype) {
+        try { img.loading = 'eager'; } catch {}
+      }
+      
+      img.onload = () => { 
+        this.imageCache.set(src, img);
+        
+        // ✨ OPTIMIZACIÓN: Pre-renderizar iconos si se especifica tamaño
+        if (preRenderSize && 'OffscreenCanvas' in window) {
+          try {
+            const offscreen = new OffscreenCanvas(preRenderSize, preRenderSize);
+            const ctx = offscreen.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            ctx.drawImage(img, 0, 0, preRenderSize, preRenderSize);
+            const rendered = offscreen.transferToImageBitmap();
+            this.renderedCache.set(cacheKey, rendered);
+            resolve(rendered);
+          } catch (e) {
+            // Fallback si OffscreenCanvas falla
+            this.imageCache.set(cacheKey, img);
+            resolve(img);
+          }
+        } else {
+          resolve(img);
+        }
+      };
+      
+      img.onerror = (e) => {
+        // ✨ OPTIMIZACIÓN: Fallback automático si WebP falla
+        if (optimizedSrc !== src) {
+          console.warn(`⚠️ WebP no disponible, usando formato original: ${src}`);
+          
+          const fallbackImg = new Image();
+          if (/^https?:\/\//i.test(src)) fallbackImg.crossOrigin = 'anonymous';
+          
+          try { fallbackImg.decoding = 'async'; } catch {}
+          if ('loading' in HTMLImageElement.prototype) {
+            try { fallbackImg.loading = 'eager'; } catch {}
+          }
+          
+          fallbackImg.onload = () => {
+            this.imageCache.set(src, fallbackImg);
+            resolve(fallbackImg);
+          };
+          
+          fallbackImg.onerror = () => {
+            console.warn('❌ No se pudo cargar imagen:', src);
+            if (typeof window !== 'undefined' && window.showError) {
+              try { window.showError('Error cargando imagen: ' + src); } catch {};
+            }
+            reject(new Error(`Failed to load: ${src}`));
+          };
+          
+          fallbackImg.src = src;
+        } else {
+          // 🆕 NUEVO: si src ya es .webp, intentamos un JPG hermano
+          const webpMatch = src.match(/^(.*)\.webp(\?.*)?$/i);
+          if (webpMatch) {
+            const jpgSrc = `${webpMatch[1]}.jpg${webpMatch[2] || ''}`;
+            console.warn(`⚠️ WebP directo falló, probando JPG: ${jpgSrc}`);
+            
+            const fallbackImg = new Image();
+            if (/^https?:\/\//i.test(jpgSrc)) fallbackImg.crossOrigin = 'anonymous';
+            try { fallbackImg.decoding = 'async'; } catch {}
+            if ('loading' in HTMLImageElement.prototype) {
+              try { fallbackImg.loading = 'eager'; } catch {}
+            }
+
+            fallbackImg.onload = () => {
+              // cacheamos usando la key original (src)
+              this.imageCache.set(src, fallbackImg);
+              resolve(fallbackImg);
+            };
+
+            fallbackImg.onerror = () => {
+              console.warn('❌ Tampoco se pudo cargar fallback JPG:', jpgSrc);
+              if (typeof window !== 'undefined' && window.showError) {
+                try { window.showError('Error cargando imagen: ' + jpgSrc); } catch {};
+              }
+              reject(new Error(`Failed to load: ${jpgSrc}`));
+            };
+
+            fallbackImg.src = jpgSrc;
+            return;
+          }
+
+          console.warn('❌ No se pudo cargar imagen:', src);
+          if (typeof window !== 'undefined' && window.showError) {
+            try { window.showError('Error cargando imagen: ' + src); } catch {};
+          }
+          reject(e);
+        }
+      };
+      
+      img.src = optimizedSrc;
+    });
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  async loadMapImages(mapConfig) {
+    const imageConfig = mapConfig.mapImage;
+    
+    const config = this.isMobile 
+      ? imageConfig.mobile 
+      : imageConfig.desktop;
+
+    const imagePath = config?.src || config || imageConfig.desktop?.src || imageConfig.desktop;
+
+    if (!imagePath) {
+      throw new Error('No se especificó imagen para el mapa');
+    }
+
+    console.log(`🖼️ Cargando imagen ${this.isMobile ? 'mobile' : 'desktop'}:`, imagePath);
+
+    try {
+      const img = await this.loadImage(imagePath);
+      
+      // ⚠️ LÓGICA ORIGINAL INTACTA - NO TOCAR
+      if (imageConfig.useNaturalSize) {
+        mapConfig.mapImage.logicalW = img.naturalWidth;
+        mapConfig.mapImage.logicalH = img.naturalHeight;
+      } else {
+        mapConfig.mapImage.logicalW = config.logicalW || imageConfig.logicalW || img.naturalWidth;
+        mapConfig.mapImage.logicalH = config.logicalH || imageConfig.logicalH || img.naturalHeight;
+      }
+
+      console.log(`✅ Dimensiones lógicas: ${mapConfig.mapImage.logicalW}x${mapConfig.mapImage.logicalH}`);
+      console.log(`   Imagen real: ${img.naturalWidth}x${img.naturalHeight}`);
+      
+      return { 
+        lowRes: img,
+        highRes: img,
+        current: img
+      };
+      
+    } catch (error) {
+      console.error('❌ Error cargando imagen del mapa:', error);
+      if (typeof window !== 'undefined' && window.showError) {
+        try { window.showError('Error cargando el mapa. Intenta recargar.'); } catch {};
+      }
+      throw error;
+    }
+  }
+
+  // ========= ✨ OPTIMIZACIÓN: PRECARGA DE ICONOS CON RENDER CACHE =========
+  async preloadIcons(mapConfig) {
+    const urls = new Set();
+    const allIcons = mapConfig.icons || {};
+    Object.values(allIcons).flat().forEach(ic => {
+      if (ic?.img) urls.add(ic.img);
+    });
+    
+    if (!urls.size) return;
+    
+    console.log(`📦 Precargando ${urls.size} iconos...`);
+    
+    // ✨ OPTIMIZACIÓN: Pre-renderizar iconos pequeños
+    const iconSize = GLOBAL_CONFIG.ICON_SIZE || 36;
+    const loadPromises = [...urls].map(url =>
+      this.loadImage(url, iconSize)
+        .then(() => ({ ok: true, url }))
+        .catch(err => {
+          console.warn(`⚠️ Error precargando icono ${url}:`, err);
+          return { ok: false, url };
+        })
+    );
+
+    const results = await Promise.all(loadPromises);
+    if (results.some(r => r && r.ok === false)) {
+      if (typeof window !== 'undefined' && window.showError) {
+        try { window.showError('Error precargando iconos. Algunos iconos pueden no mostrarse.'); } catch {};
+      }
+    }
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  normalizeWaypoints(waypoints, mapW, mapH) {
+    return waypoints.map(wp => {
+      const config = this.isMobile ? wp.mobile : wp.desktop;
+      
+      if (!config) {
+        console.warn('⚠️ Waypoint sin configuración mobile/desktop:', wp);
+        return {
+          ...wp,
+          x: mapW / 2,
+          y: mapH / 2,
+          z: 1.0
+        };
+      }
+
+      return {
+        ...wp,
+        x: (config.xp || 0.5) * mapW,
+        y: (config.yp || 0.5) * mapH,
+        z: config.z || 1.0,
+        label: wp.label,
+        lines: wp.lines
+      };
+    });
+  }
+
+  async _loadSplitIcons(mapId, mapConfig, waypointCount) {
+    if (!mapConfig.iconsDir) {
+      return mapConfig.icons || {};
+    }
+
+    const baseUrl = this.currentStoryId
+      ? `/data/stories/${this.currentStoryId}/maps/${mapId}_icons`
+      : `/data/maps/${mapId}_icons`;
+
+    const fetches = Array.from({ length: waypointCount }, (_, i) =>
+      fetch(`${baseUrl}/wp${i}.json`)
+        .then(r => r.ok ? r.json() : [])
+        .then(data => ({ index: i, data }))
+        .catch(() => ({ index: i, data: [] }))
+    );
+
+    const results = await Promise.all(fetches);
+    const icons = {};
+    results.forEach(({ index, data }) => {
+      if (data.length > 0) icons[String(index)] = data;
+    });
+
+    console.log(`📂 Icons split: ${Object.keys(icons).length}/${waypointCount} waypoints con hotspots (${mapId})`);
+    return icons;
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  normalizeIcons(icons, mapW, mapH, waypoints) {
+    const normalized = {};
+    
+    Object.entries(icons).forEach(([key, iconList]) => {
+      const waypointIndex = parseInt(key);
+      const waypoint = waypoints[waypointIndex];
+      
+      if (!waypoint) {
+        console.warn('⚠️ No se encontró waypoint para iconos:', key);
+        return;
+      }
+
+      normalized[key] = iconList.map(icon => {
+        const config = this.isMobile ? icon.mobile : icon.desktop;
+        
+        if (!config) {
+          console.warn('⚠️ Icono sin configuración mobile/desktop:', icon);
+          return icon;
+        }
+
+        const type = icon.type || 'icon';
+
+        const x = config.x !== undefined 
+          ? config.x 
+          : (waypoint.x + (config.offsetX || 0));
+        
+        const y = config.y !== undefined 
+          ? config.y 
+          : (waypoint.y + (config.offsetY || 0));
+
+        let width, height;
+        
+        if (config.width !== undefined && config.height !== undefined) {
+          width = config.width;
+          height = config.height;
+        } else if (config.size !== undefined) {
+          width = config.size;
+          height = config.size;
+        } else {
+          width = null;
+          height = null;
+        }
+
+        const base = {
+          ...icon,
+          type,
+          x,
+          y,
+          width,
+          height,
+          rotation: config.rotation || 0
+        };
+
+        if (type === 'hotspot') {
+          base.radius = config.radius || 0;
+          base.debugColor = icon.debugColor || 'rgba(255, 0, 0, 0.3)';
+        }
+
+        return base;
+      });
+    });
+    
+    return normalized;
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  /**
+   * Carga un mapa por ID, con optimizaciones para mobile/desktop.
+   * @param {string} mapId - ID del mapa a cargar.
+   * @returns {Promise<Object>} - Configuración del mapa cargado.
+   */
+  async loadMap(mapId) {
+    if (!MAPS_CONFIG[mapId]) {
+      throw new Error(`❌ Mapa no encontrado en índice: ${mapId}`);
+    }
+
+    console.log(`🗺️ Cargando mapa: ${mapId} (${this.isMobile ? 'mobile' : 'desktop'})`);
+
+    if (!MAPS_CONFIG[mapId].waypoints) {
+      try {
+        const mapUrl = this.currentStoryId
+          ? `/data/stories/${this.currentStoryId}/maps/${mapId}.json`
+          : `/data/maps/${mapId}.json`;
+        const res = await fetch(mapUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const fullData = await res.json();
+        Object.assign(MAPS_CONFIG[mapId], fullData);
+      } catch (err) {
+        console.error(`❌ Error cargando mapa desde ${mapUrl}:`, err);
+        throw err;
+      }
+    }
+
+    const mapConfig = { ...MAPS_CONFIG[mapId] };
+
+    const images = await this.loadMapImages(mapConfig);
+    
+    this.preloadIcons(mapConfig).catch(err => 
+      console.warn('⚠️ Error precargando iconos:', err)
+    );
+
+    const W = mapConfig.mapImage.logicalW;
+    const H = mapConfig.mapImage.logicalH;
+    const normalizedWps = this.normalizeWaypoints(mapConfig.waypoints || [], W, H);
+
+    const iconsData = await this._loadSplitIcons(mapId, mapConfig, normalizedWps.length);
+    const normalizedIcons = this.normalizeIcons(iconsData, W, H, normalizedWps);
+
+    this.currentMapId = mapId;
+    this.currentMap = {
+      config: mapConfig,
+      images,
+      waypoints: normalizedWps,
+      icons: normalizedIcons
+    };
+    
+    this.preloadedMaps.add(mapId);
+    
+    console.log(`✅ Mapa cargado: ${normalizedWps.length} waypoints`);
+    
+    return this.currentMap;
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  async preloadPhase(phaseId) {
+    const phase = PHASES.find(p => p.id === phaseId);
+    if (!phase) return;
+    
+    const tasks = phase.maps
+      .filter(id => !this.preloadedMaps.has(id))
+      .map(id => this.loadMap(id).catch(e => 
+        console.warn(`⚠️ Error precargando ${id}:`, e)
+      ));
+    
+    Promise.allSettled(tasks);
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  setPhase(phaseId) {
+    const phase = PHASES.find(p => p.id === phaseId);
+    if (!phase) return false;
+    
+    this.currentPhase = phaseId;
+    
+    const nextIndex = PHASES.findIndex(p => p.id === phaseId) + 1;
+    if (nextIndex < PHASES.length) {
+      this.preloadPhase(PHASES[nextIndex].id);
+    }
+    
+    return true;
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  getCurrentPhaseMaps() {
+    const phase = PHASES.find(p => p.id === this.currentPhase);
+    if (!phase) return [];
+    return phase.maps
+      .filter(id => !!MAPS_CONFIG[id])           // guard: ignorar IDs sin entrada en índice
+      .map(id => ({
+        id,
+        name: MAPS_CONFIG[id]?.name || id        // fallback: usar el id si no hay name
+      }));
+  }
+
+  // ========= ✨ OPTIMIZACIÓN: GETTER CON SOPORTE PARA CACHE RENDERIZADO =========
+  getImage(src, preferRendered = false) {
+    if (!src) return null;
+    
+    // Intentar obtener versión renderizada si existe y se prefiere
+    if (preferRendered) {
+      const iconSize = GLOBAL_CONFIG.ICON_SIZE || 36;
+      const renderedKey = `${src}_${iconSize}`;
+      if (this.renderedCache.has(renderedKey)) {
+        return this.renderedCache.get(renderedKey);
+      }
+    }
+    
+    // Fallback a imagen original
+    return this.imageCache.get(src);
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  getCurrentPhaseColor() {
+    const phase = PHASES.find(p => p.id === this.currentPhase);
+    return phase?.color || '#1BC6EB';
+  }
+
+  // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
+  getCurrentPhaseColorRgb() {
+    const color = this.getCurrentPhaseColor();
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `${r}, ${g}, ${b}`;
+  }
+
+  // ========= ✨ OPTIMIZACIÓN: LIMPIAR CACHE AL RECARGAR =========
+  async reloadCurrentMap() {
+    if (!this.currentMapId) return null;
+    
+    console.log('🔄 Recargando mapa por cambio de viewport...');
+    
+    // ✨ Limpiar cache de renderizado al cambiar viewport
+    this.renderedCache.clear();
+    
+    return await this.loadMap(this.currentMapId);
+  }
+
+  // ========= ✨ OPTIMIZACIÓN: GESTIÓN DE MEMORIA MEJORADA =========
+  clearOldMaps(keepPhases = [this.currentPhase]) {
+    const keep = new Set();
+    PHASES
+      .filter(p => keepPhases.includes(p.id))
+      .forEach(p => p.maps.forEach(id => keep.add(id)));
+    
+    let cleared = 0;
+    
+    for (const id of this.preloadedMaps) {
+      if (!keep.has(id)) {
+        this.preloadedMaps.delete(id);
+        cleared++;
+      }
+    }
+    
+    if (cleared > 0) {
+      console.log(`🧹 Limpiados ${cleared} mapas de la memoria`);
+    }
+  }
+
+  // ========= ✨ NUEVA FUNCIONALIDAD: ESTADÍSTICAS DE CACHÉ =========
+  getCacheStats() {
+    return {
+      images: this.imageCache.size,
+      rendered: this.renderedCache.size,
+      maps: this.preloadedMaps.size,
+      supportsWebP: this.supportsWebP,
+      totalMemoryEstimate: `~${Math.round((this.imageCache.size + this.renderedCache.size) * 0.5)}MB`
+    };
+  }
+
+  // ========= ✨ NUEVA FUNCIONALIDAD: LOG DE PERFORMANCE =========
+  logPerformanceStats() {
+    const stats = this.getCacheStats();
+    console.log('📊 Estadísticas de MapManager:');
+    console.table(stats);
+  }
+}
+
+// --- [SAFE WRAP] Clamp + overflow sin romper tu normalizeWaypoints actual ---
+(() => {
+  try {
+    // Evita doble parcheo en HMR
+    if (typeof MapManager === 'undefined') return;
+    if (MapManager.__overflowClampPatched) return;
+
+    const origNormalize = MapManager.prototype.normalizeWaypoints;
+    if (typeof origNormalize !== 'function') {
+      console.warn('[MapManager] normalizeWaypoints no encontrado; skip overflow patch.');
+      MapManager.__overflowClampPatched = true;
+      return;
+    }
+
+    const clamp01 = v => Math.max(0, Math.min(1, v));
+    const isFiniteNum = v => Number.isFinite(v);
+
+    MapManager.prototype.normalizeWaypoints = function (waypoints, W, H) {
+      // 1) Pre-clamp: clonar waypoints y ajustar xp/yp por vista SIN tocar fuente
+      const isMobile = !!this.isMobile;
+      const overflows = []; // guardamos overflow por índice y vista
+
+      const adjusted = (waypoints || []).map((wp, idx) => {
+        const clone = JSON.parse(JSON.stringify(wp || {}));
+        const m = (clone.mobile  ||= {});
+        const d = (clone.desktop ||= {});
+
+        // Valores originales (pueden venir fuera de rango o indefinidos)
+        const mox = isFiniteNum(m.xp) ? m.xp : 0.5;
+        const moy = isFiniteNum(m.yp) ? m.yp : 0.5;
+        const dox = isFiniteNum(d.xp) ? d.xp : 0.5;
+        const doy = isFiniteNum(d.yp) ? d.yp : 0.5;
+
+        const mcx = clamp01(mox), mcy = clamp01(moy);
+        const dcx = clamp01(dox), dcy = clamp01(doy);
+
+        // Guardar overflow normalizado (positivo si “se pasó” del borde)
+        const overflowMobile  = { x: mox - mcx, y: moy - mcy };
+        const overflowDesktop = { x: dox - dcx, y: doy - dcy };
+
+        // Reemplazar solo en el clon
+        m.xp = mcx; m.yp = mcy;
+        d.xp = dcx; d.yp = dcy;
+
+        overflows[idx] = { mobile: overflowMobile, desktop: overflowDesktop };
+
+        // Log en dev si hubo ajuste
+        if (overflowMobile.x || overflowMobile.y || overflowDesktop.x || overflowDesktop.y) {
+          try { if (!import.meta.env.PROD) {
+            console.warn(`⚠️ Waypoint ${idx}: clamp xp/yp aplicado`, { overflowMobile, overflowDesktop });
+          } } catch (_) {}
+        }
+        return clone;
+      });
+
+      // 2) Delegar en tu normalize original (usa el clon ya clampeado)
+      const out = origNormalize.call(this, adjusted, W, H);
+
+      // 3) Anexar _overflow al resultado para la vista actual (mobile/desktop)
+      if (Array.isArray(out)) {
+        for (let i = 0; i < out.length; i++) {
+          const ov = overflows[i] || { mobile: { x:0,y:0 }, desktop: { x:0,y:0 } };
+          // Mantener estructura móvil/desktop para posible cambio de breakpoint
+          out[i]._overflow = ov;
+        }
+      }
+
+      return out;
+    };
+
+    MapManager.__overflowClampPatched = true;
+    console.log('[MapManager] normalizeWaypoints envuelto con clamp+overflow (seguro).');
+  } catch (err) {
+    console.error('[MapManager] Error aplicando overflow clamp patch:', err);
+  }
+})();
+
+========================================
+FILE: src/OverlayLayer.js
+========================================
+// OverlayLayer.js
+// Capa screen-space para overlays DOM con ancho fijo en px y rotación.
+// ========= 🎭 OVERLAY LAYER - GESTIÓN DE ELEMENTOS HTML SOBRE EL CANVAS =========
+// Características: Posicionamiento absoluto, escalado, rotación, culling, orden Z, eventos táctiles
+import { GLOBAL_CONFIG } from './config.js';
+import { Camera } from './Camera.js';
+
+export class OverlayLayer {
+  constructor(rootEl) {
+    this.root = rootEl;
+    this.items = new Map();
+    this.frameLiveKeys = new Set();
+    this.lastDims = { w: 0, h: 0 };
+    this.device = 'mobile';
+
+    // 🆕 Target táctil mínimo
+    this.touchTargetMin = window
+      .matchMedia(`(max-width: ${GLOBAL_CONFIG.MOBILE_BREAKPOINT - 1}px)`)
+      .matches ? 56 : 40;
+
+    this._onPointerDown = this._onPointerDown.bind(this);
+    this._onPointerUp = this._onPointerUp.bind(this);
+  }
+
+  resize(w, h) { 
+    this.lastDims = { w, h }; 
+    this.logicalW = w;  // Store logical width
+    this.logicalH = h;  // Store logical height
+  }
+  setDevice(device) { this.device = device; } // 'mobile' | 'desktop'
+
+  beginFrame() {
+    this.frameLiveKeys.clear();
+  }
+
+  /**
+   * Upsert de un item de overlay.
+   * @param {Object} opt
+   *  - key: id único (string|number)
+   *  - src: ruta de la imagen
+   *  - worldX, worldY: coords en sistema "mundo" del canvas
+   *  - rotationDeg: rotación en grados
+   *  - lockWidthPx: ancho fijo en px de pantalla
+   *  - z: (opcional) orden visual
+   *  - meta: (opcional) payload para popups, etc.
+   */
+  upsert(opt) {
+    const {
+      key, src, worldX, worldY,
+      rotationDeg = 0, lockWidthPx = 36,
+      z = 0, meta = {}
+    } = opt;
+
+    let rec = this.items.get(key);
+    if (!rec) {
+      // 🆕 wrapper + img (wrapper = hitbox)
+      const wrap = document.createElement('div');
+      wrap.className = 'overlay-wrap';
+      wrap.dataset.key = String(key);
+      wrap.style.position = 'absolute';
+      wrap.style.touchAction = 'manipulation';
+      wrap.style.userSelect = 'none';
+
+      const img = document.createElement('img');
+      img.className = 'overlay-item';
+      img.decoding = 'async';
+      img.loading = 'lazy';
+      img.draggable = false;
+      img.alt = ''; // 🖼️ Decorativa; evita texto si la imagen falla
+      img.src = src;
+      img.style.display = 'block';
+      img.style.pointerEvents = 'none'; // 👈 la interacción la toma el wrapper
+
+      // ♿ Accesibilidad en el wrapper (no ensucia UI)
+      if (meta?.title) {
+        wrap.setAttribute('aria-label', meta.title);
+      }
+
+      // 🛟 Manejo de fallos de carga
+      img.onerror = () => {
+        // Oculta contenido visual fallido (evita ícono roto/texto)
+        img.style.visibility = 'hidden';
+        // Marca el wrapper para posible retry/logging
+        wrap.dataset.loadError = '1';
+      };
+
+      wrap.appendChild(img);
+      this.root.appendChild(wrap);
+
+      // 🆕 listeners pointer (evita ghost clicks y scroll-move)
+      wrap.addEventListener('pointerdown', this._onPointerDown, { passive: true });
+      wrap.addEventListener('pointerup', this._onPointerUp, { passive: true });
+
+      rec = { wrap, img, meta, lockWidthPx, worldX, worldY, rotationDeg, z, _pd:{x:0,y:0,t:0} };
+      this.items.set(key, rec);
+    }
+
+    rec.meta = meta;
+    rec.lockWidthPx = lockWidthPx;
+    rec.worldX = worldX;
+    rec.worldY = worldY;
+    rec.rotationDeg = rotationDeg;
+    rec.z = z;
+
+    this.frameLiveKeys.add(String(key));
+  }
+
+  // world → screen (px DOM) con cámara del canvas
+  worldToScreen(x, y, camera, canvasW, canvasH) {
+    const sx = (x - camera.x) * camera.z + (canvasW / 2);
+    const sy = (y - camera.y) * camera.z + (canvasH / 2);
+    return { x: sx, y: sy };
+  }
+
+  /**
+   * Logs debug information about hitbox sizes when they change
+   * @private
+   */
+  _debugLog(rec) {
+    if (!rec || !rec.hitW || !rec.hitH || !GLOBAL_CONFIG.DEBUG_OVERLAY_WRAPS) return;
+    
+    if (rec._lastHitW !== rec.hitW || rec._lastHitH !== rec.hitH) {
+      console.log(
+        `%c🎯 Hitbox [${rec.wrap?.dataset?.key || '?'}]:`,
+        'color: #4CAF50; font-weight: bold',
+        `${~~rec.hitW}×${~~rec.hitH}px`,
+        `(shape: ${rec.meta?.shape || 'rect'})`,
+        `@ (${~~rec.worldX}, ${~~rec.worldY})`
+      );
+      
+      // Actualizar etiqueta de debug si existe
+      if (rec.wrap) {
+        const debugLabel = rec.wrap.querySelector('.hs-debug-label');
+        if (debugLabel) {
+          debugLabel.textContent = `${rec.key || '?'}: ${~~rec.hitW}×${~~rec.hitH}px`;
+        }
+      }
+      
+      rec._lastHitW = rec.hitW;
+      rec._lastHitH = rec.hitH;
+    }
+  }
+
+  /**
+   * Paints the final position/rotation/order of "live" frame items.
+   * Performs cheap culling and avoids unnecessary reflow.
+   */
+  endFrame(camera, canvasW, canvasH) {
+    if (!this.root) return;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    
+    // Calculate canvas offset from wrapper for letterboxing compensation
+    const canvasEl = document.getElementById('mapa-canvas'); // always use the real canvas
+    const canvasRect = canvasEl?.getBoundingClientRect();
+    const wrapperRect = this.root?.parentElement?.getBoundingClientRect();
+    
+    const offX = canvasRect && wrapperRect ? (canvasRect.left - wrapperRect.left) : 0;
+    const offY = canvasRect && wrapperRect ? (canvasRect.top - wrapperRect.top) : 0;
+    
+    // Get viewport bounds for culling if camera supports it
+    let viewportBounds = null;
+    if (camera.getWorldBounds) {
+      viewportBounds = camera.getWorldBounds();
+    }
+
+    for (const [key, rec] of this.items) {
+      const alive = this.frameLiveKeys.has(String(key));
+      if (!alive) {
+        rec.wrap.removeEventListener('pointerdown', this._onPointerDown);
+        rec.wrap.removeEventListener('pointerup', this._onPointerUp);
+        rec.wrap.remove();
+        this.items.delete(key);
+        continue;
+      }
+
+      // Skip if outside viewport bounds (if camera supports it)
+      if (viewportBounds) {
+        const margin = 500 / camera.z; // Convert screen margin to world space
+        if (rec.worldX < viewportBounds.minX - margin ||
+            rec.worldX > viewportBounds.maxX + margin ||
+            rec.worldY < viewportBounds.minY - margin ||
+            rec.worldY > viewportBounds.maxY + margin) {
+          rec.wrap.style.display = 'none';
+          continue;
+        }
+      }
+
+      // world → screen using camera's worldToCss method if available
+      let sx, sy;
+      if (camera.worldToCss) {
+        const screenPos = camera.worldToCss(rec.worldX, rec.worldY);
+        sx = screenPos.x;
+        sy = screenPos.y;
+      } else {
+        // Fallback to manual calculation
+        sx = (rec.worldX - camera.x) * camera.z + (canvasW / 2);
+        sy = (rec.worldY - camera.y) * camera.z + (canvasH / 2);
+      }
+
+      // Additional culling check (screen space)
+      const margin = 500; // pixels
+      if (sx < -margin || sy < -margin || sx > vw + margin || sy > vh + margin) {
+        rec.wrap.style.display = 'none';
+        continue;
+      } else {
+        rec.wrap.style.display = 'block';
+      }
+
+      // 🆕 hitbox: control preciso de dimensiones
+      const visualW = rec.lockWidthPx;
+      const visualH = Number(rec.meta?.visualH || visualW);
+      const hitSlop = Number(rec.meta?.hitSlop || GLOBAL_CONFIG.TOUCH.hitSlop);
+      
+      // 🎯 Modo compacto: usa tamaño visual exacto
+      const compact = !!rec.meta?.compact;
+      const minTap = compact ? 0 : Number(rec.meta?.minTap || GLOBAL_CONFIG.TOUCH.mobileMin);
+
+      // Calcula hitbox respetando modo compacto
+      const hitW = (compact ? visualW : Math.max(visualW, minTap)) + hitSlop * 2;
+      const hitH = (compact ? visualH : Math.max(visualH, minTap)) + hitSlop * 2;
+      
+      // Guarda para debug
+      rec.hitW = hitW;
+      rec.hitH = hitH;
+      
+      // Apply letterboxing compensation to screen coordinates
+      sx += offX;
+      sy += offY;
+      
+      // Aplicar estilos al wrap
+      rec.wrap.style.width = `${visualW}px`;
+      rec.wrap.style.height = `${visualH}px`;
+      rec.wrap.style.transform = `translate(${sx}px, ${sy}px) translate(-50%,-50%) rotate(${rec.rotationDeg}deg)`;
+      rec.wrap.style.zIndex = Math.round(1000 + (rec.z * 100) + (rec.worldY / 1000));
+      
+      // Nuevo flag solo para overlays DOM
+      const overlayDebug = GLOBAL_CONFIG.DEBUG_OVERLAY_WRAPS === true;
+
+      if (overlayDebug) {
+        rec.wrap.classList.add('debug-hotspot');
+
+        const debugBorderWidth = 3;
+        rec.wrap.style.border = `${debugBorderWidth}px solid rgba(255, 0, 0, 0.8)`;
+        rec.wrap.style.background = 'rgba(255, 0, 0, 0.1)';
+        rec.wrap.style.borderRadius = (rec.meta?.shape === 'circle') ? '50%' : '8px';
+        rec.wrap.style.boxShadow = '0 0 0 1px white, 0 0 0 2px rgba(0,0,0,0.3)';
+        rec.wrap.style.transition = 'all 0.15s ease-out';
+
+        let debugLabel = rec.wrap.querySelector('.hs-debug-label');
+        if (!debugLabel) {
+          debugLabel = document.createElement('div');
+          debugLabel.className = 'hs-debug-label';
+          rec.wrap.appendChild(debugLabel);
+        }
+        debugLabel.textContent = `${rec.key || '?'}: ${~~rec.hitW}×${~~rec.hitH}px`;
+      } else {
+        rec.wrap.classList.remove('debug-hotspot');
+        rec.wrap.style.border = 'none';
+        rec.wrap.style.background = 'transparent';
+        rec.wrap.style.boxShadow = 'none';
+        rec.wrap.style.transition = '';
+
+        const debugLabel = rec.wrap.querySelector('.hs-debug-label');
+        if (debugLabel) debugLabel.remove();
+      }
+
+      // imagen centrada (mantén ancho/alto visuales)
+      const img = rec.img;
+      const im = img.style;
+      if (im.position !== 'absolute') im.position = 'absolute';
+      if (im.left !== '50%')  im.left = '50%';
+      if (im.top  !== '50%')  im.top  = '50%';
+      const imgTransform = `translate(-50%,-50%) rotate(0deg)`; // ya rota el wrapper
+      if (im.transform !== imgTransform) im.transform = imgTransform;
+      if (im.width  !== `${visualW}px`) im.width  = `${visualW}px`;
+      if (im.height !== `${visualH}px`) im.height = `${visualH}px`; // 🆕 antes 'auto'
+    }
+  }
+
+  _onPointerDown(ev) {
+    const wrap = ev.currentTarget;
+    const key = wrap?.dataset?.key;
+    if (!key) return;
+    const rec = this.items.get(key);
+    rec._pd = { x: ev.clientX, y: ev.clientY, t: performance.now() };
+  }
+
+  _onPointerUp(ev) {
+    const wrap = ev.currentTarget;
+    const key = wrap?.dataset?.key;
+    if (!key) return;
+    const rec = this.items.get(key);
+    const dx = Math.abs(ev.clientX - rec._pd.x);
+    const dy = Math.abs(ev.clientY - rec._pd.y);
+    const dt = performance.now() - rec._pd.t;
+
+    // 🆕 "fat-finger forgiveness": solo click si no se arrastró
+    if (dx <= 8 && dy <= 8 && dt <= 500) {
+      // 🆕 Verifica toggle global antes de cualquier acción
+      if (!GLOBAL_CONFIG.SHOW_POPUP_ON_CLICK) {
+        console.log(`[INFO] Popup disabled via SHOW_POPUP_ON_CLICK for hotspot ${key}`);
+        return;  // Sale temprano si popups están desactivados
+      }
+
+      // 🆕 Prioriza modo debug como principal si activo
+      if (GLOBAL_CONFIG.DEBUG_HOTSPOTS) {
+        const hotspotData = rec.meta?.hotspot || rec.meta;
+        
+        if (!hotspotData) {
+          console.warn(`[DEBUG] No hay metadata para hotspot ${key}`);
+          return;  // 🆕 Salir si no hay metadata
+        }
+        
+        if (window.popupManager) {
+          console.log(`[DEBUG] Abriendo popup directo para hotspot ${key}:`, hotspotData.title || 'Sin título');
+          window.popupManager.openPopup(hotspotData);  // Trigger directo (principal en debug)
+        } else {
+          console.warn(`[DEBUG] No se puede abrir popup: popupManager no está disponible`);
+        }
+      } else {
+        // Fallback al evento original si no en debug
+        this.root.dispatchEvent(new CustomEvent('overlay:click', {
+          bubbles: true,
+          detail: { key, record: rec }
+        }));
+      }
+    }
+  }
+}
+

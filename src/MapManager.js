@@ -278,7 +278,8 @@ export class MapManager {
   // ========= ✨ OPTIMIZACIÓN: PRECARGA DE ICONOS CON RENDER CACHE =========
   async preloadIcons(mapConfig) {
     const urls = new Set();
-    Object.values(mapConfig.icons || {}).flat().forEach(ic => {
+    const allIcons = mapConfig.icons || {};
+    Object.values(allIcons).flat().forEach(ic => {
       if (ic?.img) urls.add(ic.img);
     });
     
@@ -329,6 +330,32 @@ export class MapManager {
         lines: wp.lines
       };
     });
+  }
+
+  async _loadSplitIcons(mapId, mapConfig, waypointCount) {
+    if (!mapConfig.iconsDir) {
+      return mapConfig.icons || {};
+    }
+
+    const baseUrl = this.currentStoryId
+      ? `/data/stories/${this.currentStoryId}/maps/${mapId}_icons`
+      : `/data/maps/${mapId}_icons`;
+
+    const fetches = Array.from({ length: waypointCount }, (_, i) =>
+      fetch(`${baseUrl}/wp${i}.json`)
+        .then(r => r.ok ? r.json() : [])
+        .then(data => ({ index: i, data }))
+        .catch(() => ({ index: i, data: [] }))
+    );
+
+    const results = await Promise.all(fetches);
+    const icons = {};
+    results.forEach(({ index, data }) => {
+      if (data.length > 0) icons[String(index)] = data;
+    });
+
+    console.log(`📂 Icons split: ${Object.keys(icons).length}/${waypointCount} waypoints con hotspots (${mapId})`);
+    return icons;
   }
 
   // ========= ⚠️ MANTENER LÓGICA ORIGINAL - NO MODIFICAR =========
@@ -382,7 +409,9 @@ export class MapManager {
           y,
           width,
           height,
-          rotation: config.rotation || 0
+          rotation: config.rotation || 0,
+          _rawMobile: icon.mobile || {},
+          _rawDesktop: icon.desktop || {}
         };
 
         if (type === 'hotspot') {
@@ -436,7 +465,9 @@ export class MapManager {
     const W = mapConfig.mapImage.logicalW;
     const H = mapConfig.mapImage.logicalH;
     const normalizedWps = this.normalizeWaypoints(mapConfig.waypoints || [], W, H);
-    const normalizedIcons = this.normalizeIcons(mapConfig.icons || {}, W, H, normalizedWps);
+
+    const iconsData = await this._loadSplitIcons(mapId, mapConfig, normalizedWps.length);
+    const normalizedIcons = this.normalizeIcons(iconsData, W, H, normalizedWps);
 
     this.currentMapId = mapId;
     this.currentMap = {

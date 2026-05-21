@@ -1,3 +1,6 @@
+========================================
+FILE: src/app.js
+========================================
 // ========= APLICACIÓN PRINCIPAL OPTIMIZADA =========
 // 🚀 OPTIMIZACIONES IMPLEMENTADAS:
 // 1. Culling espacial con viewport frustum
@@ -1167,54 +1170,9 @@ ${memStats ? `├─ Memory: ${memStats.current} (avg: ${memStats.average}, peak
           ctx.stroke();
         }
       } else if (type === 'hotspot') {
-        // Número de hotspot — visible siempre en editor, útil en mobile
-        if (appConfig.editorActive) {
+        if (GLOBAL_CONFIG.DEBUG_HOTSPOTS) {
           const radius = (item.radius || 0) / sqrtZ;
-          const hIdx = i; // índice dentro del waypoint actual
-          const isSelected = window.__EDITOR_ACTIVE__ && hIdx === (window.__editorSelectedIndex ?? -1);
-
-          // Fondo semitransparente con forma del hotspot
-          ctx.fillStyle = isSelected
-            ? 'rgba(0, 255, 0, 0.18)'
-            : 'rgba(255, 165, 0, 0.13)';
-          ctx.strokeStyle = isSelected
-            ? 'rgba(0, 255, 0, 0.7)'
-            : 'rgba(255, 165, 0, 0.55)';
-          ctx.lineWidth = (isSelected ? 2.5 : 1.5) / sqrtZ;
-          ctx.beginPath();
-          const x = item.x - halfW;
-          const y = item.y - halfH;
-          ctx.moveTo(x + radius, y);
-          ctx.arcTo(x + displayWidth, y, x + displayWidth, y + displayHeight, radius);
-          ctx.arcTo(x + displayWidth, y + displayHeight, x, y + displayHeight, radius);
-          ctx.arcTo(x, y + displayHeight, x, y, radius);
-          ctx.arcTo(x, y, x + displayWidth, y, radius);
-          ctx.closePath();
-          ctx.fill();
-          ctx.stroke();
-
-          // Badge circular con número
-          const badgeR = Math.max(10, 14) / sqrtZ;
-          const badgeX = item.x - halfW + badgeR + 4 / sqrtZ;
-          const badgeY = item.y - halfH + badgeR + 4 / sqrtZ;
-          ctx.beginPath();
-          ctx.arc(badgeX, badgeY, badgeR, 0, Math.PI * 2);
-          ctx.fillStyle = isSelected ? '#00FF00' : '#FF6B00';
-          ctx.fill();
-          ctx.strokeStyle = 'rgba(0,0,0,0.6)';
-          ctx.lineWidth = 1.5 / sqrtZ;
-          ctx.stroke();
-
-          // Número dentro del badge
-          ctx.fillStyle = isSelected ? '#000' : '#fff';
-          ctx.font = `bold ${Math.max(8, 12) / sqrtZ}px Inter, sans-serif`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(String(hIdx + 1), badgeX, badgeY);
-          ctx.textBaseline = 'alphabetic';
-        } else if (GLOBAL_CONFIG.DEBUG_HOTSPOTS) {
-          const radius = (item.radius || 0) / sqrtZ;
-          ctx.fillStyle = item.debugColor || 'rgba(40, 150, 229, 0.3)';
+          ctx.fillStyle = item.debugColor || 'rgba(40, 150, 229, 0.3)3)';
           ctx.strokeStyle = 'rgba(9, 16, 51, 0.8)';
           ctx.lineWidth = 2 / sqrtZ;
           ctx.beginPath();
@@ -2154,3 +2112,815 @@ if (appConfig.toggles.debug) {
   const mem = safeMemory();
   if (mem) log.info('Mem MB', Math.round(mem.usedJSHeapSize / 1048576));
 }
+
+========================================
+FILE: src/Camera.js
+========================================
+// Camera.js - Clase para manejar transformaciones world ↔ screen/CSS
+export class Camera {
+  constructor(initial = { x: 0, y: 0, z: 1, viewportW: 1280, viewportH: 720 }) {
+    this.x = initial.x;  // Centro world X
+    this.y = initial.y;  // Centro world Y
+    this.z = initial.z;  // Zoom (scale)
+    this.viewportW = initial.viewportW;  // CSS width (no DPR)
+    this.viewportH = initial.viewportH;  // CSS height (no DPR)
+    this.rotation = 0;   // Futuro: rotación global (por ahora 0)
+    this.M = null;       // Matriz world-to-css
+    this.Minv = null;    // Inversa css-to-world
+    this.dirty = true;   // Flag para re-cálculo
+  }
+
+  // Actualiza viewport (llamado en resize)
+  setViewport(w, h) {
+    if (this.viewportW === w && this.viewportH === h) return;
+    this.viewportW = w;
+    this.viewportH = h;
+    this.dirty = true;
+  }
+
+  // Actualiza posición/zoom (llamado en transiciones)
+  setPosition(x, y, z) {
+    if (this.x === x && this.y === y && this.z === z) return;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.dirty = true;
+  }
+
+  // Calcula matrices si dirty (pre-cálculo eficiente)
+  updateMatrices() {
+    if (!this.dirty) return;
+    
+    // Matriz simple: translate to center + scale (zoom) + translate viewport/2
+    // M = [z, 0, viewportW/2 - x*z,  0, z, viewportH/2 - y*z,  0, 0, 1]
+    // Para simplicidad, usamos affine (sin full matrix lib)
+    this.M = {
+      scale: this.z,
+      tx: this.viewportW / 2 - this.x * this.z,
+      ty: this.viewportH / 2 - this.y * this.z
+    };
+    
+    // Inversa aproximada (para css-to-world)
+    this.Minv = {
+      scale: 1 / this.z,
+      tx: (this.x * this.z - this.viewportW / 2) / this.z,
+      ty: (this.y * this.z - this.viewportH / 2) / this.z
+    };
+    
+    this.dirty = false;
+  }
+
+  // World to CSS (para overlays y dibujo canvas sin DPR)
+  worldToCss(worldX, worldY) {
+    this.updateMatrices();
+    return {
+      x: worldX * this.M.scale + this.M.tx,
+      y: worldY * this.M.scale + this.M.ty
+    };
+  }
+
+  // CSS to World (para input, e.g., clics)
+  cssToWorld(cssX, cssY) {
+    this.updateMatrices();
+    return {
+      x: (cssX - this.M.tx) * this.Minv.scale,
+      y: (cssY - this.M.ty) * this.Minv.scale
+    };
+  }
+
+  // Bounds del viewport en world space (para culling)
+  getWorldBounds() {
+    this.updateMatrices();
+    const halfW = this.viewportW / (2 * this.z);
+    const halfH = this.viewportH / (2 * this.z);
+    return {
+      minX: this.x - halfW,
+      maxX: this.x + halfW,
+      minY: this.y - halfH,
+      maxY: this.y + halfH
+    };
+  }
+
+  // ✅ Ajusta posición/zoom para que un rectángulo base (mapa) quepa en el viewport
+  // mode: 'contain' (recomendado) o 'cover'
+  fitBaseToViewport(baseW, baseH, mode = 'contain') {
+    // viewportW/H ya están en CSS px (sin DPR); aquí decides la escala uniforme
+    const sx = this.viewportW / baseW;
+    const sy = this.viewportH / baseH;
+    const s  = (mode === 'cover') ? Math.max(sx, sy) : Math.min(sx, sy);
+
+    // Centra al medio del mapa y aplica zoom s
+    const cx = baseW  * 0.5;
+    const cy = baseH  * 0.5;
+    this.setPosition(cx, cy, s);
+  }
+}
+
+========================================
+FILE: src/config.js
+========================================
+// config.js — Solo configuración técnica, sin datos de negocio
+
+// PHASES y MAPS_CONFIG ya no se definen aquí.
+// Los datos viven en /data/story.json y /data/maps/*.json
+// y se cargan en runtime por MapManager.
+
+export const PHASES = [];        // Se puebla desde story.json en runtime
+export const MAPS_CONFIG = {};   // Se puebla desde story.json en runtime
+
+// ========= CONFIG GLOBAL (OPTIMIZADO CON NUEVAS FUNCIONES) =========
+export const GLOBAL_CONFIG = {
+  // Control de visibilidad SEPARADO
+  SHOW_DIALOGS: false,   // Controla los cuadros de diálogo de texto
+  SHOW_CONTROLS: true,  // Controla los botones de navegación (prev/next/progress)
+  
+  // ========= DEBUG Y VISUALIZACIÓN =========
+  // DEBUG_HOTSPOTS: true,
+  
+  // Estilos para iconos y hotspots
+  ICON_STYLES: {
+    showBackground: true,  // Fondo semi-transparente en debug (opcional)
+    backgroundColor: 'rgba(0, 209, 255, 0)',  // Fondo azul claro
+    borderColor: 'rgba(255, 255, 255, 1)',  // Color del marco blanco semi-transparente
+    borderWidth: 5,  // Grosor del marco (aumentado a 3px para mejor visibilidad en mobile)
+    debugFill: 'rgba(255,0,0,0)'  // Fondo rojo sutil para hotspots en debug
+  },
+  
+  // Configuración de toque
+  TOUCH: {
+    mobileMin: 56,  // Tamaño mínimo en mobile para toque
+    desktopMin: 40,  // Tamaño mínimo en desktop
+    hitSlop: 4  // Margen invisible extra para clics
+  },
+  
+  // ========= EFECTOS DE CÁMARA =========
+  CAMERA_EFFECTS: {
+    // Movimiento sutil constante (breathing) – DESKTOP (defaults)
+    breathingEnabled: true,
+    breathingAmount: 11,        // Píxeles de movimiento en Y
+    breathingSpeed: 0.0011,     // Velocidad de oscilación (más bajo = más lento)
+    breathingZAmount: 0.0030,   // Cambio sutil en zoom
+
+    // 🆕 Perfil específico para mobile
+    breathingMobileEnabled: true, // ponlo en false si quieres apagar breathing en mobile
+    breathingMobile: {
+      amount: 7,        // menos movimiento en Y para pantallas chicas
+      speed: 0.0010,    // puedes bajarlo aún más si quieres más "lento"
+      zAmount: 0.0020   // cambio de zoom más sutil
+    },
+
+    // Transición cinemática entre waypoints
+    transitionEnabled: true,
+    transitionDuration: 1100,       // Desktop
+    // 🆕 Duración específica para mobile
+    transitionDurationMobile: 800,  // Mobile (ajusta al gusto)
+    transitionZoomOut: 0.20,        // Cuánto hacer zoom out (0.25 = -25% del zoom actual)
+    transitionEasing: 'ease-in-out', // 'linear', 'ease-in', 'ease-out', 'ease-in-out'
+
+    // 🆕 Opcional: evitar breathing durante la transición
+    disableBreathingDuringTransition: true
+  },
+  
+  // ========= 🆕 LÍMITES DE CANVAS OPTIMIZADOS =========
+  CANVAS_LIMITS: {
+    desktop: {
+      maxWidth: 4096,
+      maxHeight: 4096,
+      maxPixels: 16_000_000,  // ~4000×3000
+      maxMemoryMB: 150
+    },
+    mobile: {
+      maxWidth: 2400,
+      maxHeight: 5400,        // ✅ Soporta 4000px altura
+      maxPixels: 13_000_000,  // ~2000×4000
+      maxMemoryMB: 72
+    },
+    downscaleFactor: 0.8,
+    warnThreshold: 0.85       // Alertar cuando use >85% del límite
+  },
+  
+  // ========= 🛡️ GUARDIANES DE VIEWPORT =========
+  // RANGOS DE VIEWPORT DONDE BLOQUEAMOS/RECORTAMOS PARA NO DEFORMAR
+  VIEWPORT_GUARDS: {
+    desktop: {
+      // Si el ancho lógico cae por debajo de 1183 → forzamos contain+letterbox
+      clampBelowW: 800,
+      // Corte duro (overflow hidden) si baja más de 900
+      hardCutBelowW: 800
+    },
+    mobile: {
+      // Si la altura lógica baja de 606 → congelamos a 606 y recortamos
+      minH: 0
+    }
+  },
+  // Relación de aspecto base del mapa (si tu base es 1280x720, ajusta)
+  BASE_ASPECT: 4240/2608,
+  
+  // ========= 🆕 OPTIMIZACIÓN DE WAYPOINTS =========
+  WAYPOINT_RENDERING: {
+    enableCulling: true,
+    cullingMargin: 300,
+    maxVisibleWaypoints: 20,
+    useSpatialIndex: true,
+    spatialIndexThreshold: 15,  // Usar index si hay >15 waypoints
+    cellSize: 500                // Tamaño de celda para spatial grid
+  },
+  
+  // ========= 🆕 GESTIÓN DE MEMORIA =========
+  MEMORY_MANAGEMENT: {
+    maxActivePhaseCaches: 1,          // Solo 1 fase en memoria
+    autoCleanInactivePhases: true,    // Limpiar automáticamente
+    unloadAfterPhaseChange: true,     // Liberar memoria al cambiar
+    forceClearCache: true,            // Forzar limpieza de cache
+    logMemoryUsage: false              // Log de uso de memoria
+  },
+  
+  // ========= 🆕 OPTIMIZACIONES MOBILE =========
+  MOBILE_OPTIMIZATIONS: {
+    maxDPR: 1.5,                      // Limitar DPR en mobile
+    disableBreathingOnLowEnd: true,   // Desactivar breathing si FPS <45
+    reduceTransitionQuality: true,    // Transiciones más simples
+    targetFPS: 45,                    // FPS objetivo en mobile
+    aggressiveCulling: true           // Culling más agresivo
+  },
+
+  RESPONSIVE_SIZING: {
+  mobile:  { lockItemWidthToScreenPx: false },  // activa ancho fijo en mobile
+  desktop: { lockItemWidthToScreenPx: false }  // desktop se mantiene igual
+},
+
+  
+  // ========= MODO DEBUG MEJORADO =========
+  EDITOR_ENABLED: false,
+  // 🔴 Debug en CANVAS (los rectángulos que quieres conservar)
+  DEBUG_HOTSPOTS: true,
+
+  // 🟥 Debug de WRAPPERS DOM (cuadros rojos enormes que quieres eliminar)
+  DEBUG_OVERLAY_WRAPS: false,
+  
+  DRAW_HOTSPOTS_ON_CANVAS: false,     // Dibujar hotspots en canvas para referencia/editor
+  SHOW_POPUP_ON_CLICK: true,
+  DEBUG_SHOW_GRID: true,             // Mostrar cuadrícula de referencia cada 10%
+  DEBUG_SHOW_COORDS: false,           // Mostrar coordenadas en cada área
+  DEBUG_SHOW_MINIMAP_MOBILE: false,   // Mostrar minimap en mobile
+  DEBUG_SHOW_WAYPOINT_LABELS: false,  // Mostrar números en waypoints
+  DEBUG_SHOW_MEMORY_STATS: false,     // 🆕 Mostrar uso de memoria
+  DEBUG_SHOW_WAYPOINT_HUD: false,
+  
+  // Estilos de iconos
+  ICON_STYLES: {
+    showBackground: true,
+    backgroundColor: 'rgba(0, 209, 255, .18)',
+    borderColor: 'rgba(255,255,255,.55)',
+    borderWidth: 1.5
+  },
+  
+  // ===== CANVAS HOTSPOTS & EDITOR =====
+  DRAW_HOTSPOTS_ON_CANVAS: true,     // Dibujar hotspots en canvas para referencia/editor
+  SYNC_OVERLAYS_WITH_EDITOR: false,   // Sincronización automática de overlays con el editor
+  
+  // Estilos para los hotspots en canvas
+  CANVAS_HOTSPOT_STYLES: {
+    fill: 'rgba(0, 209, 255, 0.1)',    // Color de relleno con transparencia
+    stroke: 'rgba(0, 209, 255, 0.5)',  // Color del borde
+    lineWidth: 1,                      // Grosor del borde
+    activeFill: 'rgba(0, 209, 255, 0.2)',   // Color al estar activo
+    activeStroke: 'rgba(255, 255, 255, 0.8)' // Borde al estar activo
+  },
+  
+  WAYPOINT_OFFSET: {
+    mobile: -10,
+    desktop: -5
+  },
+
+  BASE_W: 1280,
+  BASE_H: 720,
+  TYPE_SPEED: 18,
+  EASE: 0.10,
+  MARKER_R: 8,
+  ICON_R: 18,
+  ICON_SIZE: 36,
+  DPR_MAX: 1.6,
+  
+  MOBILE_BREAKPOINT: 800,
+  CANVAS_MIN_HEIGHT: 920,
+  
+  DIALOG_BOX: {
+    x: 16, 
+    y: 720 - 220, 
+    w: 1280 - 32, 
+    h: 180,
+    bg: 'rgba(0,0,0,0.55)', 
+    border: 'rgba(255,255,255,0.18)', 
+    radius: 14, 
+    padding: 16,
+    nameColor: '#89e0ff', 
+    textColor: '#fff',
+    fontStack: "'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+    nameSize: 22, 
+    textSize: 18, 
+    lineHeight: 28
+  },
+  
+  CAM: {
+    minZ: 0.25, 
+    maxZ: 3.2,
+    defaultZMobile: 1.2, 
+    defaultZDesktop: 0.8
+  },
+
+  PERFORMANCE: {
+    spatialGridSize: 200,
+    idleFPS: 30,
+    useOffscreenCanvas: true,
+    prefetchNextWaypoint: true,
+    autoCleanOldMaps: true,
+    preferWebP: true,
+    logPerformanceStats: false,
+    logMemoryStats: false          // 🆕 Log de memoria
+  },
+
+  ICON_TRANSITION: {
+    enabled: true,
+    easingIn: 'ease-out',
+    easingOut: 'ease-in',
+    durationIn: 400,
+    durationOut: 300,
+    delayBetweenIcons: 50,
+    scaleFrom: 0.3,
+    opacityFrom: 0
+  }
+};
+========================================
+FILE: src/DetailedPopupManager.js
+========================================
+// ========= MÓDULO PARA POPUPS DETALLADOS MEJORADO =========
+// Este módulo maneja la visualización de hotspots con estructura detallada
+// Versión mejorada con mejor soporte responsive y UX
+
+export class DetailedPopupManager {
+  constructor() {
+    // Referencias DOM - Popup simple
+    this.popupSimple = document.getElementById('popup');
+    this.popupSimpleTitle = document.getElementById('popup-title');
+    this.popupSimpleBody = document.getElementById('popup-body');
+    this.popupSimpleClose = document.getElementById('popup-close');
+    
+    // Referencias DOM - Popup detallado
+    this.popupDetailed = document.getElementById('popup-detailed');
+    this.popupDetailedClose = document.getElementById('popup-detailed-close');
+    this.popupDetailedImage = document.getElementById('popup-detailed-image');
+    this.popupDetailedTitle = document.getElementById('popup-detailed-title');
+    this.popupDetailedDate = document.getElementById('popup-detailed-date');
+    this.popupDetailedTime = document.getElementById('popup-detailed-time');
+    this.popupDetailedLocation = document.getElementById('popup-detailed-location');
+    this.popupDetailedDescription = document.getElementById('popup-detailed-description');
+    this.popupDetailedInvolved = document.getElementById('popup-detailed-involved');
+    this.popupDetailedInvolvedSection = document.getElementById('popup-detailed-involved-section');
+    this.popupDetailedEchos = document.getElementById('popup-detailed-echos');
+    this.popupDetailedEchosSection = document.getElementById('popup-detailed-echos-section');
+    this.popupDetailedEchosTitle = document.getElementById('popup-detailed-echos-title');
+    
+    // Backdrop compartido
+    this.backdrop = document.getElementById('popup-backdrop');
+    
+    // Estado
+    this.currentHotspot = null;
+    this.selectedPersonId = null;
+    this.touchStartY = 0;
+    this.touchCurrentY = 0;
+    this.isDragging = false;
+    this.closeTimeout = null;          // 🆕 timeout para animación de cierre
+    
+    // Detectar si es dispositivo móvil (antes de listeners)
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    // Event listeners
+    this.initEventListeners();
+  }
+  
+  initEventListeners() {
+    // Cerrar popups
+    this.popupSimpleClose?.addEventListener('click', () => this.closeAll());
+    this.popupDetailedClose?.addEventListener('click', () => this.closeAll());
+    
+    // Cerrar solo si el click fue directamente en el fondo,
+    // no dentro de la tarjeta
+    this.backdrop?.addEventListener('click', (e) => {
+      if (e.target === this.backdrop) {
+        this.closeAll();
+      }
+    });
+    
+    // Evitar que los clicks dentro del popup lleguen al backdrop
+    this.popupSimple?.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    this.popupDetailed?.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && (!this.popupSimple.hidden || !this.popupDetailed.hidden)) {
+        this.closeAll();
+      }
+    });
+    
+    // Gesto de deslizar hacia abajo en mobile
+    if (this.isMobile && this.popupDetailed) {
+      this.initSwipeToClose();
+    }
+    
+    // Prevenir scroll del body cuando el popup está abierto
+    this.backdrop?.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+  }
+  
+  initSwipeToClose() {
+    const handle = this.popupDetailed.querySelector('.popup-detailed__drag-handle');
+    if (!handle) return;
+    
+    handle.addEventListener('touchstart', (e) => {
+      this.touchStartY = e.touches[0].clientY;
+      this.isDragging = true;
+      this.popupDetailed.style.transition = 'none';
+    });
+    
+    handle.addEventListener('touchmove', (e) => {
+      if (!this.isDragging) return;
+      
+      this.touchCurrentY = e.touches[0].clientY;
+      const deltaY = this.touchCurrentY - this.touchStartY;
+      
+      if (deltaY > 0) {
+        this.popupDetailed.style.transform = `translate(-50%, ${deltaY}px)`;
+      }
+    });
+    
+    handle.addEventListener('touchend', () => {
+      if (!this.isDragging) return;
+      
+      const deltaY = this.touchCurrentY - this.touchStartY;
+      this.popupDetailed.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+      
+      if (deltaY > 100) {
+        this.closeAll();
+      } else {
+        this.popupDetailed.style.transform = 'translate(-50%, 0)';
+      }
+      
+      this.isDragging = false;
+      this.touchStartY = 0;
+      this.touchCurrentY = 0;
+    });
+  }
+  
+  /**
+   * Detecta si un hotspot tiene estructura detallada
+   */
+  isDetailedHotspot(hotspot) {
+    return !!(
+      hotspot.datetime ||
+      hotspot.location ||
+      hotspot.involved ||
+      hotspot.echos ||
+      hotspot.image
+    );
+  }
+
+  /**
+   * API explícita desde Canvas: recibe el objeto hotspot (world/coords/meta)
+   */
+  openFromHotspot(hs) {
+    if (!hs) return;
+    // Normaliza payload mínimo
+    const data = {
+      id:    hs.id || hs.key,
+      title: hs.title || hs.meta?.title || hs.text || '',
+      body:  hs.body  || hs.meta?.description || hs.description || '',
+      image: hs.image || hs.meta?.media || null,
+      datetime: hs.datetime,
+      location: hs.location,
+      involved: hs.involved,
+      echos:    hs.echos
+    };
+    // Reusa la ruta actual: decide si es detallado o simple
+    this.openPopup(data);
+  }
+
+  /**
+   * Abre el popup apropiado según el tipo de hotspot
+   */
+  openPopup(hotspot) {
+    // Prevenir scroll del body
+    document.body.style.overflow = 'hidden';
+    
+    if (this.isDetailedHotspot(hotspot)) {
+      this.openDetailedPopup(hotspot);
+    } else {
+      this.openSimplePopup(hotspot);
+    }
+  }
+  
+  /**
+   * Abre el popup simple (estructura original)
+   */
+  openSimplePopup(hotspot) {
+    // Cancelar cualquier cierre pendiente
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+
+    // Asegurar que el detallado está oculto
+    if (this.popupDetailed) {
+      this.popupDetailed.classList.remove('popup--visible');
+      this.popupDetailed.hidden = true;
+    }
+
+    this.popupSimpleTitle.textContent = hotspot.title || '';
+    this.popupSimpleBody.textContent = hotspot.body || '';
+
+    this.backdrop.hidden = false;
+    this.popupSimple.hidden = false;
+
+    // Añadir clase para animación
+    requestAnimationFrame(() => {
+      this.popupSimple.classList.add('popup--visible');
+      this.backdrop.classList.add('popup-backdrop--visible');
+    });
+  }
+  
+  /**
+   * Abre el popup detallado (nueva estructura)
+   */
+  openDetailedPopup(hotspot) {
+    // Cancelar cualquier cierre pendiente
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+
+    // Asegurar que el simple está oculto
+    if (this.popupSimple) {
+      this.popupSimple.classList.remove('popup--visible');
+      this.popupSimple.hidden = true;
+    }
+
+    this.currentHotspot = hotspot;
+    
+    // Título
+    this.popupDetailedTitle.textContent = hotspot.title || '';
+    
+    // Imagen con overlay gradient
+    if (hotspot.image) {
+      this.popupDetailedImage.src = hotspot.image;
+      this.popupDetailedImage.alt = hotspot.title || '';
+      const imageWrapper = this.popupDetailedImage.parentElement;
+      imageWrapper.style.display = 'block';
+      
+      // Añadir overlay gradient para mobile
+      if (!imageWrapper.querySelector('.popup-detailed__image-overlay')) {
+        const overlay = document.createElement('div');
+        overlay.className = 'popup-detailed__image-overlay';
+        imageWrapper.appendChild(overlay);
+      }
+    } else {
+      this.popupDetailedImage.parentElement.style.display = 'none';
+    }
+    
+    // Fecha y hora con formato mejorado
+    if (hotspot.datetime) {
+      this.popupDetailedDate.textContent = hotspot.datetime.date || '';
+      this.popupDetailedTime.textContent = hotspot.datetime.time || '';
+      
+      // Aplicar color personalizado a la hora
+      if (hotspot.datetime.timeColor) {
+        this.popupDetailedTime.style.color = hotspot.datetime.timeColor;
+      }
+      
+      // Mostrar contenedor de datetime
+      const datetimeContainer = this.popupDetailedDate.parentElement;
+      if (datetimeContainer) {
+        datetimeContainer.style.display = 'flex';
+      }
+    } else {
+      const datetimeContainer = this.popupDetailedDate.parentElement;
+      if (datetimeContainer) {
+        datetimeContainer.style.display = 'none';
+      }
+    }
+    
+    // Ubicación con ícono
+    if (hotspot.location) {
+      this.popupDetailedLocation.innerHTML = `
+        <svg class="popup-detailed__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+        </svg>
+        <span>${hotspot.location}</span>
+      `;
+      this.popupDetailedLocation.style.display = 'flex';
+    } else {
+      this.popupDetailedLocation.style.display = 'none';
+    }
+    
+    // Descripción
+    if (hotspot.description) {
+      this.popupDetailedDescription.textContent = hotspot.description;
+      this.popupDetailedDescription.style.display = 'block';
+    } else {
+      this.popupDetailedDescription.style.display = 'none';
+    }
+    
+    // Personas implicadas
+    if (hotspot.involved && hotspot.involved.length > 0) {
+      this.renderInvolved(hotspot.involved);
+      this.popupDetailedInvolvedSection.hidden = false;
+      
+      // Seleccionar automáticamente la persona resaltada o la primera
+      const highlighted = hotspot.involved.find(p => p.highlighted);
+      const firstPerson = hotspot.involved[0];
+      this.selectedPersonId = highlighted ? highlighted.id : firstPerson.id;
+      
+      // Actualizar echos para la persona seleccionada
+      this.updateEchos();
+    } else {
+      this.popupDetailedInvolvedSection.hidden = true;
+      this.popupDetailedEchosSection.hidden = true;
+    }
+    
+    // Mostrar popup
+    this.popupDetailed.hidden = false;
+    this.backdrop.hidden = false;
+    
+    // Añadir clases para animación
+    requestAnimationFrame(() => {
+      this.popupDetailed.classList.add('popup--visible');
+      this.backdrop.classList.add('popup-backdrop--visible');
+    });
+    
+    // Resetear scroll del contenido
+    const content = this.popupDetailed.querySelector('.popup-detailed__content');
+    if (content) {
+      content.scrollTop = 0;
+    }
+  }
+  
+  /**
+   * Renderiza la lista de personas implicadas
+   */
+  renderInvolved(involved) {
+    this.popupDetailedInvolved.innerHTML = '';
+    
+    involved.forEach(person => {
+      const personEl = document.createElement('div');
+      personEl.className = 'popup-detailed__person';
+      personEl.dataset.personId = person.id;
+      
+      // Marcar como activa si está seleccionada
+      if (person.id === this.selectedPersonId || person.highlighted) {
+        personEl.classList.add('active');
+      }
+      
+      personEl.innerHTML = `
+        <div class="popup-detailed__person-avatar-wrapper">
+          <img 
+            src="${person.avatar || './assets/default.webp'}" 
+            alt="${person.name}"
+            class="popup-detailed__person-avatar"
+            loading="lazy"
+          />
+          ${person.highlighted ? '<span class="popup-detailed__person-badge">★</span>' : ''}
+        </div>
+        <div class="popup-detailed__person-info">
+          <div class="popup-detailed__person-name">${person.name}</div>
+          ${person.role ? `<div class="popup-detailed__person-role">${person.role}</div>` : ''}
+        </div>
+      `;
+      
+      // Click para seleccionar persona
+      personEl.addEventListener('click', () => {
+        this.selectPerson(person.id);
+      });
+      
+      this.popupDetailedInvolved.appendChild(personEl);
+    });
+  }
+  
+  /**
+   * Selecciona una persona y actualiza los echos
+   */
+  selectPerson(personId) {
+    this.selectedPersonId = personId;
+    
+    // Actualizar clases activas con animación
+    this.popupDetailedInvolved.querySelectorAll('.popup-detailed__person').forEach(el => {
+      if (el.dataset.personId === personId) {
+        el.classList.add('active');
+        // Pequeña animación de pulso
+        el.classList.add('popup-detailed__person--pulse');
+        setTimeout(() => {
+          el.classList.remove('popup-detailed__person--pulse');
+        }, 300);
+      } else {
+        el.classList.remove('active');
+      }
+    });
+    
+    // Actualizar echos
+    this.updateEchos();
+  }
+  
+  /**
+   * Actualiza la sección de echos para la persona seleccionada
+   */
+  updateEchos() {
+    if (!this.currentHotspot || !this.currentHotspot.echos || !this.selectedPersonId) {
+      this.popupDetailedEchosSection.hidden = true;
+      return;
+    }
+    
+    const echos = this.currentHotspot.echos[this.selectedPersonId];
+    
+    if (!echos || echos.length === 0) {
+      this.popupDetailedEchosSection.hidden = true;
+      return;
+    }
+    
+    // Actualizar título de echos
+    const selectedPerson = this.currentHotspot.involved?.find(p => p.id === this.selectedPersonId);
+    if (selectedPerson) {
+      this.popupDetailedEchosTitle.textContent = `Echos de ${selectedPerson.name}:`;
+    } else {
+      this.popupDetailedEchosTitle.textContent = 'Echos:';
+    }
+    
+    // Renderizar echos con animación de entrada
+    this.popupDetailedEchos.innerHTML = '';
+    
+    echos.forEach((echo, index) => {
+      const echoEl = document.createElement('div');
+      echoEl.className = 'popup-detailed__echo';
+      echoEl.style.animationDelay = `${index * 0.05}s`;
+      
+      echoEl.innerHTML = `
+        <div class="popup-detailed__echo-header">
+          <div class="popup-detailed__echo-datetime">
+            <span class="popup-detailed__echo-date">${echo.datetime?.date || ''}</span>
+            <span class="popup-detailed__echo-time">${echo.datetime?.time || ''}</span>
+          </div>
+        </div>
+        <div class="popup-detailed__echo-description">${echo.description || ''}</div>
+      `;
+      
+      this.popupDetailedEchos.appendChild(echoEl);
+    });
+    
+    this.popupDetailedEchosSection.hidden = false;
+  }
+  
+  /**
+   * Cierra todos los popups
+   */
+  closeAll() {
+    // Cancelar timeout anterior si existe
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
+
+    // Quitar clases visibles para disparar animación
+    this.popupSimple.classList.remove('popup--visible');
+    this.popupDetailed.classList.remove('popup--visible');
+    this.backdrop.classList.remove('popup-backdrop--visible');
+
+    // Esperar a que termine la animación antes de ocultar
+    this.closeTimeout = setTimeout(() => {
+      this.popupSimple.hidden = true;
+      this.popupDetailed.hidden = true;
+      this.backdrop.hidden = true;
+      
+      // Resetear transform del popup detallado
+      if (this.popupDetailed) {
+        this.popupDetailed.style.transform = '';
+      }
+      
+      // Restaurar scroll del body
+      document.body.style.overflow = '';
+      
+      this.currentHotspot = null;
+      this.selectedPersonId = null;
+      this.popupDetailedTime.style.color = '';
+
+      this.closeTimeout = null;
+    }, 300);
+  }
+  
+  /**
+   * Verifica si algún popup está abierto
+   */
+  isOpen() {
+    return !this.popupSimple.hidden || !this.popupDetailed.hidden;
+  }
+}
+

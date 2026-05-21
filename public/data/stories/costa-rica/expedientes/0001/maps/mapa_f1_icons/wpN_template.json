@@ -1,0 +1,86 @@
+[
+  {
+    "type": "hotspot",
+    "_note": "TODO — Ajustar offsets con el editor. Copiar este archivo como wpN.json y reemplazar N por el índice del waypoint.",
+    "mobile": {
+      "offsetX": -200,
+      "offsetY": -200,
+      "width": 200,
+      "height": 140,
+      "rotation": 0
+    },
+    "desktop": {
+      "offsetX": -200,
+      "offsetY": -200,
+      "width": 200,
+      "height": 140,
+      "rotation": 0
+    },
+    "title": "TODO — Título hotspot 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "TODO_pf1wNaN0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "TODO_pf1wNaN0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "TODO_pf1wNaN0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "TODO_pf1wNaN0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "TODO_pf1wNaN0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participación persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interacción persona B."
+        }
+      ],
+      "TODO_pf1wNaN0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participación persona C."
+        }
+      ]
+    }
+  }
+]

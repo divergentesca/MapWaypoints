@@ -4,7 +4,15 @@
 ├── dist
 │   ├── assets
 │   │   ├── default.gif
-│   │   ├── editor-Bpm1sb7U.js
+│   │   ├── editor-ExEm5x4T.js
+│   │   ├── fase-2-mapa-dektop-4x.png
+│   │   ├── fase-2-mapa-dektop-4x.webp
+│   │   ├── fase-2-mapa-mobile-x4.png
+│   │   ├── fase-2-mapa-mobile-x4.webp
+│   │   ├── fase-3-mapa-dektop-4x.png
+│   │   ├── fase-3-mapa-dektop-4x.webp
+│   │   ├── fase-3-mapa-mobile-x4.png
+│   │   ├── fase-3-mapa-mobile-x4.webp
 │   │   ├── fonts
 │   │   │   ├── inter-v20-latin-500.woff2
 │   │   │   ├── inter-v20-latin-600.woff2
@@ -12,8 +20,8 @@
 │   │   │   ├── inter-v20-latin-800.woff2
 │   │   │   └── inter-v20-latin-regular.woff2
 │   │   ├── icon-info.png
-│   │   ├── index-bpnlZlfH.css
-│   │   ├── index-pcliIv9G.js
+│   │   ├── index-CUS2L-T-.js
+│   │   ├── index-DoIB1mek.css
 │   │   ├── mapa-1.jpg
 │   │   ├── mapa-1.webp
 │   │   ├── mapa-11.webp
@@ -42,10 +50,6 @@
 │   │   └── persona_1-4.gif
 │   ├── data
 │   │   ├── index.json
-│   │   ├── maps
-│   │   │   ├── mapa_f1.json
-│   │   │   ├── mapa_f2.json
-│   │   │   └── mapa_f3.json
 │   │   ├── stories
 │   │   │   └── costa-rica
 │   │   │       └── expedientes
@@ -53,7 +57,6 @@
 │   ├── index.html
 │   ├── mapa-mobile.jpg
 │   └── mapa-mobile.webp
-├── DOC-INICIO-FWB.md
 ├── FONTS-GUIDE.md
 ├── package-lock.json
 ├── package.json
@@ -104,10 +107,6 @@
 │   │   └── persona_1-4.gif
 │   ├── data
 │   │   ├── index.json
-│   │   ├── maps
-│   │   │   ├── mapa_f1.json
-│   │   │   ├── mapa_f2.json
-│   │   │   └── mapa_f3.json
 │   │   ├── stories
 │   │   │   └── costa-rica
 │   │   │       └── expedientes
@@ -128,8 +127,7 @@
 │   ├── popup_styles.css
 │   ├── style.css
 │   └── UIManager.js
-├── test-iframe.html
 ├── vercel.json
 └── vite.config.js
 
-18 directories, 115 files
+16 directories, 115 files

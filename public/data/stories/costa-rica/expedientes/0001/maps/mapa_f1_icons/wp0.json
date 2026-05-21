@@ -1,0 +1,266 @@
+[
+  {
+    "_note": "WP0-H0: Rectángulo izquierdo — evento principal (ej: aeropuerto, llegada)",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -11,
+      "offsetY": -417,
+      "width": 392,
+      "height": 200,
+      "rotation": 9,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -363,
+      "offsetY": -142,
+      "width": 420,
+      "height": 239,
+      "rotation": -10,
+      "radius": 0
+    },
+    "title": "Llegada al Aeropuerto",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "15/06/2025",
+      "time": "12:07",
+      "timeColor": "#FF4444"
+    },
+    "location": "Aeropuerto Juan Santamaría (SJO), Alajuela.",
+    "description": "Roberto Danilo Samcam Ruiz regresa a Costa Rica desde México. No se observan personas o situaciones sospechosas en su permanencia en San José. Sale en taxi formal (Taxi Tap) hacia su vivienda, conducido por José Roberto Naranjo González.",
+    "involved": [
+      {
+        "id": "person1",
+        "name": "Persona #1",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "Pasajero"
+      },
+      {
+        "id": "person2",
+        "name": "Persona #2",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "Conductor",
+        "highlighted": true
+      },
+      {
+        "id": "person3",
+        "name": "Persona #3",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "Testigo"
+      }
+    ],
+    "echos": {
+      "person1": [
+        {
+          "datetime": { "date": "15/06/2025", "time": "11:45" },
+          "description": "Arribo del vuelo internacional desde Ciudad de México."
+        }
+      ],
+      "person2": [
+        {
+          "datetime": { "date": "15/06/2025", "time": "12:07" },
+          "description": "Roberto Danilo Samcam Ruiz aborda el taxi en zona de salidas internacionales."
+        },
+        {
+          "datetime": { "date": "15/06/2025", "time": "14:30" },
+          "description": "Segunda interacción documentada con el conductor en zona residencial."
+        }
+      ],
+      "person3": [
+        {
+          "datetime": { "date": "15/06/2025", "time": "12:10" },
+          "description": "Observación del proceso de abordaje del taxi desde zona de espera."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP0-H1: Círculo superior izquierdo — evento secundario",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 1,
+      "offsetY": -86,
+      "width": 404,
+      "height": 284,
+      "rotation": -8,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 346,
+      "offsetY": -141,
+      "width": 417,
+      "height": 238,
+      "rotation": 25,
+      "radius": 0
+    },
+    "title": "TODO — Título evento círculo superior",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "pf1w0h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w0h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      }
+    ],
+    "echos": {
+      "pf1w0h1a": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "pf1w0h1b": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona B."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP0-H2: Círculo inferior — duplicado del círculo superior, evento terciario",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 84,
+      "offsetY": 145,
+      "width": 77,
+      "height": 77,
+      "rotation": -8,
+      "radius": 20
+    },
+    "desktop": {
+      "offsetX": -9,
+      "offsetY": -180,
+      "width": 170,
+      "height": 170,
+      "rotation": 25,
+      "radius": 84
+    },
+    "title": "TODO — Título evento círculo inferior",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "pf1w0h2a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w0h2b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      }
+    ],
+    "echos": {
+      "pf1w0h2a": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "pf1w0h2b": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona B."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP0-H3: Rectángulo derecho — duplicado del rectángulo izquierdo, evento cuaternario",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 224,
+      "offsetY": 107,
+      "width": 77,
+      "height": 77,
+      "rotation": 24,
+      "radius": 15
+    },
+    "desktop": {
+      "offsetX": -9,
+      "offsetY": 61,
+      "width": 166,
+      "height": 166,
+      "rotation": 24,
+      "radius": 85
+    },
+    "title": "TODO — Título evento rectángulo derecho",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, País.",
+    "description": "TODO — Descripción del evento.",
+    "involved": [
+      {
+        "id": "pf1w0h3a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w0h3b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w0h3c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w0h3a": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona A."
+        }
+      ],
+      "pf1w0h3b": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona B."
+        },
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Segunda interacción persona B."
+        }
+      ],
+      "pf1w0h3c": [
+        {
+          "datetime": { "date": "TODO — DD/MM/AAAA", "time": "TODO — HH:MM" },
+          "description": "TODO — Participación persona C."
+        }
+      ]
+    }
+  }
+]

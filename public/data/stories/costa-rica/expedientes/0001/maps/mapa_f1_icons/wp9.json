@@ -1,0 +1,174 @@
+[
+  {
+    "_note": "WP9-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": -465,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 9, Evento 1",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 1 en el waypoint 9.",
+    "involved": [
+      {
+        "id": "pf1w9h0a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w9h0b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w9h0c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w9h0a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w9h0b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w9h0c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP9-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 26,
+      "offsetY": -301,
+      "width": 370,
+      "height": 200,
+      "rotation": 0,
+      "radius": 0
+    },
+    "desktop": {
+      "offsetX": 115,
+      "offsetY": -61,
+      "width": 388,
+      "height": 230,
+      "rotation": 0,
+      "radius": 0
+    },
+    "title": "TODO — Waypoint 9, Evento 2",
+    "image": "/assets/mapa-1.webp",
+    "datetime": {
+      "date": "TODO — DD/MM/AAAA",
+      "time": "TODO — HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO — Lugar, Ciudad, Pais.",
+    "description": "TODO — Descripcion del evento 2 en el waypoint 9.",
+    "involved": [
+      {
+        "id": "pf1w9h1a",
+        "name": "TODO — Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO — Rol"
+      },
+      {
+        "id": "pf1w9h1b",
+        "name": "TODO — Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO — Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w9h1c",
+        "name": "TODO — Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO — Rol"
+      }
+    ],
+    "echos": {
+      "pf1w9h1a": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona A."
+        }
+      ],
+      "pf1w9h1b": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona B."
+        },
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Segunda interaccion persona B."
+        }
+      ],
+      "pf1w9h1c": [
+        {
+          "datetime": {
+            "date": "TODO — DD/MM/AAAA",
+            "time": "TODO — HH:MM"
+          },
+          "description": "TODO — Participacion persona C."
+        }
+      ]
+    }
+  }
+]
