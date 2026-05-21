@@ -237,6 +237,7 @@ html, body {
   right: 0;
   z-index: 35;
   display: flex;
+  justify-content: center;
   gap: 8px;
   padding: 10px;
   background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%);
@@ -246,7 +247,8 @@ html, body {
 
 
 .phase-btn {
-  flex: 1;
+  width: 300px;
+  flex: 0 0 auto;
   padding: 12px 16px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
@@ -258,6 +260,14 @@ html, body {
   transition: transform 0.25s ease;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 899px) {
+  .phase-btn {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+  }
 }
 
 @media (max-width: 520px) {
