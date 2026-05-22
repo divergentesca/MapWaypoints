@@ -1072,7 +1072,8 @@ ${memStats ? `├─ Memory: ${memStats.current} (avg: ${memStats.average}, peak
     const mapImg = state.mapImages.highRes || state.mapImages.lowRes;
     if (mapImg) {
       ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(mapImg, 0, 0, mapImg.naturalWidth, mapImg.naturalHeight);
+      const { logicalW, logicalH } = mapManager.currentMap.config.mapImage;
+      ctx.drawImage(mapImg, 0, 0, logicalW, logicalH);
     }
 
     let waypointsToRender;

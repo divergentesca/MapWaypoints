@@ -3,10 +3,10 @@
     "_note": "WP0-H0: Rectángulo principal izquierdo",
     "type": "hotspot",
     "mobile": {
-      "offsetX": -11,
-      "offsetY": -417,
-      "width": 392,
-      "height": 200,
+      "offsetX": -10,
+      "offsetY": -315,
+      "width": 260,
+      "height": 145,
       "rotation": 9,
       "radius": 0
     },
@@ -90,10 +90,10 @@
     "_note": "WP0-H1: Rectángulo secundario superior derecho",
     "type": "hotspot",
     "mobile": {
-      "offsetX": 1,
-      "offsetY": -86,
-      "width": 404,
-      "height": 284,
+      "offsetX": -5,
+      "offsetY": -121,
+      "width": 280,
+      "height": 190,
       "rotation": -8,
       "radius": 0
     },
@@ -155,8 +155,8 @@
     "_note": "WP0-H2: Círculo terciario inferior izquierdo",
     "type": "hotspot",
     "mobile": {
-      "offsetX": 84,
-      "offsetY": 145,
+      "offsetX": -92,
+      "offsetY": 48,
       "width": 77,
       "height": 77,
       "rotation": -8,
@@ -220,11 +220,11 @@
     "_note": "WP0-H3: Círculo cuaternario inferior derecho",
     "type": "hotspot",
     "mobile": {
-      "offsetX": 224,
-      "offsetY": 107,
+      "offsetX": 20,
+      "offsetY": 37,
       "width": 77,
       "height": 77,
-      "rotation": 24,
+      "rotation": -24,
       "radius": 15
     },
     "desktop": {

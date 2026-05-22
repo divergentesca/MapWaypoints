@@ -87,8 +87,8 @@ map-waypoints/
 ├── public/                       ← Archivos estáticos (Vite los copia a dist/ sin procesar)
 │   ├── assets/                   ← Imágenes, fuentes, GIFs
 │   │   ├── fonts/                ← Inter woff2 (self-hosted)
-│   │   ├── mapa-mobile-x4.webp   ← Imagen mapa mobile (2336×4192px)
-│   │   ├── mapa-dektop-4x.webp   ← Imagen mapa desktop (4240×2608px)
+│   │   ├── mapa-mobile.webp         ← Imagen mapa mobile (1400×3181px, logicalW:1400 logicalH:3181)
+│   │   ├── mapa-dektop-4x.webp      ← Imagen mapa desktop (4240×2608px)
 │   │   ├── fase-2-mapa-mobile-x4.webp  ← Fase 2 mobile
 │   │   ├── fase-2-mapa-dektop-4x.webp  ← Fase 2 desktop
 │   │   ├── fase-3-mapa-mobile-x4.webp  ← Fase 3 mobile
@@ -439,15 +439,19 @@ identify public/assets/nueva-imagen.webp
 
 El `?v=YYYY-MM-DD` fuerza al browser a no usar la versión cacheada.
 
-### Paso 3 — Recalcular `yp` de los waypoints
+### Paso 3 — Sobre los waypoints
 
-Si el `logicalH` cambió, todos los `yp` deben ajustarse:
+Los waypoints usan `xp/yp` normalizados (0.0–1.0). Si la nueva imagen mantiene
+la misma proporción que el logicalW/H declarado, **no hay que recalcular nada** —
+el sistema escala la imagen para llenar el espacio lógico exactamente.
 
+Solo recalculá si cambiás el logicalH a un valor diferente:
 ```
 yp_nuevo = (yp_viejo × logicalH_viejo) / logicalH_nuevo
 ```
 
-Los `offsetX/offsetY` de los hotspots **no necesitan cambio** — son relativos al waypoint y se ajustan automáticamente.
+Regla práctica: mantené siempre la proporción `logicalW:logicalH` al generar
+nuevas imágenes y los waypoints quedan intactos.
 
 ### Paso 4 — Verificar `CANVAS_LIMITS` en `src/config.js`
 

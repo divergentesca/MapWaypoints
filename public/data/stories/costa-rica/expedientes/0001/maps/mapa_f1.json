@@ -20,9 +20,9 @@
     {
       "id": "wp_f1_col1",
       "mobile": {
-        "xp": 0.192857,
-        "yp": 0.28293,
-        "z": 1.7
+        "xp": 0.172857,
+        "yp": 0.18862,
+        "z": 1
       },
       "desktop": {
         "xp": 0.176887,
@@ -36,10 +36,10 @@
         "short": 30
       },
       "zMobileProfile": {
-        "default": 0.56,
-        "tall": 0.66,
-        "medium": 0.6,
-        "short": 0.52
+        "default": 1,
+        "tall": 1,
+        "medium": 0.90,
+        "short": 0.60
       },
       "label": "Inicio del Viaje",
       "lines": [

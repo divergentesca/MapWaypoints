@@ -253,7 +253,10 @@ git add . && git commit -m "descripción" && git push
 - Multi-historia funcional via `?story=`
 - Editor visual funcional con undo/redo (50 pasos)
 - Multi-select en editor implementado
-- Primer expediente real (Costa Rica 0001) en progreso — imágenes de prueba activas
-- Imágenes actuales en mapa_f1: mobile `2336×4192`, desktop `4240×2608`
+- Primer expediente real (Costa Rica 0001) en progreso
+- Sistema de imágenes mobile optimizado:
+  - `drawImage` usa `logicalW/H` como destino — la imagen se escala al espacio lógico siempre
+  - `logicalW/H` es la fuente de verdad de coordenadas; la resolución física de la imagen es independiente
+  - Imagen mobile actual: `mapa-mobile.webp` (1400×3181px físicos, logicalW:1400, logicalH:3181)
 - WordPress embed via iframe probado localmente, pendiente fix en divergentes.com
 - `index.json` con catálogo inicial (1 historia registrada)
