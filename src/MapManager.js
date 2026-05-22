@@ -233,8 +233,8 @@ export class MapManager {
   async loadMapImages(mapConfig) {
     const imageConfig = mapConfig.mapImage;
     
-    const config = this.isMobile 
-      ? imageConfig.mobile 
+    const config = this.isMobile
+      ? imageConfig.mobile
       : imageConfig.desktop;
 
     const imagePath = config?.src || config || imageConfig.desktop?.src || imageConfig.desktop;

@@ -129,9 +129,7 @@
 │   ├── popup_styles.css
 │   ├── style.css
 │   └── UIManager.js
-├── src-p1.txt
-├── src-p2.txt
 ├── vercel.json
 └── vite.config.js
 
-16 directories, 119 files
+16 directories, 117 files

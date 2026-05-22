@@ -4,7 +4,7 @@
   "phase": "fase2",
   "mapImage": {
     "mobile": {
-      "src": "/assets/fase-2-mapa-mobile-x4.webp?v=2026-05-20",
+      "src": "/assets/mapa-mobile.webp?v=2026-05-21",
       "logicalW": 2338,
       "logicalH": 5313
     },
