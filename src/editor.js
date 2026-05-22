@@ -412,7 +412,10 @@ export function initEditor() {
 
     indices.forEach((index) => {
       const btn = document.createElement('button');
-      btn.textContent = `Waypoint #${index+1}`;
+      const wpData = window.mapManager?.currentMap?.waypoints?.[index];
+      const wpId = wpData?.id ? ` · ${wpData.id}` : '';
+      const wpLabel = wpData?.label ? ` — ${wpData.label}` : '';
+      btn.textContent = `#${index}${wpId}${wpLabel}`;
       btn.style.cssText = `
         background: ${editor.waypointIndex === index ? 'rgba(255, 0, 255, 0.3)' : 'rgba(255, 255, 255, 0.1)'};
         border: 2px solid ${editor.waypointIndex === index ? '#FF00FF' : 'rgba(255, 255, 255, 0.3)'};
@@ -473,10 +476,14 @@ export function initEditor() {
         // Actualizar botón principal
         const btn = document.getElementById('waypoint-selector-btn');
         if (btn) {
-          btn.textContent = `📍 Waypoint #${index}`;
+          const wpData = window.mapManager?.currentMap?.waypoints?.[index];
+          const wpId = wpData?.id ? ` · ${wpData.id}` : '';
+          btn.textContent = `📍 #${index}${wpId}`;
         }
 
-        console.log(`%c📍 Waypoint cambiado a: #${index}`, 'color:#FF00FF;font-weight:bold;font-size:14px');
+        const wpData2 = window.mapManager?.currentMap?.waypoints?.[index];
+        const wpId2 = wpData2?.id ? ` · ${wpData2.id}` : '';
+        console.log(`%c📍 Waypoint cambiado a: #${index}${wpId2}`, 'color:#FF00FF;font-weight:bold;font-size:14px');
       };
 
       list.appendChild(btn);
@@ -777,7 +784,7 @@ export function initEditor() {
         <!-- 🆕 SELECTOR DE WAYPOINTS CON LISTA ACTUALIZADA -->
         <div style="margin-bottom: 12px; padding: 10px; background: rgba(255, 100, 255, 0.15); border-radius: 8px; border: 1px solid #FF00FF;">
           <button id="waypoint-selector-btn" style="width: 100%; padding: 8px; background: #FF00FF; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px; color: #fff;">
-            📍 Waypoint #${editor.waypointIndex}
+            📍 #${editor.waypointIndex}${(() => { const wp = window.mapManager?.currentMap?.waypoints?.[editor.waypointIndex]; return wp?.id ? ' · ' + wp.id : ''; })()}
           </button>
         </div>
 
@@ -1070,8 +1077,10 @@ export function initEditor() {
       const code = typeof ev.detail.code === 'string'
         ? ev.detail.code
         : JSON.stringify(ev.detail.code, null, 2);
+      const wpSaved = window.mapManager?.currentMap?.waypoints?.[editor.waypointIndex];
+      const wpIdSaved = wpSaved?.id ? ` · ${wpSaved.id}` : '';
       console.log(
-        `%c📋 Waypoint #${editor.waypointIndex} [${device}] — pega esto en el JSON:`,
+        `%c📋 Waypoint #${editor.waypointIndex}${wpIdSaved} [${device}] — pega esto en el JSON:`,
         'color:#FFD700;font-size:13px;font-weight:bold'
       );
       console.log(`%c${code}`, 'color:#00FF88;font-family:monospace;font-size:12px');
@@ -1094,7 +1103,9 @@ export function initEditor() {
       editor.selectedItem = null;
       editor.needsRedraw = true;
       window.dispatchEvent(new CustomEvent('editor:redraw'));
-      updateInfo(`💾 Waypoint #${editor.waypointIndex} guardado — código en consola`);
+      const wpSavedInfo = window.mapManager?.currentMap?.waypoints?.[editor.waypointIndex];
+      const wpIdInfo = wpSavedInfo?.id ? ` · ${wpSavedInfo.id}` : '';
+      updateInfo(`💾 #${editor.waypointIndex}${wpIdInfo} guardado — código en consola`);
     }, { once: true });
   }
 
@@ -1352,28 +1363,14 @@ export function initEditor() {
         // Actualizar botón de waypoint
         const btn = document.getElementById('waypoint-selector-btn');
         if (btn) {
-          btn.textContent = `📍 Waypoint #${index}`;
+          const wpData = window.mapManager?.currentMap?.waypoints?.[index];
+          const wpId = wpData?.id ? ` · ${wpData.id}` : '';
+          btn.textContent = `📍 #${index}${wpId}`;
         }
         
-        const waypointNames = editor.isMobile ? [
-          '🏠 Inicio',
-          '🌳 Deforestación',
-          '🌋 Volcán',
-          '👥 Comunidad',
-          '🦜 Biodiversidad',
-          '🔄 Economía Circular'
-        ] : [
-          '🏠 Inicio',
-          '🌳 Deforestación',
-          '🌋 Volcán',
-          '⚡ Hidroeléctrica',
-          '👥 Comunidad',
-          '🦜 Biodiversidad',
-          '🏭 Industria',
-          '🔄 Economía Circular'
-        ];
-        
-        console.log(`%c📍 Waypoint cambiado a: #${index} - ${waypointNames[index] || ''}`, 'color:#FF00FF;font-weight:bold;font-size:14px');
+        const wpCurrent = window.mapManager?.currentMap?.waypoints?.[index];
+        const wpIdLog = wpCurrent?.id || '';
+        console.log(`%c📍 Waypoint cambiado a: #${index}${wpIdLog ? ' · ' + wpIdLog : ''}`, 'color:#FF00FF;font-weight:bold;font-size:14px');
       }
       return;
     }

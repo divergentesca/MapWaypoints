@@ -1,346 +1,82 @@
 [
   {
-    "_note": "WP2-H0 (rect_izq) \u2014 ajustar con editor",
     "type": "hotspot",
     "mobile": {
-      "offsetX": -11,
-      "offsetY": -417,
-      "width": 392,
-      "height": 200,
-      "rotation": 9,
-      "radius": 0
-    },
-    "desktop": {
-      "offsetX": -200,
-      "offsetY": -130,
-      "width": 420,
-      "height": 239,
-      "rotation": -10,
-      "radius": 0
-    },
-    "title": "TODO \u2014 T\u00edtulo H0 wp2",
-    "image": "/assets/TODO-f3-wp2-h0.webp",
-    "datetime": {
-      "date": "TODO \u2014 DD/MM/AAAA",
-      "time": "TODO \u2014 HH:MM",
-      "timeColor": "#FF4444"
-    },
-    "location": "TODO \u2014 Lugar, Ciudad, Pa\u00eds.",
-    "description": "TODO \u2014 Descripci\u00f3n H0.",
-    "involved": [
-      {
-        "id": "pf3w2h0a",
-        "name": "TODO \u2014 Persona A",
-        "avatar": "./assets/persona_1-1.png",
-        "role": "TODO \u2014 Rol"
-      },
-      {
-        "id": "pf3w2h0b",
-        "name": "TODO \u2014 Persona B",
-        "avatar": "./assets/persona_1-2.png",
-        "role": "TODO \u2014 Rol",
-        "highlighted": true
-      },
-      {
-        "id": "pf3w2h0c",
-        "name": "TODO \u2014 Persona C",
-        "avatar": "./assets/persona_1-3.png",
-        "role": "TODO \u2014 Rol"
-      }
-    ],
-    "echos": {
-      "pf3w2h0a": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n A."
-        }
-      ],
-      "pf3w2h0b": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n B."
-        },
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Segunda interacci\u00f3n B."
-        }
-      ],
-      "pf3w2h0c": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n C."
-        }
-      ]
-    }
-  },
-  {
-    "_note": "WP2-H1 (rect_der) \u2014 ajustar con editor",
-    "type": "hotspot",
-    "mobile": {
-      "offsetX": 1,
-      "offsetY": -86,
-      "width": 404,
-      "height": 284,
-      "rotation": -8,
-      "radius": 0
-    },
-    "desktop": {
-      "offsetX": 180,
-      "offsetY": -130,
-      "width": 417,
-      "height": 238,
-      "rotation": 25,
-      "radius": 0
-    },
-    "title": "TODO \u2014 T\u00edtulo H1 wp2",
-    "image": "/assets/TODO-f3-wp2-h1.webp",
-    "datetime": {
-      "date": "TODO \u2014 DD/MM/AAAA",
-      "time": "TODO \u2014 HH:MM",
-      "timeColor": "#FF4444"
-    },
-    "location": "TODO \u2014 Lugar, Ciudad, Pa\u00eds.",
-    "description": "TODO \u2014 Descripci\u00f3n H1.",
-    "involved": [
-      {
-        "id": "pf3w2h1a",
-        "name": "TODO \u2014 Persona A",
-        "avatar": "./assets/persona_1-1.png",
-        "role": "TODO \u2014 Rol"
-      },
-      {
-        "id": "pf3w2h1b",
-        "name": "TODO \u2014 Persona B",
-        "avatar": "./assets/persona_1-2.png",
-        "role": "TODO \u2014 Rol",
-        "highlighted": true
-      },
-      {
-        "id": "pf3w2h1c",
-        "name": "TODO \u2014 Persona C",
-        "avatar": "./assets/persona_1-3.png",
-        "role": "TODO \u2014 Rol"
-      }
-    ],
-    "echos": {
-      "pf3w2h1a": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n A."
-        }
-      ],
-      "pf3w2h1b": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n B."
-        },
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Segunda interacci\u00f3n B."
-        }
-      ],
-      "pf3w2h1c": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n C."
-        }
-      ]
-    }
-  },
-  {
-    "_note": "WP2-H2 (circ_arriba) \u2014 ajustar con editor",
-    "type": "hotspot",
-    "mobile": {
-      "offsetX": 84,
-      "offsetY": 145,
-      "width": 77,
-      "height": 77,
-      "rotation": -8,
-      "radius": 20
-    },
-    "desktop": {
-      "offsetX": -9,
+      "offsetX": -160,
       "offsetY": -180,
-      "width": 170,
-      "height": 170,
-      "rotation": 0,
-      "radius": 84
-    },
-    "title": "TODO \u2014 T\u00edtulo H2 wp2",
-    "image": "/assets/TODO-f3-wp2-h2.webp",
-    "datetime": {
-      "date": "TODO \u2014 DD/MM/AAAA",
-      "time": "TODO \u2014 HH:MM",
-      "timeColor": "#FF4444"
-    },
-    "location": "TODO \u2014 Lugar, Ciudad, Pa\u00eds.",
-    "description": "TODO \u2014 Descripci\u00f3n H2.",
-    "involved": [
-      {
-        "id": "pf3w2h2a",
-        "name": "TODO \u2014 Persona A",
-        "avatar": "./assets/persona_1-1.png",
-        "role": "TODO \u2014 Rol"
-      },
-      {
-        "id": "pf3w2h2b",
-        "name": "TODO \u2014 Persona B",
-        "avatar": "./assets/persona_1-2.png",
-        "role": "TODO \u2014 Rol",
-        "highlighted": true
-      },
-      {
-        "id": "pf3w2h2c",
-        "name": "TODO \u2014 Persona C",
-        "avatar": "./assets/persona_1-3.png",
-        "role": "TODO \u2014 Rol"
-      }
-    ],
-    "echos": {
-      "pf3w2h2a": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n A."
-        }
-      ],
-      "pf3w2h2b": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n B."
-        },
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Segunda interacci\u00f3n B."
-        }
-      ],
-      "pf3w2h2c": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n C."
-        }
-      ]
-    }
-  },
-  {
-    "_note": "WP2-H3 (circ_abajo) \u2014 ajustar con editor",
-    "type": "hotspot",
-    "mobile": {
-      "offsetX": 224,
-      "offsetY": 107,
-      "width": 77,
-      "height": 77,
-      "rotation": 24,
-      "radius": 15
+      "width": 136,
+      "height": 136,
+      "rotation": 0
     },
     "desktop": {
-      "offsetX": -9,
-      "offsetY": 61,
-      "width": 166,
-      "height": 166,
-      "rotation": 0,
-      "radius": 85
+      "offsetX": -90,
+      "offsetY": -90,
+      "width": 136,
+      "height": 136,
+      "rotation": 0
     },
-    "title": "TODO \u2014 T\u00edtulo H3 wp2",
-    "image": "/assets/TODO-f3-wp2-h3.webp",
-    "datetime": {
-      "date": "TODO \u2014 DD/MM/AAAA",
-      "time": "TODO \u2014 HH:MM",
-      "timeColor": "#FF4444"
+    "title": "Transformación Final",
+    "body": "El estado final del personaje. Cómo los acontecimientos han definido su destino.",
+    "id": "hs_f3_w2_h0"
+  },
+  {
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 160,
+      "offsetY": -180,
+      "width": 136,
+      "height": 136,
+      "rotation": 0
     },
-    "location": "TODO \u2014 Lugar, Ciudad, Pa\u00eds.",
-    "description": "TODO \u2014 Descripci\u00f3n H3.",
-    "involved": [
-      {
-        "id": "pf3w2h3a",
-        "name": "TODO \u2014 Persona A",
-        "avatar": "./assets/persona_1-1.png",
-        "role": "TODO \u2014 Rol"
-      },
-      {
-        "id": "pf3w2h3b",
-        "name": "TODO \u2014 Persona B",
-        "avatar": "./assets/persona_1-2.png",
-        "role": "TODO \u2014 Rol",
-        "highlighted": true
-      },
-      {
-        "id": "pf3w2h3c",
-        "name": "TODO \u2014 Persona C",
-        "avatar": "./assets/persona_1-3.png",
-        "role": "TODO \u2014 Rol"
-      }
-    ],
-    "echos": {
-      "pf3w2h3a": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n A."
-        }
-      ],
-      "pf3w2h3b": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n B."
-        },
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Segunda interacci\u00f3n B."
-        }
-      ],
-      "pf3w2h3c": [
-        {
-          "datetime": {
-            "date": "TODO \u2014 DD/MM/AAAA",
-            "time": "TODO \u2014 HH:MM"
-          },
-          "description": "TODO \u2014 Participaci\u00f3n C."
-        }
-      ]
-    }
+    "desktop": {
+      "offsetX": 90,
+      "offsetY": -90,
+      "width": 136,
+      "height": 136,
+      "rotation": 0
+    },
+    "title": "Testigos del Desenlace",
+    "body": "Quiénes están presentes en este momento crucial. Su reacción ante los eventos finales.",
+    "id": "hs_f3_w2_h1"
+  },
+  {
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": -160,
+      "offsetY": 180,
+      "width": 136,
+      "height": 136,
+      "rotation": 0
+    },
+    "desktop": {
+      "offsetX": -90,
+      "offsetY": 90,
+      "width": 136,
+      "height": 136,
+      "rotation": 0
+    },
+    "title": "Legado Material",
+    "body": "Objetos que permanecen como testimonio. Evidencia física de todo lo ocurrido.",
+    "id": "hs_f3_w2_h2"
+  },
+  {
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 160,
+      "offsetY": 80,
+      "width": 136,
+      "height": 136,
+      "rotation": 0
+    },
+    "desktop": {
+      "offsetX": 90,
+      "offsetY": 90,
+      "width": 136,
+      "height": 136,
+      "rotation": 0
+    },
+    "title": "Lugar del Destino",
+    "body": "El significado final de esta ubicación. Por qué todo termina precisamente aquí.",
+    "id": "hs_f3_w2_h3"
   }
 ]
