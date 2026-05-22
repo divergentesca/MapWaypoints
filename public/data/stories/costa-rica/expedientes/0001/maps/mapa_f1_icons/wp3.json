@@ -1,172 +1,300 @@
 [
   {
-    "_note": "WP3-H0: Rectángulo principal — PENDIENTE posicionar con editor y rellenar contenido",
+    "_note": "WP3-H0: Rect\u00e1ngulo principal izquierdo \u2014 ajustar offsets con editor",
     "type": "hotspot",
     "mobile": {
-      "offsetX": -26,
-      "offsetY": -301,
-      "width": 370,
+      "offsetX": -11,
+      "offsetY": -417,
+      "width": 392,
       "height": 200,
-      "rotation": 0,
+      "rotation": 9,
       "radius": 0
     },
     "desktop": {
-      "offsetX": -465,
-      "offsetY": -61,
-      "width": 388,
-      "height": 230,
-      "rotation": 0,
+      "offsetX": -200,
+      "offsetY": -130,
+      "width": 420,
+      "height": 239,
+      "rotation": -10,
       "radius": 0
     },
-    "title": "TODO — Waypoint 3, Evento 1",
-    "image": "/assets/mapa-1.webp",
+    "title": "TODO \u2014 T\u00edtulo evento principal wp3",
+    "image": "/assets/TODO-wp3-h0.webp",
     "datetime": {
-      "date": "TODO — DD/MM/AAAA",
-      "time": "TODO — HH:MM",
+      "date": "TODO \u2014 DD/MM/AAAA",
+      "time": "TODO \u2014 HH:MM",
       "timeColor": "#FF4444"
     },
-    "location": "TODO — Lugar, Ciudad, Pais.",
-    "description": "TODO — Descripcion del evento 1 en el waypoint 3.",
+    "location": "TODO \u2014 Lugar, Ciudad, Pa\u00eds.",
+    "description": "TODO \u2014 Descripci\u00f3n del evento principal.",
     "involved": [
       {
         "id": "pf1w3h0a",
-        "name": "TODO — Persona A",
+        "name": "TODO \u2014 Persona A",
         "avatar": "./assets/persona_1-1.png",
-        "role": "TODO — Rol"
+        "role": "TODO \u2014 Rol"
       },
       {
         "id": "pf1w3h0b",
-        "name": "TODO — Persona B",
+        "name": "TODO \u2014 Persona B",
         "avatar": "./assets/persona_1-2.png",
-        "role": "TODO — Rol",
+        "role": "TODO \u2014 Rol",
         "highlighted": true
       },
       {
         "id": "pf1w3h0c",
-        "name": "TODO — Persona C",
+        "name": "TODO \u2014 Persona C",
         "avatar": "./assets/persona_1-3.png",
-        "role": "TODO — Rol"
+        "role": "TODO \u2014 Rol"
       }
     ],
     "echos": {
       "pf1w3h0a": [
         {
           "datetime": {
-            "date": "TODO — DD/MM/AAAA",
-            "time": "TODO — HH:MM"
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
           },
-          "description": "TODO — Participacion persona A."
+          "description": "TODO \u2014 Participaci\u00f3n persona A."
         }
       ],
       "pf1w3h0b": [
         {
           "datetime": {
-            "date": "TODO — DD/MM/AAAA",
-            "time": "TODO — HH:MM"
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
           },
-          "description": "TODO — Participacion persona B."
+          "description": "TODO \u2014 Participaci\u00f3n persona B."
         },
         {
           "datetime": {
-            "date": "TODO — DD/MM/AAAA",
-            "time": "TODO — HH:MM"
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
           },
-          "description": "TODO — Segunda interaccion persona B."
+          "description": "TODO \u2014 Segunda interacci\u00f3n persona B."
         }
       ],
       "pf1w3h0c": [
         {
           "datetime": {
-            "date": "TODO — DD/MM/AAAA",
-            "time": "TODO — HH:MM"
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
           },
-          "description": "TODO — Participacion persona C."
+          "description": "TODO \u2014 Participaci\u00f3n persona C."
         }
       ]
     }
   },
   {
-    "_note": "WP3-H1: Rectángulo secundario — PENDIENTE posicionar con editor y rellenar contenido",
+    "_note": "WP3-H1: Rect\u00e1ngulo secundario superior derecho \u2014 ajustar offsets con editor",
     "type": "hotspot",
     "mobile": {
-      "offsetX": 26,
-      "offsetY": -301,
-      "width": 370,
-      "height": 200,
-      "rotation": 0,
+      "offsetX": 1,
+      "offsetY": -86,
+      "width": 404,
+      "height": 284,
+      "rotation": -8,
       "radius": 0
     },
     "desktop": {
-      "offsetX": 115,
-      "offsetY": -61,
-      "width": 388,
-      "height": 230,
-      "rotation": 0,
+      "offsetX": 180,
+      "offsetY": -130,
+      "width": 417,
+      "height": 238,
+      "rotation": 25,
       "radius": 0
     },
-    "title": "TODO — Waypoint 3, Evento 2",
-    "image": "/assets/mapa-1.webp",
+    "title": "TODO \u2014 T\u00edtulo evento secundario wp3",
+    "image": "/assets/TODO-wp3-h1.webp",
     "datetime": {
-      "date": "TODO — DD/MM/AAAA",
-      "time": "TODO — HH:MM",
+      "date": "TODO \u2014 DD/MM/AAAA",
+      "time": "TODO \u2014 HH:MM",
       "timeColor": "#FF4444"
     },
-    "location": "TODO — Lugar, Ciudad, Pais.",
-    "description": "TODO — Descripcion del evento 2 en el waypoint 3.",
+    "location": "TODO \u2014 Lugar, Ciudad, Pa\u00eds.",
+    "description": "TODO \u2014 Descripci\u00f3n del evento secundario.",
     "involved": [
       {
         "id": "pf1w3h1a",
-        "name": "TODO — Persona A",
+        "name": "TODO \u2014 Persona A",
         "avatar": "./assets/persona_1-1.png",
-        "role": "TODO — Rol"
+        "role": "TODO \u2014 Rol"
       },
       {
         "id": "pf1w3h1b",
-        "name": "TODO — Persona B",
+        "name": "TODO \u2014 Persona B",
         "avatar": "./assets/persona_1-2.png",
-        "role": "TODO — Rol",
+        "role": "TODO \u2014 Rol",
         "highlighted": true
-      },
-      {
-        "id": "pf1w3h1c",
-        "name": "TODO — Persona C",
-        "avatar": "./assets/persona_1-3.png",
-        "role": "TODO — Rol"
       }
     ],
     "echos": {
       "pf1w3h1a": [
         {
           "datetime": {
-            "date": "TODO — DD/MM/AAAA",
-            "time": "TODO — HH:MM"
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
           },
-          "description": "TODO — Participacion persona A."
+          "description": "TODO \u2014 Participaci\u00f3n persona A."
         }
       ],
       "pf1w3h1b": [
         {
           "datetime": {
-            "date": "TODO — DD/MM/AAAA",
-            "time": "TODO — HH:MM"
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
           },
-          "description": "TODO — Participacion persona B."
+          "description": "TODO \u2014 Participaci\u00f3n persona B."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP3-H2: C\u00edrculo terciario inferior izquierdo \u2014 ajustar offsets con editor",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 84,
+      "offsetY": 145,
+      "width": 77,
+      "height": 77,
+      "rotation": -8,
+      "radius": 20
+    },
+    "desktop": {
+      "offsetX": -9,
+      "offsetY": -180,
+      "width": 170,
+      "height": 170,
+      "rotation": 25,
+      "radius": 84
+    },
+    "title": "TODO \u2014 T\u00edtulo evento terciario wp3",
+    "image": "/assets/TODO-wp3-h2.webp",
+    "datetime": {
+      "date": "TODO \u2014 DD/MM/AAAA",
+      "time": "TODO \u2014 HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO \u2014 Lugar, Ciudad, Pa\u00eds.",
+    "description": "TODO \u2014 Descripci\u00f3n del evento terciario.",
+    "involved": [
+      {
+        "id": "pf1w3h2a",
+        "name": "TODO \u2014 Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO \u2014 Rol"
+      },
+      {
+        "id": "pf1w3h2b",
+        "name": "TODO \u2014 Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO \u2014 Rol",
+        "highlighted": true
+      }
+    ],
+    "echos": {
+      "pf1w3h2a": [
+        {
+          "datetime": {
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
+          },
+          "description": "TODO \u2014 Participaci\u00f3n persona A."
+        }
+      ],
+      "pf1w3h2b": [
+        {
+          "datetime": {
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
+          },
+          "description": "TODO \u2014 Participaci\u00f3n persona B."
+        }
+      ]
+    }
+  },
+  {
+    "_note": "WP3-H3: C\u00edrculo cuaternario inferior derecho \u2014 ajustar offsets con editor",
+    "type": "hotspot",
+    "mobile": {
+      "offsetX": 224,
+      "offsetY": 107,
+      "width": 77,
+      "height": 77,
+      "rotation": 24,
+      "radius": 15
+    },
+    "desktop": {
+      "offsetX": -9,
+      "offsetY": 61,
+      "width": 166,
+      "height": 166,
+      "rotation": 24,
+      "radius": 85
+    },
+    "title": "TODO \u2014 T\u00edtulo evento cuaternario wp3",
+    "image": "/assets/TODO-wp3-h3.webp",
+    "datetime": {
+      "date": "TODO \u2014 DD/MM/AAAA",
+      "time": "TODO \u2014 HH:MM",
+      "timeColor": "#FF4444"
+    },
+    "location": "TODO \u2014 Lugar, Ciudad, Pa\u00eds.",
+    "description": "TODO \u2014 Descripci\u00f3n del evento cuaternario.",
+    "involved": [
+      {
+        "id": "pf1w3h3a",
+        "name": "TODO \u2014 Persona A",
+        "avatar": "./assets/persona_1-1.png",
+        "role": "TODO \u2014 Rol"
+      },
+      {
+        "id": "pf1w3h3b",
+        "name": "TODO \u2014 Persona B",
+        "avatar": "./assets/persona_1-2.png",
+        "role": "TODO \u2014 Rol",
+        "highlighted": true
+      },
+      {
+        "id": "pf1w3h3c",
+        "name": "TODO \u2014 Persona C",
+        "avatar": "./assets/persona_1-3.png",
+        "role": "TODO \u2014 Rol"
+      }
+    ],
+    "echos": {
+      "pf1w3h3a": [
+        {
+          "datetime": {
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
+          },
+          "description": "TODO \u2014 Participaci\u00f3n persona A."
+        }
+      ],
+      "pf1w3h3b": [
+        {
+          "datetime": {
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
+          },
+          "description": "TODO \u2014 Participaci\u00f3n persona B."
         },
         {
           "datetime": {
-            "date": "TODO — DD/MM/AAAA",
-            "time": "TODO — HH:MM"
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
           },
-          "description": "TODO — Segunda interaccion persona B."
+          "description": "TODO \u2014 Segunda interacci\u00f3n persona B."
         }
       ],
-      "pf1w3h1c": [
+      "pf1w3h3c": [
         {
           "datetime": {
-            "date": "TODO — DD/MM/AAAA",
-            "time": "TODO — HH:MM"
+            "date": "TODO \u2014 DD/MM/AAAA",
+            "time": "TODO \u2014 HH:MM"
           },
-          "description": "TODO — Participacion persona C."
+          "description": "TODO \u2014 Participaci\u00f3n persona C."
         }
       ]
     }
