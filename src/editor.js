@@ -473,7 +473,6 @@ export function initEditor() {
           b.style.fontWeight = i === index ? 'bold' : 'normal';
         });
 
-        // Actualizar botón principal
         const btn = document.getElementById('waypoint-selector-btn');
         if (btn) {
           const wpData = window.mapManager?.currentMap?.waypoints?.[index];
@@ -481,9 +480,7 @@ export function initEditor() {
           btn.textContent = `📍 #${index}${wpId}`;
         }
 
-        const wpData2 = window.mapManager?.currentMap?.waypoints?.[index];
-        const wpId2 = wpData2?.id ? ` · ${wpData2.id}` : '';
-        console.log(`%c📍 Waypoint cambiado a: #${index}${wpId2}`, 'color:#FF00FF;font-weight:bold;font-size:14px');
+        console.log(`%c📍 Waypoint cambiado a: #${index}${(() => { const w = window.mapManager?.currentMap?.waypoints?.[index]; return w?.id ? ' · ' + w.id : ''; })()}`, 'color:#FF00FF;font-weight:bold;font-size:14px');
       };
 
       list.appendChild(btn);
@@ -1077,10 +1074,8 @@ export function initEditor() {
       const code = typeof ev.detail.code === 'string'
         ? ev.detail.code
         : JSON.stringify(ev.detail.code, null, 2);
-      const wpSaved = window.mapManager?.currentMap?.waypoints?.[editor.waypointIndex];
-      const wpIdSaved = wpSaved?.id ? ` · ${wpSaved.id}` : '';
       console.log(
-        `%c📋 Waypoint #${editor.waypointIndex}${wpIdSaved} [${device}] — pega esto en el JSON:`,
+        `%c📋 Waypoint #${editor.waypointIndex} [${device}] — pega esto en el JSON:`,
         'color:#FFD700;font-size:13px;font-weight:bold'
       );
       console.log(`%c${code}`, 'color:#00FF88;font-family:monospace;font-size:12px');
@@ -1103,9 +1098,7 @@ export function initEditor() {
       editor.selectedItem = null;
       editor.needsRedraw = true;
       window.dispatchEvent(new CustomEvent('editor:redraw'));
-      const wpSavedInfo = window.mapManager?.currentMap?.waypoints?.[editor.waypointIndex];
-      const wpIdInfo = wpSavedInfo?.id ? ` · ${wpSavedInfo.id}` : '';
-      updateInfo(`💾 #${editor.waypointIndex}${wpIdInfo} guardado — código en consola`);
+      updateInfo(`💾 Waypoint #${editor.waypointIndex} guardado — código en consola`);
     }, { once: true });
   }
 
@@ -1360,7 +1353,6 @@ export function initEditor() {
           window.dispatchEvent(new CustomEvent('editor:redraw'));
         }, { once: true });
         
-        // Actualizar botón de waypoint
         const btn = document.getElementById('waypoint-selector-btn');
         if (btn) {
           const wpData = window.mapManager?.currentMap?.waypoints?.[index];
@@ -1447,6 +1439,19 @@ export function initEditor() {
       const cam = editor.camera;
       const hs = 15 / cam.z;
 
+      // ✅ WAYPOINT DRAG — hit-test prioritario cuando editWaypointMode está activo
+      if (editor.editWaypointMode && editor.waypoint) {
+        const wpRadius = 24 / cam.z; // radio de hit del círculo del waypoint
+        if (Math.hypot(x - editor.waypoint.x, y - editor.waypoint.y) < wpRadius) {
+          editor.mode = 'drag-wp';
+          editor.dragStart = { x, y };
+          editor.itemStart = { x: editor.waypoint.x, y: editor.waypoint.y };
+          canvas.style.cursor = 'move';
+          updateInfo(`<b style="color:#00BFFF;">⬡ Waypoint #${editor.waypointIndex}</b><br>Arrastrando... suelta para guardar`);
+          return;
+        }
+      }
+
       if (editor.selectedItem) {
         const item = editor.items[editor.selectedItem.index];
         if (item) {
@@ -1519,7 +1524,7 @@ export function initEditor() {
             item.wrap.style.outlineOffset = '2px';
           }
 
-          console.log(`%c📍 Item #${i}`, 'color:#00FF00;font-weight:bold');
+          console.log(`%c📍 Item #${i}${item.id ? ' · ' + item.id : ''}`, 'color:#00FF00;font-weight:bold');
           
           
           console.table({
@@ -1554,7 +1559,7 @@ export function initEditor() {
           }
 
           updateInfo(`
-            <b style="color:#00FF00;">Item #${i}</b><br>
+            <b style="color:#00FF00;">Item #${i}${item.id ? '<br><span style="color:#FFD700;font-size:10px;">' + item.id + '</span>' : ''}</b><br>
             Type: ${item.type || 'hotspot'}<br>
             Offset: (${ox}, ${oy})<br>
             Size: ${Math.round(item.width)}×${Math.round(item.height)}<br>

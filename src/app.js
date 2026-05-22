@@ -621,7 +621,14 @@ let memoryMonitor = new MemoryMonitor();
     const cfg = MAPS_CONFIG[mapId];
     const wp = cfg.waypoints[waypointIndex][device];
     if (!wp) return;
-    const code = `{ ${device}: { xp: ${wp.xp}, yp: ${wp.yp}, z: ${wp.z} } }`;
+    const wpId = cfg.waypoints[waypointIndex].id || null;
+    const wpLabel = cfg.waypoints[waypointIndex].label || null;
+    const code = [
+      `// 📁 Archivo : ${mapId}.json`,
+      `// 🔍 Buscar  : "waypoints"[${waypointIndex}]${wpId ? ` — id: "${wpId}"` : ''}${wpLabel ? ` — "${wpLabel}"` : ''}`,
+      `// ✏️  Reemplaza el bloque "${device}":`,
+      `"${device}": { "xp": ${wp.xp}, "yp": ${wp.yp}, "z": ${wp.z} }`
+    ].join('\n');
     window.dispatchEvent(new CustomEvent('editor:itemCodeResponse', { detail: { code } }));
   });
   window.addEventListener('editor:getItemCode', (e) => {
